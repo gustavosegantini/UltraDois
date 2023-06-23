@@ -1,11 +1,10 @@
 <?php
 require_once '../conexao.php';
 session_start();
-if (!isset($_SESSION['cliente_logado'])) {
+if (!isset($_SESSION['cliente_id'])) {
     header('Location: login_cliente.php');
     exit;
 }
-
 
 // Buscar estabelecimentos associados ao cliente
 $query = $conn->prepare("SELECT Estabelecimentos.nome, Pontos.pontos FROM Pontos JOIN Estabelecimentos ON Pontos.id_estabelecimento = Estabelecimentos.id WHERE Pontos.id_cliente = ?");

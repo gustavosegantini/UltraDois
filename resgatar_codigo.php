@@ -4,7 +4,7 @@ require_once '../conexao.php';
 session_start();
 
 // Verificar se o cliente está logado
-if (!isset($_SESSION['cliente_logado'])) {
+if (!isset($_SESSION['cliente_id'])) {
     header('Location: login_cliente.php');
     exit;
 }
