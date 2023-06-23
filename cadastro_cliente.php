@@ -16,7 +16,7 @@ if (isset($_POST['nome'], $_POST['email'], $_POST['senha'])) {
 <head>
     <meta charset="UTF-8">
     <title>Cadastro de Cliente</title>
-    <link rel="stylesheet" href="cadastro_estabelecimento.css">
+    <link rel="stylesheet" href="cadastro_cliente.css">
 </head>
 <body>
     <h1>Cadastro de Cliente</h1>
