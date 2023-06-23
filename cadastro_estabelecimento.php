@@ -4,7 +4,7 @@ require_once '../conexao.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
-    $senha = $_POST['senha'];
+    $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
 
     try {
         $query = $conn->prepare("INSERT INTO Estabelecimentos (nome, email, senha) VALUES (?, ?, ?)");
@@ -18,11 +18,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="cadastro_estabelecimento.css">
     <title>Cadastro de Estabelecimento</title>
 </head>
+
 <body>
     <div class="container">
         <h1>Cadastro de Estabelecimento</h1>
@@ -32,7 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="password" name="senha" placeholder="Senha" required>
             <input type="submit" value="Cadastrar">
         </form>
-        <?php if(isset($msg)) echo $msg; ?>
+        <?php if (isset($msg))
+            echo $msg; ?>
     </div>
 </body>
+
 </html>
