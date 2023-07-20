@@ -113,7 +113,7 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
             <!-- botão de menu sanduiche -->
             <div class="dropdown">
                 <button class="dropbtn">
-                    <i class="fas fa-user"></i>
+                    <i class="fas fa-bars"></i>
                 </button>
                 <div class="dropdown-content">
                     <a href="editar_email.php">Editar e-mail</a>
