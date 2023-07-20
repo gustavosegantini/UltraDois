@@ -50,6 +50,8 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
 <head>
     <title>Perfil do Cliente</title>
     <link rel="stylesheet" type="text/css" href="perfil_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.13/dist/index.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.3"></script>
@@ -106,25 +108,29 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
 
     <div class="container">
         <div class="modal modal-title">
-            <h1>Olá,
-                <?php echo $nome; ?>! <!-- botão de menu sanduiche -->
+            <h1>
+                Olá,
+                <?php echo $nome; ?>!
                 <div class="dropdown">
-                    <button class="dropbtn"><img src="user Pequena.jpeg" alt=""></button>
+                    <button class="dropbtn">
+                        <i class="fas fa-user"></i>
+                    </button>
                     <div class="dropdown-content">
                         <a href="editar_email.php">Editar e-mail</a>
                         <a href="criar_nova_senha.php">Criar nova senha</a>
                         <a href="sair.php">Sair</a>
                     </div>
+                </div>
             </h1>
-
         </div>
+    </div>
 
-        <!-- <div class="buttons">
+    <!-- <div class="buttons">
                 <a href="editar_email.php" class="btn nova-senha-btn">Editar e-mail</a>
                 <a href="criar_nova_senha.php" class="btn editar-email-btn">Criar nova senha</a>
                 <a href="sair.php" class="btn sair-btn">Sair</a>
             </div> -->
-    </div>
+
 
     <div class="modal">
         <header>
