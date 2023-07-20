@@ -118,6 +118,8 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
                 <div class="dropdown-content">
                     <a href="editar_email.php">Editar e-mail</a>
                     <a href="criar_nova_senha.php">Criar nova senha</a>
+                    <a href="mailto:contato@ultrafidelidade.com">Suporte</a>
+                    <a href="politica_privacidade.php">Política de Privacidade</a>
                     <a href="sair.php">Sair</a>
                 </div>
             </div>
@@ -196,7 +198,7 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
             </div>
         <?php endif; ?>
 
-        <div class="modal">
+        <!-- <div class="modal">
             <header>
                 <h1>Suporte e Política de Privacidade</h1>
             </header>
@@ -206,7 +208,7 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
                 <p>Leia nossa <a href="politica_privacidade.php">Política de Privacidade</a> para saber mais sobre como
                     lidamos com suas informações pessoais.</p>
             </main>
-        </div>
+        </div> -->
 
         <footer>
             <div class="credit-banner">
