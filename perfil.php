@@ -111,17 +111,17 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
             <h1>
                 Olá,
                 <?php echo $nome; ?>!
-                <div class="dropdown">
-                    <button class="dropbtn">
-                        <i class="fas fa-user"></i>
-                    </button>
-                    <div class="dropdown-content">
-                        <a href="editar_email.php">Editar e-mail</a>
-                        <a href="criar_nova_senha.php">Criar nova senha</a>
-                        <a href="sair.php">Sair</a>
-                    </div>
-                </div>
             </h1>
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="editar_email.php">Editar e-mail</a>
+                    <a href="criar_nova_senha.php">Criar nova senha</a>
+                    <a href="sair.php">Sair</a>
+                </div>
+            </div>
         </div>
     </div>
 
