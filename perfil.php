@@ -51,8 +51,6 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
     <title>Perfil do Cliente</title>
     <link rel="stylesheet" type="text/css" href="perfil_style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-
     <!-- <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.13/dist/index.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.3"></script>
 
@@ -111,13 +109,13 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
             <h1>Olá,
                 <?php echo $nome; ?>!
             </h1>
-            <div class="hamburger-menu">
-                <input type="checkbox" id="menu-toggle" />
-                <label for="menu-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
-                <div class="menu-content">
-                    <a href="editar_email.php" class="btn nova-senha-btn">Editar e-mail</a>
-                    <a href="criar_nova_senha.php" class="btn editar-email-btn">Criar nova senha</a>
-                    <a href="sair.php" class="btn sair-btn">Sair</a>
+            <!-- botão de menu sanduiche -->
+            <div class="dropdown">
+                <button class="dropbtn">Menu</button>
+                <div class="dropdown-content">
+                    <a href="editar_email.php">Editar e-mail</a>
+                    <a href="criar_nova_senha.php">Criar nova senha</a>
+                    <a href="sair.php">Sair</a>
                 </div>
             </div>
 
