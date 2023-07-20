@@ -1,0 +1,124 @@
+@import 'colors.css';
+
+/* Reset de estilo */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+}
+
+header {
+    background-color: var(--header-background-color);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+header h1 {
+    font-size: 2rem;
+}
+
+main {
+    margin: 2rem;
+}
+
+section {
+    background-color: var(--card-background-color);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+form {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: inline-block;
+    width: 180px;
+    text-align: left;
+}
+
+input[type="text"],
+input[type="submit"] {
+    margin-bottom: 1rem;
+    font-size: 18px;
+    padding: 5px;
+    margin: 5px 0;
+    width: 100%;
+    max-width: 200px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+th,
+td {
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.info-banner {
+    background-color: #e0e0e0;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+}
+
+.buttonEditar {
+    background-color: var(--header-background-color);
+    color: white;
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+}
+
+.buttonCodigo {
+    background-color: var(--header-background-color);
+    color: white;
+    border: none;
+    padding: 2rem 4rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: large;
+}
+
+.codigo-gerado {
+    font-size: 8rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.alert {
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+}
+
+.success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.error {
+    background-color: var(--error-color);
+    color: white;
+}
