@@ -6,7 +6,8 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     font-family: Arial, sans-serif;
     background-color: var(--background-color);
     height: 100%;
@@ -129,11 +130,14 @@ input[type="submit"]:hover {
 
 progress {
     width: 100%;
-    height: 0.8rem; /* Aumente a espessura da barra de progresso */
+    height: 0.8rem;
+    /* Aumente a espessura da barra de progresso */
     margin-bottom: 5rem;
-    -webkit-appearance: none; /* Adicione esta linha */
-    appearance: none; /* Adicione esta linha */
-    
+    -webkit-appearance: none;
+    /* Adicione esta linha */
+    appearance: none;
+    /* Adicione esta linha */
+
 }
 
 progress::-webkit-progress-bar {
@@ -161,15 +165,17 @@ progress::-moz-progress-bar {
 
 .cupom-item {
     font-size: 2rem;
-    background-color: var(--success-color); /* Altere a cor de fundo para verde */
+    background-color: var(--success-color);
+    /* Altere a cor de fundo para verde */
     color: var(--card-background-color);
-    padding: 0.75rem; /* Aumente o padding para aumentar a altura */
+    padding: 0.75rem;
+    /* Aumente o padding para aumentar a altura */
     border-radius: 0.25rem;
     text-align: center;
 }
 
-    
-    /* .sair-btn {
+
+/* .sair-btn {
     font-size: 1rem;
     font-weight: 700;
     background-color: #f44336;
@@ -185,7 +191,7 @@ progress::-moz-progress-bar {
     .sair-btn:hover {
     background-color: #d32f2f;
     } */
-    /* Restante das regras de estilo do perfil_style.css */
+/* Restante das regras de estilo do perfil_style.css */
 
 .buttons {
     display: flex;
@@ -224,11 +230,13 @@ progress::-moz-progress-bar {
 .sair-btn:hover {
     background-color: var(--sair-btn-hover-color);
 }
+
 .cupom-utilizado-item {
     background-color: var(--cupom-utilizado-item-color);
     font-size: 1rem;
     color: var(--card-background-color);
-    padding: 0.75rem; /* Aumente o padding para aumentar a altura */
+    padding: 0.75rem;
+    /* Aumente o padding para aumentar a altura */
     border-radius: 0.25rem;
     text-align: center;
 }
@@ -240,9 +248,12 @@ canvas {
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Para garantir que a animação não interfira com a interação do usuário */
-    z-index: 100; /* Ajuste o z-index para que o canvas fique acima dos demais elementos da página */
+    pointer-events: none;
+    /* Para garantir que a animação não interfira com a interação do usuário */
+    z-index: 100;
+    /* Ajuste o z-index para que o canvas fique acima dos demais elementos da página */
 }
+
 body {
     position: relative;
 }
@@ -274,4 +285,45 @@ body {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
+}
+
+.hamburger-menu {
+    position: relative;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+.menu-icon {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+
+.menu-content {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #ffffff;
+    width: 180px;
+    border-radius: 8px;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+}
+
+#menu-toggle:checked+.menu-icon+.menu-content {
+    transform: translateX(0);
+}
+
+.menu-content .btn {
+    display: block;
+    border-bottom: 1px solid #dddddd;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.menu-content .btn:last-child {
+    border-bottom: none;
 }
