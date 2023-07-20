@@ -110,20 +110,20 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
                 <?php echo $nome; ?>!
             </h1>
             <!-- botão de menu sanduiche -->
-
-            <!-- <div class="buttons">
-                <a href="editar_email.php" class="btn nova-senha-btn">Editar e-mail</a>
-                <a href="criar_nova_senha.php" class="btn editar-email-btn">Criar nova senha</a>
-                <a href="sair.php" class="btn sair-btn">Sair</a>
-            </div> -->
-        </div>
-        <div class="dropdown">
+            <div class="dropdown">
             <button class="dropbtn">Menu</button>
             <div class="dropdown-content">
                 <a href="editar_email.php">Editar e-mail</a>
                 <a href="criar_nova_senha.php">Criar nova senha</a>
                 <a href="sair.php">Sair</a>
             </div>
+        </div>
+
+            <!-- <div class="buttons">
+                <a href="editar_email.php" class="btn nova-senha-btn">Editar e-mail</a>
+                <a href="criar_nova_senha.php" class="btn editar-email-btn">Criar nova senha</a>
+                <a href="sair.php" class="btn sair-btn">Sair</a>
+            </div> -->
         </div>
 
         <div class="modal">
