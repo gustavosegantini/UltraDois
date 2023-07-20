@@ -317,3 +317,7 @@ body {
     position: relative;
     display: inline-block;
 }
+.modal-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;}
