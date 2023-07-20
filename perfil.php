@@ -109,120 +109,122 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
     <div class="container">
         <div class="modal modal-title">
             <h1>
-                Olá,
-                <?php echo $nome; ?>!
-            </h1>
-            <div class="dropdown">
-                <button class="dropbtn">
-                    <i class="fas fa-user"></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="editar_email.php">Editar e-mail</a>
-                    <a href="criar_nova_senha.php">Criar nova senha</a>
-                    <a href="sair.php">Sair</a>
+                <div class="user-info">
+                    Olá,
+                    <?php echo $nome; ?>!
+                    <div class="dropdown">
+                        <button class="dropbtn">
+                            <i class="fas fa-user"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="editar_email.php">Editar e-mail</a>
+                            <a href="criar_nova_senha.php">Criar nova senha</a>
+                            <a href="sair.php">Sair</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            </h1>
 
-    <!-- <div class="buttons">
+
+            <!-- <div class="buttons">
                 <a href="editar_email.php" class="btn nova-senha-btn">Editar e-mail</a>
                 <a href="criar_nova_senha.php" class="btn editar-email-btn">Criar nova senha</a>
                 <a href="sair.php" class="btn sair-btn">Sair</a>
             </div> -->
 
 
-    <div class="modal">
-        <header>
-            <p>Você possui <span class="pontos">
-                    <?php echo $pontos; ?>
-                </span> pontos.</p>
-        </header>
-        <main>
-            <progress max="5.5" value="<?php echo $pontos; ?>"></progress>
+            <div class="modal">
+                <header>
+                    <p>Você possui <span class="pontos">
+                            <?php echo $pontos; ?>
+                        </span> pontos.</p>
+                </header>
+                <main>
+                    <progress max="5.5" value="<?php echo $pontos; ?>"></progress>
 
-            <form action="adicionar_pontos.php" method="post">
-                <label for="codigo">Insira o código da cafeteria:</label>
-                <input type="text" id="codigo" name="codigo">
-                <input type="submit" value="Resgatar Código">
-            </form><br>
-            <?php
-            if (isset($_SESSION['sucesso'])) {
-                echo '<div class="alert success">' . $_SESSION['sucesso'] . '</div>';
-                unset($_SESSION['sucesso']);
-            }
-            if (isset($_SESSION['codigoErro'])) {
-                echo '<div class="alert error">' . $_SESSION['codigoErro'] . '</div>';
-                unset($_SESSION['codigoErro']);
-            }
-            ?>
+                    <form action="adicionar_pontos.php" method="post">
+                        <label for="codigo">Insira o código da cafeteria:</label>
+                        <input type="text" id="codigo" name="codigo">
+                        <input type="submit" value="Resgatar Código">
+                    </form><br>
+                    <?php
+                    if (isset($_SESSION['sucesso'])) {
+                        echo '<div class="alert success">' . $_SESSION['sucesso'] . '</div>';
+                        unset($_SESSION['sucesso']);
+                    }
+                    if (isset($_SESSION['codigoErro'])) {
+                        echo '<div class="alert error">' . $_SESSION['codigoErro'] . '</div>';
+                        unset($_SESSION['codigoErro']);
+                    }
+                    ?>
 
-            <?php if (isset($_SESSION['cupomGerado']) && $_SESSION['cupomGerado']): ?>
-                <script>
-                    showConfetti();
-                </script>
-                <?php unset($_SESSION['cupomGerado']); ?>
+                    <?php if (isset($_SESSION['cupomGerado']) && $_SESSION['cupomGerado']): ?>
+                        <script>
+                            showConfetti();
+                        </script>
+                        <?php unset($_SESSION['cupomGerado']); ?>
+                    <?php endif; ?>
+                </main>
+            </div>
+
+            <?php if (!empty($cupons)): ?>
+                <div class="modal">
+                    <header>
+                        <h1>Seus cupons</h1>
+                        <p>Na próxima compra informe esses cupons e ganhe um super desconto</p>
+                    </header>
+                    <main>
+                        <div class="cupons-list">
+                            <?php foreach ($cupons as $cupom): ?>
+                                <div class="cupom-item">
+                                    <?php echo $cupom; ?>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </main>
+                </div>
             <?php endif; ?>
-        </main>
-    </div>
 
-    <?php if (!empty($cupons)): ?>
-        <div class="modal">
-            <header>
-                <h1>Seus cupons</h1>
-                <p>Na próxima compra informe esses cupons e ganhe um super desconto</p>
-            </header>
-            <main>
-                <div class="cupons-list">
-                    <?php foreach ($cupons as $cupom): ?>
-                        <div class="cupom-item">
-                            <?php echo $cupom; ?>
+            <?php if (!empty($cupons_utilizados)): ?>
+                <div class="modal">
+                    <header>
+                        <h1>Cupons utilizados</h1>
+                        <p>Veja a lista dos 5 ultimos que você já utilizou</p>
+                    </header>
+                    <main>
+                        <div class="cupons-list">
+                            <?php foreach ($cupons_utilizados as $cupom_utilizado): ?>
+                                <div class="cupom-utilizado-item">
+                                    <!-- Código do cupom: -->
+                                    <?php echo $cupom_utilizado['cupom']; ?><br>
+                                    Usado em:
+                                    <?php echo $cupom_utilizado['data_utilizado']; ?>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
-                    <?php endforeach; ?>
+                    </main>
                 </div>
-            </main>
-        </div>
-    <?php endif; ?>
+            <?php endif; ?>
 
-    <?php if (!empty($cupons_utilizados)): ?>
-        <div class="modal">
-            <header>
-                <h1>Cupons utilizados</h1>
-                <p>Veja a lista dos 5 ultimos que você já utilizou</p>
-            </header>
-            <main>
-                <div class="cupons-list">
-                    <?php foreach ($cupons_utilizados as $cupom_utilizado): ?>
-                        <div class="cupom-utilizado-item">
-                            <!-- Código do cupom: -->
-                            <?php echo $cupom_utilizado['cupom']; ?><br>
-                            Usado em:
-                            <?php echo $cupom_utilizado['data_utilizado']; ?>
-                        </div>
-                    <?php endforeach; ?>
+            <div class="modal">
+                <header>
+                    <h1>Suporte e Política de Privacidade</h1>
+                </header>
+                <main>
+                    <p>Para suporte, entre em contato conosco pelo e-mail: <a
+                            href="mailto:contato@ultrafidelidade.com">contato@ultrafidelidade.com</a></p><br>
+                    <p>Leia nossa <a href="politica_privacidade.php">Política de Privacidade</a> para saber mais sobre
+                        como
+                        lidamos com suas informações pessoais.</p>
+                </main>
+            </div>
+
+            <footer>
+                <div class="credit-banner">
+                    <p>Criado por Gustavo Segantini</p>
                 </div>
-            </main>
+            </footer>
         </div>
-    <?php endif; ?>
-
-    <div class="modal">
-        <header>
-            <h1>Suporte e Política de Privacidade</h1>
-        </header>
-        <main>
-            <p>Para suporte, entre em contato conosco pelo e-mail: <a
-                    href="mailto:contato@ultrafidelidade.com">contato@ultrafidelidade.com</a></p><br>
-            <p>Leia nossa <a href="politica_privacidade.php">Política de Privacidade</a> para saber mais sobre como
-                lidamos com suas informações pessoais.</p>
-        </main>
-    </div>
-
-    <footer>
-        <div class="credit-banner">
-            <p>Criado por Gustavo Segantini</p>
-        </div>
-    </footer>
-    </div>
 </body>
 
 </html>
