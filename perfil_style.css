@@ -59,8 +59,8 @@ header {
     background: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%); */
     padding: 1.5rem 0;
     text-align: center;
-    color: linear-gradient(45deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
-    
+    color: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+
     /* color: var(--text-color); */
     position: relative;
     border-radius: 8px;
@@ -68,7 +68,7 @@ header {
 
 .h1 {
     /* color: (--text-color); */
-    color: linear-gradient(45deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    color: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
 }
 
 header h1 {
@@ -173,12 +173,13 @@ progress::-webkit-progress-bar {
 
 progress::-webkit-progress-value {
     /* background-color: #3a83f1; */
-    background-color: linear-gradient(45deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    background-color: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
     border-radius: 1rem;
 }
 
 progress::-moz-progress-bar {
-    background-color: #3a83f1;
+    background-color: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+    /* background-color: #3a83f1; */
     border-radius: 1rem;
 }
 
