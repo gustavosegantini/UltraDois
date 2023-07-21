@@ -333,27 +333,27 @@ body {
 
 @media screen and (max-width: 600px) {
     .dropdown-content {
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
     }
-  
+
     .modal-title {
-      flex-direction: column;
+        flex-direction: column;
     }
-  
+
     .dropdown {
-      margin-top: 20px;
+        margin-top: 20px;
     }
+
     .modal {
         background-color: var(--card-background-color);
         padding: 1rem;
-        border-radius: 8px;
+        border-radius: 18px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         margin: 1rem;
         max-width: 90%;
         width: 100%;
         text-align: center;
     }
-  }
-  
+}
