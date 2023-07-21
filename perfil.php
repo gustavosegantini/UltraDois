@@ -120,38 +120,6 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
             <h1>Olá,
                 <?php echo $nome; ?>!
             </h1>
-
-            <div class="dots" onclick="this.classList.toggle('active');">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="shadow cut"></div>
-                <div class="container cut">
-                    <div class="drop cut2"></div>
-                </div>
-                <div class="list">
-                    <ul>
-                        <li>
-                            Mark as read
-                        </li>
-                        <li>
-                            Flag as important
-                        </li>
-                        <li>
-                            Save for later
-                        </li>
-                        <li>
-                            Move to trash
-                        </li>
-                        <li>
-                            Mark as spam
-                        </li>
-                    </ul>
-                </div>
-                <div class="dot"></div>
-            </div>
-            <div class="cursor" onclick="document.querySelector('.dots').classList.toggle('active');"></div>
-
-
             <!-- botão de menu sanduiche
             <div class="dropdown">
                 <button class="dropbtn" onclick="toggleMenu()">
@@ -166,6 +134,35 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
                 </div>
             </div> -->
         </div>
+        <div class="dots" onclick="this.classList.toggle('active');">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="shadow cut"></div>
+            <div class="container cut">
+                <div class="drop cut2"></div>
+            </div>
+            <div class="list">
+                <ul>
+                    <li>
+                        Mark as read
+                    </li>
+                    <li>
+                        Flag as important
+                    </li>
+                    <li>
+                        Save for later
+                    </li>
+                    <li>
+                        Move to trash
+                    </li>
+                    <li>
+                        Mark as spam
+                    </li>
+                </ul>
+            </div>
+            <div class="dot"></div>
+        </div>
+        <div class="cursor" onclick="document.querySelector('.dots').classList.toggle('active');"></div>
     </div>
 
 
