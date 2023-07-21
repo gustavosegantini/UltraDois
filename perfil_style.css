@@ -288,6 +288,7 @@ body {
     text-decoration: none;
     display: flex;
     text-align: left;
+    z-index: 1008;
 }
 
 .dropdown-content a:hover {
