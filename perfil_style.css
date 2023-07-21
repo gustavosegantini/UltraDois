@@ -9,7 +9,7 @@
 html,
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #72EDF2 10%, #5151E5 100%);
+    background: linear-gradient(214deg, #72edf2 10%, #5151e5);
     height: 100%;
     background-attachment: fixed;
     /* Adicione essa linha para deixar o background fixo */
