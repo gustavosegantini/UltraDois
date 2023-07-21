@@ -315,7 +315,7 @@ body {
 
 .dropdown {
     position: relative;
-    display: flex;
+    display: inline-block;
 }
 
 .modal-title {
