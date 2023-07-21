@@ -3,9 +3,9 @@
 :root {
     --background-color: #f5f5f5;
     --card-background-color: #fff;
-    --header-background-color: linear-gradient(45deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
-    --text-color: linear-gradient(45deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
-    /* --text-color: #444444; */
+   --header-background-color: linear-gradient(45deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+
+    --text-color: #444444;
     --input-border-color: #ccc;
     --submit-button-color: #3a83f1;
     --submit-button-hover-color: #1f5bbf;
