@@ -156,32 +156,39 @@ input[type="submit"]:hover {
 progress {
     width: 100%;
     height: 1rem;
-    /* Aumente a espessura da barra de progresso */
     margin-bottom: 4rem;
     margin-top: 2rem;
     -webkit-appearance: none;
-    /* Adicione esta linha */
     appearance: none;
-    /* Adicione esta linha */
-
 }
 
-progress::-webkit-progress-bar {
+progress[value]::-webkit-progress-bar {
     background-color: #eee;
     border-radius: 1rem;
 }
 
-progress::-webkit-progress-value {
-    /* background-color: #3a83f1; */
-    background-color: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+progress[value]::-webkit-progress-value {
+    background-image:
+        -webkit-linear-gradient(
+            left,
+            rgba(131,58,180,1),
+            rgba(253,29,29,1),
+            rgba(252,176,69,1)
+        );
     border-radius: 1rem;
 }
 
-progress::-moz-progress-bar {
-    background-color: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
-    /* background-color: #3a83f1; */
+progress[value]::-moz-progress-bar {
+    background-image:
+        -moz-linear-gradient(
+            left,
+            rgba(131,58,180,1),
+            rgba(253,29,29,1),
+            rgba(252,176,69,1)
+        );
     border-radius: 1rem;
 }
+
 
 
 .cupons-list {
