@@ -116,13 +116,17 @@ input[type="submit"] {
     margin-top: 1rem;
     border-radius: 0.25rem;
     border: none;
-    background-color: var(--submit-button-color);
+    background: rgb(162, 130, 203);
+    background: linear-gradient(45deg, rgba(162, 130, 203, 1) 0%, rgba(218, 151, 146, 1) 100%);
+    /* background-color: var(--submit-button-color); */
     color: var(--card-background-color);
     cursor: pointer;
 }
 
 input[type="submit"]:hover {
-    background-color: var(--submit-button-hover-color);
+    /* background-color: var(--submit-button-hover-color); */
+    background: rgb(162, 130, 203);
+    background: linear-gradient(45deg, rgba(162, 130, 203, 1) 0%, rgba(218, 151, 146, 1) 100%);
 }
 
 .alert {
