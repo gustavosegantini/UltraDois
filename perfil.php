@@ -104,7 +104,6 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
 
     </script>
 
-
     <div class="container">
         <div class="modal modal-title">
             <h1>Olá,
@@ -197,19 +196,6 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
                 </main>
             </div>
         <?php endif; ?>
-
-        <!-- <div class="modal">
-            <header>
-                <h1>Suporte e Política de Privacidade</h1>
-            </header>
-            <main>
-                <p>Para suporte, entre em contato conosco pelo e-mail: <a
-                        href="mailto:contato@ultrafidelidade.com">contato@ultrafidelidade.com</a></p><br>
-                <p>Leia nossa <a href="politica_privacidade.php">Política de Privacidade</a> para saber mais sobre como
-                    lidamos com suas informações pessoais.</p>
-            </main>
-        </div> -->
-
         <footer>
             <div class="credit-banner">
                 <p>Criado por Gustavo Segantini</p>
