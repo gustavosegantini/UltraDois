@@ -325,16 +325,23 @@ body {
     }
 
     .modal {
-        background-color: var(--glass);
-        padding: 1rem;
-        border-radius: 18px;
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-        border: 1px solid var(--border-color);
-        margin: 1rem;
-        max-width: 90%;
-        width: 100%;
-        text-align: center;
+       /* background-color: var(--glass); */
+    padding: 1rem;
+    /* border-radius: 18px; */
+    /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
+    /* backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px); */
+    /* border: 1px solid var(--border-color); */
+    margin: 1rem;
+    max-width: 90%;
+    width: 100%;
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.24);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.9px);
+    -webkit-backdrop-filter: blur(8.9px);
+    border: 1px solid rgba(255, 255, 255, 1);
     }
 }
