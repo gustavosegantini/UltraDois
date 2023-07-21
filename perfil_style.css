@@ -60,13 +60,15 @@ header {
     padding: 1.5rem 0;
     text-align: center;
     color: linear-gradient(45deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    
     /* color: var(--text-color); */
     position: relative;
     border-radius: 8px;
 }
 
 .h1 {
-    color: (--text-color);
+    /* color: (--text-color); */
+    color: linear-gradient(45deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
 }
 
 header h1 {
