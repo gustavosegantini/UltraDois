@@ -40,7 +40,7 @@ header {
     text-align: center;
     color: var(--card-background-color);
     position: relative;
-    border-radius: 8px;
+    border-radius: 18px;
 }
 
 header h1 {
