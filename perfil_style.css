@@ -328,3 +328,20 @@ body {
     font-size: 24px;
     display: block;
 }
+
+@media screen and (max-width: 600px) {
+    .dropdown-content {
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+    }
+  
+    .modal-title {
+      flex-direction: column;
+    }
+  
+    .dropdown {
+      margin-top: 20px;
+    }
+  }
+  
