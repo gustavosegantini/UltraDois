@@ -122,10 +122,10 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
             </h1>
             <!-- botão de menu sanduiche -->
             <div class="dropdown">
-                <button class="dropbtn">
+                <button class="dropbtn" onclick="toggleMenu()">
                     <i class="fas fa-bars"></i>
                 </button>
-                <div class="dropdown-content">
+                <div id="dropdown-content" class="dropdown-content">
                     <a href="editar_email.php">Editar e-mail</a>
                     <a href="criar_nova_senha.php">Criar nova senha</a>
                     <a href="mailto:contato@ultrafidelidade.com">Suporte</a>
@@ -134,81 +134,83 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
                 </div>
             </div>
         </div>
+    </div>
 
+
+    <div class="modal">
+        <header>
+            <p>Você possui <span class="pontos">
+                    <?php echo $pontos; ?>
+                </span> pontos.</p>
+        </header>
+        <main>
+            <progress max="5.5" value="<?php echo $pontos; ?>"></progress>
+
+            <form action="adicionar_pontos.php" method="post">
+                <label for="codigo">Insira o código da cafeteria:</label>
+                <input type="text" id="codigo" name="codigo">
+                <input type="submit" value="Resgatar Código">
+            </form><br>
+            <?php
+            if (isset($_SESSION['sucesso'])) {
+                echo '<div class="alert success">' . $_SESSION['sucesso'] . '</div>';
+                unset($_SESSION['sucesso']);
+            }
+            if (isset($_SESSION['codigoErro'])) {
+                echo '<div class="alert error">' . $_SESSION['codigoErro'] . '</div>';
+                unset($_SESSION['codigoErro']);
+            }
+            ?>
+
+            <?php if (isset($_SESSION['cupomGerado']) && $_SESSION['cupomGerado']): ?>
+                <script>
+                    showConfetti();
+                </script>
+                <?php unset($_SESSION['cupomGerado']); ?>
+            <?php endif; ?>
+        </main>
+    </div>
+
+    <?php if (!empty($cupons)): ?>
         <div class="modal">
             <header>
-                <p>Você possui <span class="pontos">
-                        <?php echo $pontos; ?>
-                    </span> pontos.</p>
+                <h1>Seus cupons</h1>
+                <p>Na próxima compra informe esses cupons e ganhe um super desconto</p>
             </header>
             <main>
-                <progress max="5.5" value="<?php echo $pontos; ?>"></progress>
-
-                <form action="adicionar_pontos.php" method="post">
-                    <label for="codigo">Insira o código da cafeteria:</label>
-                    <input type="text" id="codigo" name="codigo">
-                    <input type="submit" value="Resgatar Código">
-                </form><br>
-                <?php
-                if (isset($_SESSION['sucesso'])) {
-                    echo '<div class="alert success">' . $_SESSION['sucesso'] . '</div>';
-                    unset($_SESSION['sucesso']);
-                }
-                if (isset($_SESSION['codigoErro'])) {
-                    echo '<div class="alert error">' . $_SESSION['codigoErro'] . '</div>';
-                    unset($_SESSION['codigoErro']);
-                }
-                ?>
-
-                <?php if (isset($_SESSION['cupomGerado']) && $_SESSION['cupomGerado']): ?>
-                    <script>
-                        showConfetti();
-                    </script>
-                    <?php unset($_SESSION['cupomGerado']); ?>
-                <?php endif; ?>
+                <div class="cupons-list">
+                    <?php foreach ($cupons as $cupom): ?>
+                        <div class="cupom-item">
+                            <?php echo $cupom; ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </main>
         </div>
+    <?php endif; ?>
 
-        <?php if (!empty($cupons)): ?>
-            <div class="modal">
-                <header>
-                    <h1>Seus cupons</h1>
-                    <p>Na próxima compra informe esses cupons e ganhe um super desconto</p>
-                </header>
-                <main>
-                    <div class="cupons-list">
-                        <?php foreach ($cupons as $cupom): ?>
-                            <div class="cupom-item">
-                                <?php echo $cupom; ?>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </main>
-            </div>
-        <?php endif; ?>
+    <?php if (!empty($cupons_utilizados)): ?>
+        <div class="modal">
+            <header>
+                <h1>Cupons utilizados</h1>
+                <p>Veja a lista dos 5 ultimos que você já utilizou</p>
+            </header>
+            <main>
+                <div class="cupons-list">
+                    <?php foreach ($cupons_utilizados as $cupom_utilizado): ?>
+                        <div class="cupom-utilizado-item">
+                            <!-- Código do cupom: -->
+                            <?php echo $cupom_utilizado['cupom']; ?><br>
+                            Usado em:
+                            <?php echo $cupom_utilizado['data_utilizado']; ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </main>
+        </div>
+    <?php endif; ?>
 
-        <?php if (!empty($cupons_utilizados)): ?>
-            <div class="modal">
-                <header>
-                    <h1>Cupons utilizados</h1>
-                    <p>Veja a lista dos 5 ultimos que você já utilizou</p>
-                </header>
-                <main>
-                    <div class="cupons-list">
-                        <?php foreach ($cupons_utilizados as $cupom_utilizado): ?>
-                            <div class="cupom-utilizado-item">
-                                <!-- Código do cupom: -->
-                                <?php echo $cupom_utilizado['cupom']; ?><br>
-                                Usado em:
-                                <?php echo $cupom_utilizado['data_utilizado']; ?>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </main>
-            </div>
-        <?php endif; ?>
-
-        <!-- <div class="modal">
+    <!-- <div class="modal">
             <header>
                 <h1>Suporte e Política de Privacidade</h1>
             </header>
@@ -220,11 +222,11 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
             </main>
         </div> -->
 
-        <footer>
-            <div class="credit-banner">
-                <p>Criado por Gustavo Segantini</p>
-            </div>
-        </footer>
+    <footer>
+        <div class="credit-banner">
+            <p>Criado por Gustavo Segantini</p>
+        </div>
+    </footer>
     </div>
 </body>
 
