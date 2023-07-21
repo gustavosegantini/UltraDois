@@ -116,8 +116,8 @@ input[type="submit"] {
     margin-top: 1rem;
     border-radius: 0.25rem;
     border: none;
-    background: rgb(162, 130, 203);
-    background: linear-gradient(45deg, rgba(162, 130, 203, 1) 0%, rgba(218, 151, 146, 1) 100%);
+    /* background-color: #3a83f1; */
+    background-color: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
     /* background-color: var(--submit-button-color); */
     color: var(--card-background-color);
     cursor: pointer;
