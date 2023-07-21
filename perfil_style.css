@@ -135,6 +135,7 @@ progress {
     height: 1rem;
     /* Aumente a espessura da barra de progresso */
     margin-bottom: 3rem;
+    margin-top: 3rem;
     -webkit-appearance: none;
     /* Adicione esta linha */
     appearance: none;
