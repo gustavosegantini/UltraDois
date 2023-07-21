@@ -310,11 +310,11 @@ body {
 }
 
 .dropdown:hover .dropdown-content {
-    display: flex;
+    display: block;
 }
 
 .dropdown {
-    position: relative;
+    position: absolute;
     display: inline-block;
 }
 
