@@ -11,8 +11,8 @@ body {
     font-family: Arial, sans-serif;
     /* background-color: var(--background-color); */
     background: linear-gradient(135deg, #72EDF2 10%, #5151E5 100%);
-    display: block;
     height: 100%;
+    position: fixed;
 }
 
 .container {
