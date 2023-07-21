@@ -126,9 +126,9 @@ while ($row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados)) {
 
         <div class="modal">
             <header>
-                <p>Você possui <span class="pontos">
+                <h1>Você possui <span class="pontos">
                         <?php echo $pontos; ?>
-                    </span> pontos.</p>
+                    </span> pontos.</h1>
             </header>
             <main>
                 <progress max="5.5" value="<?php echo $pontos; ?>"></progress>
