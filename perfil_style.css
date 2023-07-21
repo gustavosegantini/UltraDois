@@ -314,8 +314,8 @@ body {
 }
 
 .dropdown {
-    position: absolute;
-    display: inline-block;
+    position: relative;
+    display: flex;
 }
 
 .modal-title {
