@@ -23,8 +23,8 @@ body {
 
 .modal {
     background-color: var(--card-background-color);
-    /* padding: 1rem; */
-    border-radius: 8px;
+    padding: 1rem;
+    border-radius: 18px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 1rem;
     max-width: 400px;
