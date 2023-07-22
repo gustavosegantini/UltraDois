@@ -37,15 +37,17 @@ if (isset($_POST['email_atual']) && isset($_POST['novo_email'])) {
 <head>
     <meta charset="UTF-8">
     <title>Editar E-mail</title>
-    <link rel="stylesheet" type="text/css" href="edit_style.css">
+    <link rel="stylesheet" type="text/css" href="cadastro_style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 
 <body>
-    <div class="modal">
-        <div class="card">
+    <div class="container">
+        <header>
             <h1>Editar E-mail</h1>
+        </header>
+        <div class="modal">
             <?php
             if (isset($mensagem)) {
                 if ($erro) {
