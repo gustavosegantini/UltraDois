@@ -12,7 +12,7 @@
     <div class="container">
         <div class="modal">
             <header>
-                <h1>Cadastre-se aqui!</h1>
+                <h1>Cadastre-se aqui!</h1></br>
                 <form action="cadastrar_cliente.php" method="post">
                     <label for="nome">Nome:</label>
                     <input type="text" id="nome" name="nome" required>
