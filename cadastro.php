@@ -15,16 +15,16 @@
                 <h1>Cadastre-se aqui!</h1></br>
                 <form action="cadastrar_cliente.php" method="post">
                     <label for="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome" placeholder="Nome" required>
+                    <input type="text" id="nome" name="nome" placeholder="Seu Nome" required>
 
                     <label for="sobrenome">Sobrenome:</label>
-                    <input type="text" id="sobrenome" name="sobrenome" placeholder="Sobrenome" required>
+                    <input type="text" id="sobrenome" name="sobrenome" placeholder="Seu Sobrenome" required>
 
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    <input type="email" id="email" name="email" placeholder="Seu e-mail" required>
 
                     <label for="senha">Senha:</label>
-                    <input type="password" id="senha" name="senha" placeholder="Senha" required>
+                    <input type="password" id="senha" name="senha" placeholder="Sua Senha" required>
 
                     <label for="confirmar_senha">Confirmar Senha:</label>
                     <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Confirmar Senha"
