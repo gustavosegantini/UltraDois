@@ -42,7 +42,7 @@ body {
     margin: 1rem;
     max-width: 400px;
     width: 100%;
-    text-align: center;
+    /* text-align: center; */
 
     /* background: rgba(255, 255, 255, 0.49);
     border-radius: 16px;
