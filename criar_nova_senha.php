@@ -22,21 +22,21 @@ if (isset($_POST['senha_atual']) && isset($_POST['nova_senha'])) {
     $row = mysqli_fetch_assoc($result);
 
     if (password_verify($senha_atual, $row['senha'])) {
-    $senha_hash = password_hash($nova_senha, PASSWORD_DEFAULT);
-    $query = "UPDATE perfil_cliente SET senha = '$senha_hash' WHERE email = '$email'";
-    $result = mysqli_query($conn, $query);
+        $senha_hash = password_hash($nova_senha, PASSWORD_DEFAULT);
+        $query = "UPDATE perfil_cliente SET senha = '$senha_hash' WHERE email = '$email'";
+        $result = mysqli_query($conn, $query);
 
-    if ($result) {
-        $mensagem = "Senha atualizada com sucesso!";
-        $erro = false;
+        if ($result) {
+            $mensagem = "Senha atualizada com sucesso!";
+            $erro = false;
+        } else {
+            $mensagem = "Erro ao atualizar a senha!";
+            $erro = true;
+        }
     } else {
-        $mensagem = "Erro ao atualizar a senha!";
+        $mensagem = "Senha atual incorreta!";
         $erro = true;
     }
-} else {
-    $mensagem = "Senha atual incorreta!";
-    $erro = true;
-}
 
 }
 ?>
@@ -47,15 +47,17 @@ if (isset($_POST['senha_atual']) && isset($_POST['nova_senha'])) {
 <head>
     <meta charset="UTF-8">
     <title>Criar Nova Senha</title>
-    <link rel="stylesheet" type="text/css" href="edit_style.css">
+    <link rel="stylesheet" type="text/css" href="cadastro_style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 
 <body>
-    <div class="modal">
-        <div class="card">
-            <h1>Criar Nova Senha</h1> <br>
+    <div class="container">
+        <div class="modal">
+            <header>
+                <h1>Criar Nova Senha</h1> <br>
+            </header>
             <?php
             if (isset($mensagem)) {
                 if ($erro) {
@@ -64,7 +66,7 @@ if (isset($_POST['senha_atual']) && isset($_POST['nova_senha'])) {
                     echo '<div class="alert success">' . $mensagem . '</div>';
                 }
             }
-            
+
             ?>
             <form action="criar_nova_senha.php" method="post">
                 <label for="senha_atual">Senha atual:</label>
@@ -74,9 +76,10 @@ if (isset($_POST['senha_atual']) && isset($_POST['nova_senha'])) {
                 <input type="submit" value="Atualizar Senha">
             </form><br>
             <a href="perfil.php">Voltar ao Perfil</a>
+
+
         </div>
     </div>
 </body>
 
 </html>
-
