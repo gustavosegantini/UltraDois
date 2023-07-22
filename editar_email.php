@@ -44,10 +44,10 @@ if (isset($_POST['email_atual']) && isset($_POST['novo_email'])) {
 
 <body>
     <div class="container">
-        <header>
-            <h1>Editar E-mail</h1>
-        </header>
         <div class="modal">
+            <header>
+                <h1>Editar E-mail</h1>
+            </header>
             <?php
             if (isset($mensagem)) {
                 if ($erro) {
