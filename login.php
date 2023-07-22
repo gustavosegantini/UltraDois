@@ -47,7 +47,7 @@
             ?>
 
             <form method="POST" action="autenticar_login.php">
-                <label for="email">E-mail:</label>
+                <label for="email">E-mail:</label><br>
                 <input type="email" id="email" name="email" required>
 
                 <label for="senha">Senha:</label>
