@@ -38,7 +38,7 @@ body {
     backdrop-filter: blur(4px);
     /* -webkit-backdrop-filter: blur(4px);
     border: 1px solid var(--border-color); */
-
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     margin: 1rem;
     max-width: 400px;
     width: 100%;
@@ -113,7 +113,8 @@ input[type="text"] {
 
 input[type="submit"] {
     font-size: 1rem;
-    padding: 0.75rem; /* aumentado para adicionar mais altura */
+    padding: 0.75rem;
+    /* aumentado para adicionar mais altura */
     margin-top: 1rem;
     border-radius: 0.25rem;
     border: none;
@@ -174,23 +175,19 @@ progress[value]::-webkit-progress-bar {
 
 progress[value]::-webkit-progress-value {
     background-image:
-        -webkit-linear-gradient(
-            left,
-            rgba(131,58,180,1),
-            rgba(253,29,29,1),
-            rgba(252,176,69,1)
-        );
+        -webkit-linear-gradient(left,
+            rgba(131, 58, 180, 1),
+            rgba(253, 29, 29, 1),
+            rgba(252, 176, 69, 1));
     border-radius: 1rem;
 }
 
 progress[value]::-moz-progress-bar {
     background-image:
-        -moz-linear-gradient(
-            left,
-            rgba(131,58,180,1),
-            rgba(253,29,29,1),
-            rgba(252,176,69,1)
-        );
+        -moz-linear-gradient(left,
+            rgba(131, 58, 180, 1),
+            rgba(253, 29, 29, 1),
+            rgba(252, 176, 69, 1));
     border-radius: 1rem;
 }
 
