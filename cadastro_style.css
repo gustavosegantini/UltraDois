@@ -91,6 +91,7 @@ label {
     color: var(--text-color);
     text-align: left;
     /* Justificado a esquerda */
+    align-items: left;
 }
 
 input[type="text"],
