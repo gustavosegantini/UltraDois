@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Adicione esta linha -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Cliente</title>
     <link rel="stylesheet" href="cadastro_style.css">
 </head>
@@ -15,23 +15,24 @@
                 <h1>Cadastre-se aqui!</h1></br>
                 <form action="cadastrar_cliente.php" method="post">
                     <label for="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome" required>
+                    <input type="text" id="nome" name="nome" placeholder="Nome" required>
 
                     <label for="sobrenome">Sobrenome:</label>
-                    <input type="text" id="sobrenome" name="sobrenome" required>
+                    <input type="text" id="sobrenome" name="sobrenome" placeholder="Sobrenome" required>
 
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
 
                     <label for="senha">Senha:</label>
-                    <input type="password" id="senha" name="senha" required>
+                    <input type="password" id="senha" name="senha" placeholder="Senha" required>
 
                     <label for="confirmar_senha">Confirmar Senha:</label>
-                    <input type="password" id="confirmar_senha" name="confirmar_senha" required>
+                    <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Confirmar Senha"
+                        required>
 
                     <!-- Adicionando campo Data de Nascimento -->
                     <label for="data_nascimento">Data de Nascimento:</label>
-                    <input type="date" id="data_nascimento" name="data_nascimento" required>
+                    <input type="date" id="data_nascimento" name="data_nascimento" placeholder="DD/MM/AAAA" required>
 
                     <!-- Adicionando campo Curso -->
                     <label for="curso">Curso:</label>

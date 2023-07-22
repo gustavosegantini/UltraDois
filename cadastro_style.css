@@ -86,8 +86,11 @@ header {
 label {
     font-size: 1rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    /* Maior espaço entre os campos */
     color: var(--text-color);
+    text-align: left;
+    /* Justificado a esquerda */
 }
 
 input[type="text"],
@@ -97,10 +100,13 @@ input[type="date"],
 select {
     font-size: 1rem;
     padding: 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    /* Maior espaço entre os campos */
     border-radius: 0.25rem;
     border: 1px solid var(--input-border-color);
     width: 100%;
+    opacity: 0.7;
+    /* Opacidade reduzida */
 }
 
 input[type="submit"] {
