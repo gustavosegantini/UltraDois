@@ -9,8 +9,10 @@
 </head>
 
 <body>
-    <div class="header">
-        <h1>Cadastre-se aqui!</h1>
+    <div class="modal">
+        <header>
+            <h1>Cadastre-se aqui!</h1>
+        </header>
         <form action="cadastrar_cliente.php" method="post">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required>
