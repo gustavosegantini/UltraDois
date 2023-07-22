@@ -9,50 +9,58 @@
 </head>
 
 <body>
-    <h1>Cadastre-se aqui!</h1>
-    <form action="cadastrar_cliente.php" method="post">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
+    <div class="container">
+        <div class="modal">
+            <header>
+                <h1>Cadastre-se aqui!</h1>
+                <form action="cadastrar_cliente.php" method="post">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" required>
 
-        <label for="sobrenome">Sobrenome:</label>
-        <input type="text" id="sobrenome" name="sobrenome" required>
+                    <label for="sobrenome">Sobrenome:</label>
+                    <input type="text" id="sobrenome" name="sobrenome" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
 
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha" required>
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" required>
 
-        <label for="confirmar_senha">Confirmar Senha:</label>
-        <input type="password" id="confirmar_senha" name="confirmar_senha" required>
+                    <label for="confirmar_senha">Confirmar Senha:</label>
+                    <input type="password" id="confirmar_senha" name="confirmar_senha" required>
 
-        <!-- Adicionando campo Data de Nascimento -->
-        <label for="data_nascimento">Data de Nascimento:</label>
-        <input type="date" id="data_nascimento" name="data_nascimento" required>
+                    <!-- Adicionando campo Data de Nascimento -->
+                    <label for="data_nascimento">Data de Nascimento:</label>
+                    <input type="date" id="data_nascimento" name="data_nascimento" required>
 
-        <!-- Adicionando campo Curso -->
-        <label for="curso">Curso:</label>
-        <select id="curso" name="curso" required>
-            <option value="">Selecione o curso</option>
-            <?php
-            include '../conexao.php';
+                    <!-- Adicionando campo Curso -->
+                    <label for="curso">Curso:</label>
+                    <select id="curso" name="curso" required>
+                        <option value="">Selecione o curso</option>
+                        <?php
+                        include '../conexao.php';
 
-            $query = "SELECT * FROM cursos";
-            $result = mysqli_query($conn, $query);
+                        $query = "SELECT * FROM cursos";
+                        $result = mysqli_query($conn, $query);
 
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo '<option value="' . $row['id'] . '">' . $row['nome_curso'] . '</option>';
-            }
-            ?>
-        </select>
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<option value="' . $row['id'] . '">' . $row['nome_curso'] . '</option>';
+                        }
+                        ?>
+                    </select>
 
-        <label for="aceitar_politica_privacidade">
-            <input type="checkbox" id="aceitar_politica_privacidade" name="aceitar_politica_privacidade" required>
-            Eu concordo com a <a href="politica_privacidade.php" target="_blank">Política de Privacidade</a>.
-        </label>
+                    <label for="aceitar_politica_privacidade">
+                        <input type="checkbox" id="aceitar_politica_privacidade" name="aceitar_politica_privacidade"
+                            required>
+                        Eu concordo com a <a href="politica_privacidade.php" target="_blank">Política de
+                            Privacidade</a>.
+                    </label>
 
-        <input type="submit" value="Cadastrar">
-    </form>
+                    <input type="submit" value="Cadastrar">
+                </form>
+            </header>
+        </div>
+    </div>
 </body>
 
 </html>
