@@ -164,48 +164,53 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
             </nav>
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <h2>Gerar Código</h2>
-                <button class="buttonCodigo" onclick="gerarCodigo()">Gerar Código</button>
-                <div id="codigo-gerado" class="codigo-gerado"></div>
+                <div class="container">
+                    <div class="modal">
+                        <h2>Gerar Código</h2>
+                        <button class="buttonCodigo" onclick="gerarCodigo()">Gerar Código</button>
+                        <div id="codigo-gerado" class="codigo-gerado"></div>
+                    </div>
+                    <div class="modal">
+                        <h2>Validar Cupom</h2>
+                        <?php
+                        if (isset($_POST['codigo_cupom'])) {
+                            $codigo_cupom = $_POST['codigo_cupom'];
+                            $query_cupom = "SELECT * FROM cupons INNER JOIN perfil_cliente ON cupons.id_cliente = perfil_cliente.id WHERE cupons.cupom = '$codigo_cupom' AND cupons.utilizado = 0";
+                            $result_cupom = mysqli_query($conn, $query_cupom);
 
-                <h2>Validar Cupom</h2>
-                <?php
-                if (isset($_POST['codigo_cupom'])) {
-                    $codigo_cupom = $_POST['codigo_cupom'];
-                    $query_cupom = "SELECT * FROM cupons INNER JOIN perfil_cliente ON cupons.id_cliente = perfil_cliente.id WHERE cupons.cupom = '$codigo_cupom' AND cupons.utilizado = 0";
-                    $result_cupom = mysqli_query($conn, $query_cupom);
+                            if (mysqli_num_rows($result_cupom) > 0) {
+                                $row_cupom = mysqli_fetch_assoc($result_cupom);
+                                $nome_cliente = $row_cupom['nome'];
+                                $id_cliente = $row_cupom['id'];
+                                $cupom_valido = true;
+                                $data_utilizado = date("Y-m-d");
 
-                    if (mysqli_num_rows($result_cupom) > 0) {
-                        $row_cupom = mysqli_fetch_assoc($result_cupom);
-                        $nome_cliente = $row_cupom['nome'];
-                        $id_cliente = $row_cupom['id'];
-                        $cupom_valido = true;
-                        $data_utilizado = date("Y-m-d");
+                                // Atualiza o cupom para utilizado e reseta os pontos do cliente
+                                $sql_update_cupom = "UPDATE cupons SET utilizado = 1, data_utilizado = '$data_utilizado' WHERE cupom = '$codigo_cupom'";
+                                mysqli_query($conn, $sql_update_cupom);
 
-                        // Atualiza o cupom para utilizado e reseta os pontos do cliente
-                        $sql_update_cupom = "UPDATE cupons SET utilizado = 1, data_utilizado = '$data_utilizado' WHERE cupom = '$codigo_cupom'";
-                        mysqli_query($conn, $sql_update_cupom);
+                                $sql_reset_pontos = "UPDATE perfil_cliente SET pontos = 0 WHERE id = '$id_cliente'";
+                                mysqli_query($conn, $sql_reset_pontos);
+                            } else {
+                                $cupom_valido = false;
+                            }
+                        }
 
-                        $sql_reset_pontos = "UPDATE perfil_cliente SET pontos = 0 WHERE id = '$id_cliente'";
-                        mysqli_query($conn, $sql_reset_pontos);
-                    } else {
-                        $cupom_valido = false;
-                    }
-                }
-
-                ?>
-                <form action="perfil_cafeteria.php" method="post">
-                    <label for="codigo_cupom">Verificar código de desconto do cliente:</label>
-                    <input type="text" id="codigo_cupom" name="codigo_cupom">
-                    <input type="submit" value="Verificar Código">
-                </form><br>
-                <?php
-                if (isset($cupom_valido) && $cupom_valido) {
-                    echo '<div class="alert success">Cupom válido! O desconto foi aplicado para ' . $nome_cliente . '.</div>';
-                } elseif (isset($cupom_valido) && !$cupom_valido) {
-                    echo '<div class="alert error">Cupom inválido ou já utilizado. Tente novamente.</div>';
-                }
-                ?>
+                        ?>
+                        <form action="perfil_cafeteria.php" method="post">
+                            <label for="codigo_cupom">Verificar código de desconto do cliente:</label>
+                            <input type="text" id="codigo_cupom" name="codigo_cupom">
+                            <input type="submit" value="Verificar Código">
+                        </form><br>
+                        <?php
+                        if (isset($cupom_valido) && $cupom_valido) {
+                            echo '<div class="alert success">Cupom válido! O desconto foi aplicado para ' . $nome_cliente . '.</div>';
+                        } elseif (isset($cupom_valido) && !$cupom_valido) {
+                            echo '<div class="alert error">Cupom inválido ou já utilizado. Tente novamente.</div>';
+                        }
+                        ?>
+                    </div>
+                </div>
                 <!-- Coloque aqui o conteúdo de cada seção -->
                 <section id="resumo">
                     <!-- Conteúdo da seção Resumo e funcionalidade de gerar código e validar cupom -->
