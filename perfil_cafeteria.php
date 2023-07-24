@@ -130,7 +130,7 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                 <div id="codigo-gerado" class="codigo-gerado"></div>
             </div>
         </div>
-        <div class="modal">
+        <div class="modal modal-duplo">
             <div class="modal-content">
 
                 <header>
