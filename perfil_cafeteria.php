@@ -18,7 +18,7 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
 <head>
     <meta charset="UTF-8">
     <title>Painel da Cafeteria</title>
-    <link rel="stylesheet" href="perfil_style.css">
+    <link rel="stylesheet" href="perfil_cafeteria_style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
 
