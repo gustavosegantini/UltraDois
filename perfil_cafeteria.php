@@ -197,7 +197,7 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                                     $cupom_valido = false;
                                 }
                             }
-
+                            //h
                             ?>
                             <form action="perfil_cafeteria.php" method="post">
                                 <label for="codigo_cupom">Verificar código de desconto do cliente:</label>
