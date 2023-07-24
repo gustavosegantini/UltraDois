@@ -105,22 +105,30 @@ header h1 {
     margin-bottom: 0.5rem;
 }
 
-main {
+/* main {
     margin: 2rem;
-}
+} */
 
-section {
+/* section {
     background-color: var(--card-background-color);
     padding: 1.5rem;
     margin-bottom: 2rem;
     border-radius: 5px;
-}
+} */
 
-h2 {
+/* h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-}
-
+} */
+/* input[type="text"],
+input[type="submit"] {
+    margin-bottom: 1rem;
+    font-size: 18px;
+    padding: 5px;
+    margin: 5px 0;
+    width: 100%;
+    max-width: 200px;
+} */
 form {
     margin-bottom: 1.5rem;
 }
@@ -129,16 +137,6 @@ label {
     display: inline-block;
     width: 180px;
     text-align: left;
-}
-
-input[type="text"],
-input[type="submit"] {
-    margin-bottom: 1rem;
-    font-size: 18px;
-    padding: 5px;
-    margin: 5px 0;
-    width: 100%;
-    max-width: 200px;
 }
 
 table {
@@ -167,7 +165,7 @@ th {
 
 .buttonEditar {
     background-color: var(--header-background-color);
-    color: white;
+    color: rgb(255, 255, 255);
     text-decoration: none;
     padding: 0.25rem 0.5rem;
     border-radius: 3px;
