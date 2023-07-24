@@ -165,188 +165,188 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div class="container">
-                    <div class="modal">
-                        <h2>Gerar Código</h2>
-                        <button class="buttonCodigo" onclick="gerarCodigo()">Gerar Código</button>
-                        <div id="codigo-gerado" class="codigo-gerado"></div>
-                    </div>
-                    <div class="modal">
-                        <h2>Validar Cupom</h2>
-                        <?php
-                        if (isset($_POST['codigo_cupom'])) {
-                            $codigo_cupom = $_POST['codigo_cupom'];
-                            $query_cupom = "SELECT * FROM cupons INNER JOIN perfil_cliente ON cupons.id_cliente = perfil_cliente.id WHERE cupons.cupom = '$codigo_cupom' AND cupons.utilizado = 0";
-                            $result_cupom = mysqli_query($conn, $query_cupom);
+                    <!-- Coloque aqui o conteúdo de cada seção -->
+                    <section id="resumo">
+                        <div class="modal">
+                            <h2>Gerar Código</h2>
+                            <button class="buttonCodigo" onclick="gerarCodigo()">Gerar Código</button>
+                            <div id="codigo-gerado" class="codigo-gerado"></div>
+                        </div>
+                        <div class="modal">
+                            <h2>Validar Cupom</h2>
+                            <?php
+                            if (isset($_POST['codigo_cupom'])) {
+                                $codigo_cupom = $_POST['codigo_cupom'];
+                                $query_cupom = "SELECT * FROM cupons INNER JOIN perfil_cliente ON cupons.id_cliente = perfil_cliente.id WHERE cupons.cupom = '$codigo_cupom' AND cupons.utilizado = 0";
+                                $result_cupom = mysqli_query($conn, $query_cupom);
 
-                            if (mysqli_num_rows($result_cupom) > 0) {
-                                $row_cupom = mysqli_fetch_assoc($result_cupom);
-                                $nome_cliente = $row_cupom['nome'];
-                                $id_cliente = $row_cupom['id'];
-                                $cupom_valido = true;
-                                $data_utilizado = date("Y-m-d");
+                                if (mysqli_num_rows($result_cupom) > 0) {
+                                    $row_cupom = mysqli_fetch_assoc($result_cupom);
+                                    $nome_cliente = $row_cupom['nome'];
+                                    $id_cliente = $row_cupom['id'];
+                                    $cupom_valido = true;
+                                    $data_utilizado = date("Y-m-d");
 
-                                // Atualiza o cupom para utilizado e reseta os pontos do cliente
-                                $sql_update_cupom = "UPDATE cupons SET utilizado = 1, data_utilizado = '$data_utilizado' WHERE cupom = '$codigo_cupom'";
-                                mysqli_query($conn, $sql_update_cupom);
+                                    // Atualiza o cupom para utilizado e reseta os pontos do cliente
+                                    $sql_update_cupom = "UPDATE cupons SET utilizado = 1, data_utilizado = '$data_utilizado' WHERE cupom = '$codigo_cupom'";
+                                    mysqli_query($conn, $sql_update_cupom);
 
-                                $sql_reset_pontos = "UPDATE perfil_cliente SET pontos = 0 WHERE id = '$id_cliente'";
-                                mysqli_query($conn, $sql_reset_pontos);
-                            } else {
-                                $cupom_valido = false;
+                                    $sql_reset_pontos = "UPDATE perfil_cliente SET pontos = 0 WHERE id = '$id_cliente'";
+                                    mysqli_query($conn, $sql_reset_pontos);
+                                } else {
+                                    $cupom_valido = false;
+                                }
                             }
-                        }
 
-                        ?>
-                        <form action="perfil_cafeteria.php" method="post">
-                            <label for="codigo_cupom">Verificar código de desconto do cliente:</label>
-                            <input type="text" id="codigo_cupom" name="codigo_cupom">
-                            <input type="submit" value="Verificar Código">
-                        </form><br>
-                        <?php
-                        if (isset($cupom_valido) && $cupom_valido) {
-                            echo '<div class="alert success">Cupom válido! O desconto foi aplicado para ' . $nome_cliente . '.</div>';
-                        } elseif (isset($cupom_valido) && !$cupom_valido) {
-                            echo '<div class="alert error">Cupom inválido ou já utilizado. Tente novamente.</div>';
-                        }
-                        ?>
-                    </div>
+                            ?>
+                            <form action="perfil_cafeteria.php" method="post">
+                                <label for="codigo_cupom">Verificar código de desconto do cliente:</label>
+                                <input type="text" id="codigo_cupom" name="codigo_cupom">
+                                <input type="submit" value="Verificar Código">
+                            </form><br>
+                            <?php
+                            if (isset($cupom_valido) && $cupom_valido) {
+                                echo '<div class="alert success">Cupom válido! O desconto foi aplicado para ' . $nome_cliente . '.</div>';
+                            } elseif (isset($cupom_valido) && !$cupom_valido) {
+                                echo '<div class="alert error">Cupom inválido ou já utilizado. Tente novamente.</div>';
+                            }
+                            ?>
+                        </div>
+                        <!-- Conteúdo da seção Resumo e funcionalidade de gerar código e validar cupom -->
+                        <div class="info-banner">
+                            <h3>Resumo</h3>
+                            <p>Número total de usuários: <span id="total-usuarios">
+                                    <?php echo $total_usuarios; ?>
+                                </span></p>
+                            <p>Número total de cupons: <span id="total-cupons">
+                                    <?php echo $total_cupons; ?>
+                                </span></p>
+                            <p>Número total de cupons utilizados: <span id="total-cupons-utilizados">
+                                    <?php echo $total_cupons_utilizados; ?>
+                                </span></p>
+                        </div>
+                    </section>
+                    <section id="clientes-pontos">
+                        <!-- Conteúdo da seção Tabela de clientes e pontos -->
+                        <h2>Clientes e Pontos</h2>
+                        <form action="perfil_cafeteria.php" method="get">
+                            <label for="busca">Buscar cliente:</label>
+                            <input type="text" id="busca" name="busca">
+                            <input type="submit" value="Buscar">
+                        </form>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Pontos</th>
+                                    <th>Idade</th>
+                                    <th>Curso</th>
+                                    <th>Pontos Acumulados</th>
+                                    <th>Cupons Total</th>
+                                    <th>Cupons Utilizados</th>
+                                    <th>Ações</th>
+
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                <?php
+                                // Consulta para buscar todos os clientes e seus pontos
+                                $busca = isset($_GET['busca']) ? $_GET['busca'] : '';
+                                $query = "SELECT perfil_cliente.nome, perfil_cliente.email, perfil_cliente.pontos, data_nascimento, cursos.nome_curso as nome_curso, COUNT(cupons.id) as total_cupons, SUM(cupons.utilizado) as cupons_utilizados, pontos_historico FROM perfil_cliente LEFT JOIN cupons ON cupons.id_cliente = perfil_cliente.id INNER JOIN cursos ON perfil_cliente.curso = cursos.id WHERE perfil_cliente.nome LIKE '%$busca%' OR perfil_cliente.email LIKE '%$busca%' GROUP BY perfil_cliente.id";
+
+                                $result = mysqli_query($conn, $query);
+                                if (!$result) {
+                                    die('Erro na consulta: ' . mysqli_error($conn));
+                                }
+
+                                // Percorre os resultados e adiciona as linhas na tabela
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $email_cliente = $row['email'];
+                                    $pontos_cliente = $row['pontos'];
+                                    $data_nascimento = $row['data_nascimento'];
+                                    $curso = $row['curso'];
+                                    $pontos_historico = $row['pontos_historico'];
+                                    $total_cupons = $row['total_cupons'];
+                                    $cupons_utilizados = $row['cupons_utilizados'];
+
+                                    // Calcular a idade com base na data de nascimento
+                                    $hoje = new DateTime();
+                                    $nascimento = new DateTime($data_nascimento);
+                                    $idade = $hoje->diff($nascimento)->y;
+
+                                    echo '<tr>';
+                                    echo '<td>' . $row['nome'] . '</td>';
+                                    echo '<td>' . $row['email'] . '</td>';
+                                    echo '<td>' . $row['pontos'] . '</td>';
+                                    echo '<td>' . $idade . '</td>';
+                                    echo '<td>' . $row['nome_curso'] . '</td>';
+                                    echo '<td>' . $pontos_historico . '</td>';
+                                    echo '<td>' . $total_cupons . '</td>';
+                                    echo '<td>' . $cupons_utilizados . '</td>';
+                                    echo '<td><a href="editar_cliente.php?email_cliente=' . $row['email'] . '" class="buttonEditar">Editar</a></td>';
+                                    echo '</tr>';
+                                }
+
+
+
+                                ?>
+                            </tbody>
+                        </table>
+                    </section>
+                    <section id="codigos">
+                        <!-- Conteúdo da seção Tabela de códigos -->
+                        <h2>Códigos</h2>
+                        <form action="perfil_cafeteria.php" method="get">
+                            <label for="buscador">Buscar código:</label>
+                            <input type="text" id="buscador" name="buscador">
+                            <input type="submit" value="Buscar">
+                        </form>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Gerado</th>
+                                    <th>Data de Geração</th>
+                                    <th>Utilizado</th>
+                                    <th>Data de Utilização</th>
+                                    <!-- <th>Ações</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // Consulta para buscar todos os códigos
+                                $buscador = isset($_GET['buscador']) ? $_GET['buscador'] : '';
+                                $query = "SELECT Codigos.ID_Codigo, Codigos.Codigo, Codigos.Gerado, Codigos.data_gerado, Codigos.Utilizado, Codigos.data_utilizado FROM Codigos WHERE Codigos.Codigo LIKE '%$buscador%' OR Codigos.Utilizado LIKE '%$buscador%' OR Codigos.Gerado LIKE '%$buscador%'";
+                                $result = mysqli_query($conn, $query);
+                                if (!$result) {
+                                    die('Erro na consulta: ' . mysqli_error($conn));
+                                }
+
+                                // Percorre os resultados e adiciona as linhas na tabela
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $codigo = $row['Codigo'];
+                                    $gerado = $row['Gerado'];
+                                    $data_gerado = $row['data_gerado'];
+                                    $utilizado = $row['Utilizado'];
+                                    $data_utilizado = $row['data_utilizado'];
+
+                                    echo '<tr>';
+                                    echo '<td>' . $codigo . '</td>';
+                                    echo '<td>' . $gerado . '</td>';
+                                    echo '<td>' . $data_gerado . '</td>';
+                                    echo '<td>' . $utilizado . '</td>';
+                                    echo '<td>' . $data_utilizado . '</td>';
+                                    // echo '<td><a href="editar_codigo.php?codigo_id=' . $row['id'] . '" class="buttonEditar">Editar</a></td>';
+                                    echo '</tr>';
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </section>
                 </div>
-                <!-- Coloque aqui o conteúdo de cada seção -->
-                <section id="resumo">
-                    <!-- Conteúdo da seção Resumo e funcionalidade de gerar código e validar cupom -->
-                    <div class="info-banner">
-                        <h3>Resumo</h3>
-                        <p>Número total de usuários: <span id="total-usuarios">
-                                <?php echo $total_usuarios; ?>
-                            </span></p>
-                        <p>Número total de cupons: <span id="total-cupons">
-                                <?php echo $total_cupons; ?>
-                            </span></p>
-                        <p>Número total de cupons utilizados: <span id="total-cupons-utilizados">
-                                <?php echo $total_cupons_utilizados; ?>
-                            </span></p>
-                    </div>
-                </section>
-                <section id="clientes-pontos">
-                    <!-- Conteúdo da seção Tabela de clientes e pontos -->
-                    <h2>Clientes e Pontos</h2>
-                    <form action="perfil_cafeteria.php" method="get">
-                        <label for="busca">Buscar cliente:</label>
-                        <input type="text" id="busca" name="busca">
-                        <input type="submit" value="Buscar">
-                    </form>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th>Pontos</th>
-                                <th>Idade</th>
-                                <th>Curso</th>
-                                <th>Pontos Acumulados</th>
-                                <th>Cupons Total</th>
-                                <th>Cupons Utilizados</th>
-                                <th>Ações</th>
-
-                            </tr>
-                        </thead>
-
-
-                        <tbody>
-                            <?php
-                            // Consulta para buscar todos os clientes e seus pontos
-                            $busca = isset($_GET['busca']) ? $_GET['busca'] : '';
-                            $query = "SELECT perfil_cliente.nome, perfil_cliente.email, perfil_cliente.pontos, data_nascimento, cursos.nome_curso as nome_curso, COUNT(cupons.id) as total_cupons, SUM(cupons.utilizado) as cupons_utilizados, pontos_historico FROM perfil_cliente LEFT JOIN cupons ON cupons.id_cliente = perfil_cliente.id INNER JOIN cursos ON perfil_cliente.curso = cursos.id WHERE perfil_cliente.nome LIKE '%$busca%' OR perfil_cliente.email LIKE '%$busca%' GROUP BY perfil_cliente.id";
-
-                            $result = mysqli_query($conn, $query);
-                            if (!$result) {
-                                die('Erro na consulta: ' . mysqli_error($conn));
-                            }
-
-                            // Percorre os resultados e adiciona as linhas na tabela
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $email_cliente = $row['email'];
-                                $pontos_cliente = $row['pontos'];
-                                $data_nascimento = $row['data_nascimento'];
-                                $curso = $row['curso'];
-                                $pontos_historico = $row['pontos_historico'];
-                                $total_cupons = $row['total_cupons'];
-                                $cupons_utilizados = $row['cupons_utilizados'];
-
-                                // Calcular a idade com base na data de nascimento
-                                $hoje = new DateTime();
-                                $nascimento = new DateTime($data_nascimento);
-                                $idade = $hoje->diff($nascimento)->y;
-
-                                echo '<tr>';
-                                echo '<td>' . $row['nome'] . '</td>';
-                                echo '<td>' . $row['email'] . '</td>';
-                                echo '<td>' . $row['pontos'] . '</td>';
-                                echo '<td>' . $idade . '</td>';
-                                echo '<td>' . $row['nome_curso'] . '</td>';
-                                echo '<td>' . $pontos_historico . '</td>';
-                                echo '<td>' . $total_cupons . '</td>';
-                                echo '<td>' . $cupons_utilizados . '</td>';
-                                echo '<td><a href="editar_cliente.php?email_cliente=' . $row['email'] . '" class="buttonEditar">Editar</a></td>';
-                                echo '</tr>';
-                            }
-
-
-
-                            ?>
-                        </tbody>
-                    </table>
-                </section>
-                <section id="codigos">
-                    <!-- Conteúdo da seção Tabela de códigos -->
-                    <h2>Códigos</h2>
-                    <form action="perfil_cafeteria.php" method="get">
-                        <label for="buscador">Buscar código:</label>
-                        <input type="text" id="buscador" name="buscador">
-                        <input type="submit" value="Buscar">
-                    </form>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Gerado</th>
-                                <th>Data de Geração</th>
-                                <th>Utilizado</th>
-                                <th>Data de Utilização</th>
-                                <!-- <th>Ações</th> -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            // Consulta para buscar todos os códigos
-                            $buscador = isset($_GET['buscador']) ? $_GET['buscador'] : '';
-                            $query = "SELECT Codigos.ID_Codigo, Codigos.Codigo, Codigos.Gerado, Codigos.data_gerado, Codigos.Utilizado, Codigos.data_utilizado FROM Codigos WHERE Codigos.Codigo LIKE '%$buscador%' OR Codigos.Utilizado LIKE '%$buscador%' OR Codigos.Gerado LIKE '%$buscador%'";
-                            $result = mysqli_query($conn, $query);
-                            if (!$result) {
-                                die('Erro na consulta: ' . mysqli_error($conn));
-                            }
-
-                            // Percorre os resultados e adiciona as linhas na tabela
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $codigo = $row['Codigo'];
-                                $gerado = $row['Gerado'];
-                                $data_gerado = $row['data_gerado'];
-                                $utilizado = $row['Utilizado'];
-                                $data_utilizado = $row['data_utilizado'];
-
-                                echo '<tr>';
-                                echo '<td>' . $codigo . '</td>';
-                                echo '<td>' . $gerado . '</td>';
-                                echo '<td>' . $data_gerado . '</td>';
-                                echo '<td>' . $utilizado . '</td>';
-                                echo '<td>' . $data_utilizado . '</td>';
-                                // echo '<td><a href="editar_codigo.php?codigo_id=' . $row['id'] . '" class="buttonEditar">Editar</a></td>';
-                                echo '</tr>';
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </section>
             </main>
         </div>
     </div>
