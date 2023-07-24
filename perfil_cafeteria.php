@@ -140,35 +140,39 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
     ?>
 
 
-    <header>
+    <!-- <header>
         <h1>Painel da Cafeteria</h1>
         <h1>Olá,
             <?php echo $nome_cafeteria; ?>!
         </h1>
-    </header>
-    <main>
-        <section>
-            <div class="info-banner">
-                <h3>Resumo</h3>
-                <p>Número total de usuários: <span id="total-usuarios">
-                        <?php echo $total_usuarios; ?>
-                    </span></p>
-                <p>Número total de cupons: <span id="total-cupons">
-                        <?php echo $total_cupons; ?>
-                    </span></p>
-                <p>Número total de cupons utilizados: <span id="total-cupons-utilizados">
-                        <?php echo $total_cupons_utilizados; ?>
-                    </span></p>
-            </div>
+    </header> -->
 
+    <div class="container">
+        <div class="modal">
+            <header>
+                <h1>Resumo</h1>
+            </header>
+            <p>Número total de usuários: <span id="total-usuarios">
+                    <?php echo $total_usuarios; ?>
+                </span></p>
+            <p>Número total de cupons: <span id="total-cupons">
+                    <?php echo $total_cupons; ?>
+                </span></p>
+            <p>Número total de cupons utilizados: <span id="total-cupons-utilizados">
+                    <?php echo $total_cupons_utilizados; ?>
+                </span></p>
+        </div>
 
+        <div class="modal">
             <h2>Gerar Código</h2>
             <button class="buttonCodigo" onclick="gerarCodigo()">Gerar Código</button>
             <div id="codigo-gerado" class="codigo-gerado"></div>
-        </section>
+        </div>
 
-        <section>
-            <h2>Validar Cupom</h2>
+        <div class="modal">
+            <header>
+                <h1>Validar Cupom</h1>
+            </header>
             <?php
             if (isset($_POST['codigo_cupom'])) {
                 $codigo_cupom = $_POST['codigo_cupom'];
@@ -206,10 +210,12 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                 echo '<div class="alert error">Cupom inválido ou já utilizado. Tente novamente.</div>';
             }
             ?>
-        </section>
+        </div>
 
-        <section>
-            <h2>Clientes e Pontos</h2>
+        <div class="modal">
+            <header>
+                <h1>Clientes e Pontos</h1>
+            </header>
             <form action="perfil_cafeteria.php" method="get">
                 <label for="busca">Buscar cliente:</label>
                 <input type="text" id="busca" name="busca">
@@ -276,11 +282,13 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                     ?>
                 </tbody>
             </table>
-        </section>
+        </div>
 
 
-        <section>
-            <h2>Códigos</h2>
+        <div class="modal">
+            <header>
+                <h1>Códigos</h1>
+            </header>
             <form action="perfil_cafeteria.php" method="get">
                 <label for="buscador">Buscar código:</label>
                 <input type="text" id="buscador" name="buscador">
@@ -327,8 +335,8 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                     ?>
                 </tbody>
             </table>
-        </section>
-    </main>
+        </div>
+    </div>
 </body>
 
 </html>
