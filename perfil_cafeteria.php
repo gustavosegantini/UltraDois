@@ -167,11 +167,11 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                 <div class="container">
                     <!-- Coloque aqui o conteúdo de cada seção -->
                     <section id="resumo">
-                        <div class="modal">
-                            <h2>Gerar Código</h2>
-                            <button class="buttonCodigo" onclick="gerarCodigo()">Gerar Código</button>
-                            <div id="codigo-gerado" class="codigo-gerado"></div>
-                        </div>
+
+                        <h2>Gerar Código</h2>
+                        <button class="buttonCodigo" onclick="gerarCodigo()">Gerar Código</button>
+                        <div id="codigo-gerado" class="codigo-gerado"></div>
+
                         <div class="modal">
                             <h2>Validar Cupom</h2>
                             <?php
@@ -213,21 +213,18 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                             ?>
                         </div>
                         <!-- Conteúdo da seção Resumo e funcionalidade de gerar código e validar cupom -->
-                        <div class="modal">
-                            <div class="info-banner">
-                                <h3>Resumo</h3>
-                                <p>Número total de usuários: <span id="total-usuarios">
-                                        <?php echo $total_usuarios; ?>
-                                    </span></p>
-                                <p>Número total de cupons: <span id="total-cupons">
-                                        <?php echo $total_cupons; ?>
-                                    </span></p>
-                                <p>Número total de cupons utilizados: <span id="total-cupons-utilizados">
-                                        <?php echo $total_cupons_utilizados; ?>
-                                    </span></p>
-                            </div>
+                        <div class="info-banner">
+                            <h3>Resumo</h3>
+                            <p>Número total de usuários: <span id="total-usuarios">
+                                    <?php echo $total_usuarios; ?>
+                                </span></p>
+                            <p>Número total de cupons: <span id="total-cupons">
+                                    <?php echo $total_cupons; ?>
+                                </span></p>
+                            <p>Número total de cupons utilizados: <span id="total-cupons-utilizados">
+                                    <?php echo $total_cupons_utilizados; ?>
+                                </span></p>
                         </div>
-
                     </section>
                     <section id="clientes-pontos">
                         <!-- Conteúdo da seção Tabela de clientes e pontos -->
