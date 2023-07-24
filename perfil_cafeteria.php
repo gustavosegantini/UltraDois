@@ -2,28 +2,20 @@
 session_start();
 // Conexão com o banco de dados
 include '../conexao.php';
-
 //Verificar o login
-
 include 'session_verification.php';
 
 verify_session('email_cafeteria', 'login_cafeteria.php');
-
-// Restante do código
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Painel da Cafeteria</title>
     <link rel="stylesheet" href="perfil_cafeteria_style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-
         // <!-- Hotjar Tracking Code for Cafeteria Perfils -->
-
         (function (h, o, t, j, a, r) {
             h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
             h._hjSettings = { hjid: 3444812, hjsv: 6 };
@@ -32,8 +24,6 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
             r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
             a.appendChild(r);
         })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
-
-
         function gerarCodigo() {
             $.ajax({
                 url: 'gerar_codigo.php',
@@ -47,7 +37,6 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                 }
             });
         }
-
         function atualizarResumo() {
             $.ajax({
                 url: 'atualizar_resumo.php',
@@ -63,9 +52,6 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                 }
             });
         }
-
-
-
         $(document).ready(function () {
             $("#busca").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
@@ -76,12 +62,8 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
         });
     </script>
 </head>
-
 <body>
     <?php
-
-
-
     $email_cafeteria = $_SESSION['email_cafeteria'];
 
     $query = "SELECT * FROM perfil_cafeteria WHERE email = '$email_cafeteria'";
@@ -92,7 +74,6 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
     $row = mysqli_fetch_assoc($result);
 
     $nome_cafeteria = $row['nome'];
-
     // Conta o número total de usuários na tabela perfil_cliente
     $query_total_usuarios = "SELECT COUNT(*) AS total_usuarios FROM perfil_cliente";
     $result_total_usuarios = mysqli_query($conn, $query_total_usuarios);
@@ -103,7 +84,6 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
 
     $row_total_usuarios = mysqli_fetch_assoc($result_total_usuarios);
     $total_usuarios = $row_total_usuarios['total_usuarios'];
-
     // Conta a quantidade total de cupons gerados
     $query_total_cupons = "SELECT COUNT(*) AS total_cupons FROM cupons";
     $result_total_cupons = mysqli_query($conn, $query_total_cupons);
@@ -114,7 +94,6 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
 
     $row_total_cupons = mysqli_fetch_assoc($result_total_cupons);
     $total_cupons = $row_total_cupons['total_cupons'];
-
     // Conta a quantidade total de cupons utilizados
     $query_cupons_utilizados = "SELECT COUNT(*) AS total_cupons_utilizados FROM cupons WHERE utilizado = 1";
     $result_cupons_utilizados = mysqli_query($conn, $query_cupons_utilizados);
@@ -122,31 +101,9 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
     if (!$result_cupons_utilizados) {
         die('Erro na consulta: ' . mysqli_error($conn));
     }
-
     $row_cupons_utilizados = mysqli_fetch_assoc($result_cupons_utilizados);
     $total_cupons_utilizados = $row_cupons_utilizados['total_cupons_utilizados'];
-
-
-
-    // // Liste todos os códigos
-    // $query_codigos = "SELECT ultra.Codigos.Codigo as Codigo, ultra.perfil_cafeteria.nome as Gerado, ultra.Codigos.data_gerado, ultra.Codigos.data_utilizado FROM ultra.Codigos INNER JOIN ultra.perfil_cafeteria ON ultra.Codigos.id_cafeteria = ultra.perfil_cafeteria.id ORDER BY ultra.Codigos.data_gerado DESC";
-    // $result_codigos = mysqli_query($conn, $query_codigos);
-    // $codigos = array();
-    // while ($row_codigos = mysqli_fetch_assoc($result_codigos)) {
-    //     $codigos[] = $row_codigos;
-    // }
-    
-
     ?>
-
-
-    <!-- <header>
-        <h1>Painel da Cafeteria</h1>
-        <h1>Olá,
-            <?php echo $nome_cafeteria; ?>!
-        </h1>
-    </header> -->
-
     <div class="container">
         <div class="modal">
             <header>
@@ -162,13 +119,11 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                     <?php echo $total_cupons_utilizados; ?>
                 </span></p>
         </div>
-
         <div class="modal">
             <h2>Gerar Código</h2>
             <button class="buttonCodigo" onclick="gerarCodigo()">Gerar Código</button>
             <div id="codigo-gerado" class="codigo-gerado"></div>
         </div>
-
         <div class="modal">
             <header>
                 <h1>Validar Cupom</h1>
@@ -185,7 +140,6 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                     $id_cliente = $row_cupom['id'];
                     $cupom_valido = true;
                     $data_utilizado = date("Y-m-d");
-
                     // Atualiza o cupom para utilizado e reseta os pontos do cliente
                     $sql_update_cupom = "UPDATE cupons SET utilizado = 1, data_utilizado = '$data_utilizado' WHERE cupom = '$codigo_cupom'";
                     mysqli_query($conn, $sql_update_cupom);
@@ -196,7 +150,6 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                     $cupom_valido = false;
                 }
             }
-
             ?>
             <form action="perfil_cafeteria.php" method="post">
                 <label for="codigo_cupom">Verificar código de desconto do cliente:</label>
@@ -211,7 +164,6 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
             }
             ?>
         </div>
-
         <div class="modal">
             <header>
                 <h1>Clientes e Pontos</h1>
@@ -233,11 +185,8 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                         <th>Cupons Total</th>
                         <th>Cupons Utilizados</th>
                         <th>Ações</th>
-
                     </tr>
                 </thead>
-
-
                 <tbody>
                     <?php
                     // Consulta para buscar todos os clientes e seus pontos
@@ -248,7 +197,6 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                     if (!$result) {
                         die('Erro na consulta: ' . mysqli_error($conn));
                     }
-
                     // Percorre os resultados e adiciona as linhas na tabela
                     while ($row = mysqli_fetch_assoc($result)) {
                         $email_cliente = $row['email'];
@@ -258,7 +206,6 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                         $pontos_historico = $row['pontos_historico'];
                         $total_cupons = $row['total_cupons'];
                         $cupons_utilizados = $row['cupons_utilizados'];
-
                         // Calcular a idade com base na data de nascimento
                         $hoje = new DateTime();
                         $nascimento = new DateTime($data_nascimento);
@@ -276,15 +223,10 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                         echo '<td><a href="editar_cliente.php?email_cliente=' . $row['email'] . '" class="buttonEditar">Editar</a></td>';
                         echo '</tr>';
                     }
-
-
-
                     ?>
                 </tbody>
             </table>
         </div>
-
-
         <div class="modal">
             <header>
                 <h1>Códigos</h1>
@@ -314,7 +256,6 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                     if (!$result) {
                         die('Erro na consulta: ' . mysqli_error($conn));
                     }
-
                     // Percorre os resultados e adiciona as linhas na tabela
                     while ($row = mysqli_fetch_assoc($result)) {
                         $codigo = $row['Codigo'];
@@ -338,5 +279,4 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
         </div>
     </div>
 </body>
-
 </html>
