@@ -56,6 +56,16 @@ input[type="submit"]:hover {
     width: 100%;
     text-align: left;
 }
+.modal-duplo {
+    display: flex; 
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.modal-duplo .modal-content {
+    width: 45%;
+}
+
 header {
     padding: 1.5rem 0;
     text-align: center;

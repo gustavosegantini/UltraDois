@@ -121,14 +121,16 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                     <?php echo $total_cupons_utilizados; ?>
                 </span></p>
         </div>
-        <div class="modal">
-            <header>
-                <h1>Gerar Código</h1>
-            </header>
-            <button class="buttonCodigo" onclick="gerarCodigo()">Gerar Código</button>
-            <div id="codigo-gerado" class="codigo-gerado"></div>
+        <div class="modal modal-duplo">
+            <div class="modal-content">
+                <header>
+                    <h1>Gerar Código</h1>
+                </header>
+                <button class="buttonCodigo" onclick="gerarCodigo()">Gerar Código</button>
+                <div id="codigo-gerado" class="codigo-gerado"></div>
+            </div>
         </div>
-        <div class="modal">
+        <div class="modal-content">
             <header>
                 <h1>Validar Cupom</h1>
             </header>
