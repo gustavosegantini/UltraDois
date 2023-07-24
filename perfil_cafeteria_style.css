@@ -174,13 +174,16 @@ th {
 }
 
 .buttonCodigo {
-    background-color: var(--header-background-color);
-    color: white;
+    font-size: 1rem;
+    padding: 0.75rem;
+    /* aumentado para adicionar mais altura */
+    margin-top: 1rem;
+    border-radius: 0.25rem;
     border: none;
-    padding: 2rem 4rem;
-    border-radius: 5px;
+    background: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+    /* background-color: var(--submit-button-color); */
+    color: var(--card-background-color);
     cursor: pointer;
-    font-size: large;
 }
 
 .codigo-gerado {
