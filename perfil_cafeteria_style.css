@@ -45,8 +45,11 @@ input[type="submit"]:hover {
     overflow-y: scroll;
 }
 .modal {
-    padding: 1rem;
+    display: flex; /* Para posicionar os conteúdos lado a lado */
+    justify-content: space-between; /* Para dar algum espaço entre os conteúdos */
+    flex-wrap: wrap; /* Para permitir que o conteúdo se mova para a próxima linha em telas menores */
 
+    padding: 1rem;
     background-color: var(--card-background-color);
     border-radius: 18px;
     backdrop-filter: blur(4px);
