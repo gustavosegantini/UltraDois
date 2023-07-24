@@ -45,17 +45,18 @@ input[type="submit"]:hover {
     overflow-y: scroll;
 }
 .modal {
-    padding: 1rem;
-
+    padding: 2rem; /* Aumenta o padding para adicionar mais espaço ao redor do texto */
+    
     background-color: var(--card-background-color);
     border-radius: 18px;
     backdrop-filter: blur(4px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    margin: 1rem;
-    max-width: 90%;
-    width: 100%;
+    margin: 2rem; /* Aumenta a margem para adicionar mais espaço ao redor do modal */
+    max-width: 600px; /* Limita a largura máxima do modal */
+    width: 90%; /* Mantém o modal responsivo */
     text-align: center;
 }
+
 header {
     padding: 1.5rem 0;
     text-align: center;
