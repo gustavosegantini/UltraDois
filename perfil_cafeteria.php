@@ -167,11 +167,11 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                 <div class="container">
                     <!-- Coloque aqui o conteúdo de cada seção -->
                     <section id="resumo">
-
-                        <h2>Gerar Código</h2>
-                        <button class="buttonCodigo" onclick="gerarCodigo()">Gerar Código</button>
-                        <div id="codigo-gerado" class="codigo-gerado"></div>
-
+                        <div class="modal">
+                            <h2>Gerar Código</h2>
+                            <button class="buttonCodigo" onclick="gerarCodigo()">Gerar Código</button>
+                            <div id="codigo-gerado" class="codigo-gerado"></div>
+                        </div>
                         <div class="modal">
                             <h2>Validar Cupom</h2>
                             <?php
@@ -197,7 +197,7 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                                     $cupom_valido = false;
                                 }
                             }
-
+                            
                             ?>
                             <form action="perfil_cafeteria.php" method="post">
                                 <label for="codigo_cupom">Verificar código de desconto do cliente:</label>
