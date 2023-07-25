@@ -44,11 +44,11 @@ input[type="submit"]:hover {
     backdrop-filter: blur(5px);
     overflow-y: scroll;
 }
-.modal {
-    display: flex; /* Para posicionar os conteúdos lado a lado */
-    justify-content: space-between; /* Para dar algum espaço entre os conteúdos */
-    flex-wrap: wrap; /* Para permitir que o conteúdo se mova para a próxima linha em telas menores */
 
+.modal {
+    display: flex;
+    flex-direction: column; /* Para posicionar os conteúdos um abaixo do outro */
+    align-items: flex-start; /* Para alinhar os conteúdos à esquerda */
     padding: 1rem;
     background-color: var(--card-background-color);
     border-radius: 18px;
@@ -57,33 +57,23 @@ input[type="submit"]:hover {
     margin: 1rem;
     max-width: 90%;
     width: 100%;
-    text-align: left;
-}
-.modal-duplo {
-    display: flex; 
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.modal-duplo .modal-content {
-    width: 45%;
 }
 
 header {
     padding: 1.5rem 0;
-    text-align: center;
+    text-align: left; /* Para justificar o título à esquerda */
     color: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
     position: relative;
     border-radius: 8px;
+    width: 100%; /* Para que o header ocupe todo o espaço horizontal do modal */
 }
-.h1 {
-    color: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
-}
+
 header h1 {
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
+
 form {
     margin-bottom: 1.5rem;
 }
