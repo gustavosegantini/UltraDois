@@ -6,47 +6,20 @@ include '../conexao.php';
 include 'session_verification.php';
 
 verify_session('email_cafeteria', 'login_cafeteria.php');
-require 'vendor/autoload.php';
 
-//php sheet
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xls;
+// Inclua a biblioteca PHPExcel ou PhpSpreadsheet aqui
+require_once 'PHPExcel.php';
 
-function exportData($data)
-{
-    $spreadsheet = new Spreadsheet();
-    $sheet = $spreadsheet->getActiveSheet();
-
-    // Defina os títulos das colunas
-    $sheet->setCellValue('A1', 'Nome');
-    $sheet->setCellValue('B1', 'Email');
-    $sheet->setCellValue('C1', 'Pontos');
-    $sheet->setCellValue('D1', 'Idade');
-    $sheet->setCellValue('E1', 'Curso');
-    $sheet->setCellValue('F1', 'Pontos Acumulados');
-    $sheet->setCellValue('G1', 'Cupons Total');
-    $sheet->setCellValue('H1', 'Cupons Utilizados');
-
-    // Adicione os dados no arquivo
-    $row = 2;
-    foreach ($data as $record) {
-        $sheet->setCellValue('A' . $row, $record['nome']);
-        $sheet->setCellValue('B' . $row, $record['email']);
-        $sheet->setCellValue('C' . $row, $record['pontos']);
-        $sheet->setCellValue('D' . $row, $record['idade']);
-        $sheet->setCellValue('E' . $row, $record['nome_curso']);
-        $sheet->setCellValue('F' . $row, $record['pontos_historico']);
-        $sheet->setCellValue('G' . $row, $record['total_cupons']);
-        $sheet->setCellValue('H' . $row, $record['cupons_utilizados']);
-        $row++;
-    }
-
-    // Salve o arquivo em XLS
-    $writer = new Xls($spreadsheet);
-    $writer->save('clientes_e_pontos.xls');
-}
-
+// Verifica se a ação de exportar foi solicitada
 if (isset($_GET['exportar'])) {
+    // Consulta para buscar todos os clientes e seus pontos
+    $busca = isset($_GET['busca']) ? $_GET['busca'] : '';
+    $query = "SELECT perfil_cliente.nome, perfil_cliente.email, perfil_cliente.pontos, data_nascimento, cursos.nome_curso as nome_curso, COUNT(cupons.id) as total_cupons, SUM(cupons.utilizado) as cupons_utilizados, pontos_historico FROM perfil_cliente LEFT JOIN cupons ON cupons.id_cliente = perfil_cliente.id INNER JOIN cursos ON perfil_cliente.curso = cursos.id WHERE perfil_cliente.nome LIKE '%$busca%' OR perfil_cliente.email LIKE '%$busca%' GROUP BY perfil_cliente.id";
+
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        die('Erro na consulta: ' . mysqli_error($conn));
+    }
     // Coloque os dados da sua tabela em um array
     $data = array();
     while ($row = mysqli_fetch_assoc($result)) {
@@ -74,6 +47,8 @@ if (isset($_GET['exportar'])) {
     // Terminar o script para que a tabela não seja mostrada
     exit();
 }
+
+
 
 
 ?>
@@ -242,24 +217,6 @@ if (isset($_GET['exportar'])) {
             ?>
         </div>
 
-
-        <!-- Script-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $("#exportar").click(function () {
-                    $.ajax({
-                        url: 'perfil_cafeteria.php?exportar=true',
-                        method: 'GET',
-                        success: function () {
-                            alert("Arquivo Excel gerado com sucesso!");
-                        }
-                    });
-                });
-            });
-        </script>
-
-
         <div class="modal">
             <header>
                 <h1>Clientes e Pontos</h1>
@@ -376,6 +333,16 @@ if (isset($_GET['exportar'])) {
             </table>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#exportar").click(function () {
+                window.location.href = 'perfil_cafeteria.php?exportar=true';
+            });
+        });
+    </script>
+</body>
+
 </body>
 
 </html>
