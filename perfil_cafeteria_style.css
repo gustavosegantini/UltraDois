@@ -154,5 +154,5 @@ button {
 }
 
 .exportar {
-    align-items: left;
+    align-self: left;
 }
