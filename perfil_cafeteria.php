@@ -6,6 +6,76 @@ include '../conexao.php';
 include 'session_verification.php';
 
 verify_session('email_cafeteria', 'login_cafeteria.php');
+require 'vendor/autoload.php';
+
+//php sheet
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
+
+function exportData($data)
+{
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+
+    // Defina os títulos das colunas
+    $sheet->setCellValue('A1', 'Nome');
+    $sheet->setCellValue('B1', 'Email');
+    $sheet->setCellValue('C1', 'Pontos');
+    $sheet->setCellValue('D1', 'Idade');
+    $sheet->setCellValue('E1', 'Curso');
+    $sheet->setCellValue('F1', 'Pontos Acumulados');
+    $sheet->setCellValue('G1', 'Cupons Total');
+    $sheet->setCellValue('H1', 'Cupons Utilizados');
+
+    // Adicione os dados no arquivo
+    $row = 2;
+    foreach ($data as $record) {
+        $sheet->setCellValue('A' . $row, $record['nome']);
+        $sheet->setCellValue('B' . $row, $record['email']);
+        $sheet->setCellValue('C' . $row, $record['pontos']);
+        $sheet->setCellValue('D' . $row, $record['idade']);
+        $sheet->setCellValue('E' . $row, $record['nome_curso']);
+        $sheet->setCellValue('F' . $row, $record['pontos_historico']);
+        $sheet->setCellValue('G' . $row, $record['total_cupons']);
+        $sheet->setCellValue('H' . $row, $record['cupons_utilizados']);
+        $row++;
+    }
+
+    // Salve o arquivo em XLS
+    $writer = new Xls($spreadsheet);
+    $writer->save('clientes_e_pontos.xls');
+}
+
+if (isset($_GET['exportar'])) {
+    // Coloque os dados da sua tabela em um array
+    $data = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        // Calcular a idade com base na data de nascimento
+        $hoje = new DateTime();
+        $nascimento = new DateTime($row['data_nascimento']);
+        $idade = $hoje->diff($nascimento)->y;
+
+        // Adicionar os dados do cliente no array
+        $data[] = array(
+            'nome' => $row['nome'],
+            'email' => $row['email'],
+            'pontos' => $row['pontos'],
+            'idade' => $idade,
+            'nome_curso' => $row['nome_curso'],
+            'pontos_historico' => $row['pontos_historico'],
+            'total_cupons' => $row['total_cupons'],
+            'cupons_utilizados' => $row['cupons_utilizados']
+        );
+    }
+
+    // Chamar a função para exportar os dados
+    exportData($data);
+
+    // Terminar o script para que a tabela não seja mostrada
+    exit();
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -172,6 +242,24 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
             ?>
         </div>
 
+
+        <!-- Script-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#exportar").click(function () {
+                    $.ajax({
+                        url: 'perfil_cafeteria.php?exportar=true',
+                        method: 'GET',
+                        success: function () {
+                            alert("Arquivo Excel gerado com sucesso!");
+                        }
+                    });
+                });
+            });
+        </script>
+
+
         <div class="modal">
             <header>
                 <h1>Clientes e Pontos</h1>
@@ -181,6 +269,8 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                 <input type="text" id="busca" name="busca" placeholder="Buscar...">
                 <input type="submit" value="Buscar">
             </form>
+            <button id="exportar">Exportar para Excel</button>
+
             <table>
                 <thead>
                     <tr>
