@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 // Conexão com o banco de dados
 include '../conexao.php';
@@ -13,7 +16,8 @@ include 'vendor/autoload.php';
 require 'vendor/autoload.php';
 
 
-function exportData($data) {
+function exportData($data)
+{
     $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
 
