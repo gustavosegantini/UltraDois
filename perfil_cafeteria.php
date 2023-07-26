@@ -177,8 +177,8 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                 <h1>Clientes e Pontos</h1>
             </header>
             <form action="perfil_cafeteria.php" method="get">
-                <label for="busca">Buscar cliente:</label>
-                <input type="text" id="busca" name="busca">
+                <!-- <label for="busca">Buscar cliente:</label> -->
+                <input type="text" id="busca" name="busca" placeholder="Buscar...">
                 <input type="submit" value="Buscar">
             </form>
             <table>
@@ -240,8 +240,8 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
                 <h1>Códigos</h1>
             </header>
             <form action="perfil_cafeteria.php" method="get">
-                <label for="buscador">Buscar código:</label>
-                <input type="text" id="buscador" name="buscador">
+                <!-- <label for="buscador">Buscar código:</label> -->
+                <input type="text" id="buscador" name="buscador" placeholder="Buscar...">
                 <input type="submit" value="Buscar">
             </form>
             <table>
