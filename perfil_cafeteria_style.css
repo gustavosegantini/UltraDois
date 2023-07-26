@@ -104,7 +104,7 @@ th {
 }
 .buttonEditar {
     background-color: var(--header-background-color);
-    color: rgb(255, 255, 255);
+    color: rgb(255, 127, 22);
     text-decoration: none;
     padding: 0.25rem 0.5rem;
     border-radius: 3px;
