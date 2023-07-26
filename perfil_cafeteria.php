@@ -12,7 +12,7 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
 
 // Inclua a biblioteca PHPExcel ou PhpSpreadsheet aqui
 // require_once 'PHPExcel.php';
-include 'vendor/autoload.php';
+
 require 'vendor/autoload.php';
 
 
