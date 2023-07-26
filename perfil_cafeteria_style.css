@@ -27,7 +27,7 @@ input[type="submit"] {
     margin-top: 1rem;
     border-radius: 0.25rem;
     border: none;
-    background: #fc6957;
+    background: #6638f0;
     color: var(--card-background-color);
     cursor: pointer;
 }
@@ -104,7 +104,7 @@ th {
 }
 .buttonEditar {
     background-color: var(--header-background-color);
-    color: #fc6957;
+    color: #6638f0;
     text-decoration: none;
     padding: 0.25rem 0.5rem;
     border-radius: 3px;
@@ -153,6 +153,6 @@ button {
     cursor: pointer;
 }
 
-.exportar {
+/* .exportar {
     align-self: left;
-}
+} */
