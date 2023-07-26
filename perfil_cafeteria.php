@@ -264,7 +264,7 @@ if (isset($_GET['exportar'])) {
                 <!-- <input type="submit" value="Buscar"> -->
             </form>
             <button id="exportarS">Exportar para Excel</button>
-            <button id="exportar">Exportar para CSV</button>
+            <button id="exportarCsv">Exportar para CSV</button>
 
             <table>
                 <thead>
@@ -389,7 +389,7 @@ if (isset($_GET['exportar'])) {
 
     <script>
         $(document).ready(function () {
-            $("#exportar").on('click', function (e) {
+            $("#exportarCsv").on('click', function (e) {
                 //Previne o comportamento padrão do link
                 e.preventDefault();
 
