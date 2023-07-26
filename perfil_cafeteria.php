@@ -11,7 +11,8 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
 // require_once 'PHPExcel.php';
 require 'vendor/autoload.php';
 
-function exportData($data) {
+function exportData($data)
+{
     $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
 
@@ -31,7 +32,9 @@ function exportData($data) {
     header('Cache-Control: max-age=0');
 
     // Escreva a planilha para a saída PHP
+    ob_end_clean();
     $writer->save('php://output');
+
 }
 
 
