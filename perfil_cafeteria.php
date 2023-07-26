@@ -261,7 +261,7 @@ if (isset($_GET['exportar'])) {
             <form action="perfil_cafeteria.php" method="get">
                 <!-- <label for="busca">Buscar cliente:</label> -->
                 <input type="text" id="busca" name="busca" placeholder="Buscar...">
-                <input type="submit" value="Buscar">
+                <!-- <input type="submit" value="Buscar"> -->
             </form>
             <button id="exportar">Exportar para Excel</button>
 
@@ -326,7 +326,7 @@ if (isset($_GET['exportar'])) {
             <form action="perfil_cafeteria.php" method="get">
                 <!-- <label for="buscador">Buscar código:</label> -->
                 <input type="text" id="buscador" name="buscador" placeholder="Buscar...">
-                <input type="submit" value="Buscar">
+                <!-- <input type="submit" value="Buscar"> -->
             </form>
             <table>
                 <thead>
