@@ -180,13 +180,21 @@ input[type="submit"]:hover {
     display: inline-block;
 }
 
+
+
 .show-password-button {
     position: absolute;
-    top: 0;
-    right: 0;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
     border: none;
-    background: none;
+    font-size: 0.9rem;
+    color: var(--text-color);
     cursor: pointer;
-    padding: 10px;
-    font-size: 1.2em;
+    padding: 8px;
+    z-index: 1;
 }
+
+.show-password-button:focus {
+   
