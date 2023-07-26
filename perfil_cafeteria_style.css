@@ -152,3 +152,7 @@ button {
     color: var(--card-background-color);
     cursor: pointer;
 }
+
+.exportar {
+    align: left;
+}
