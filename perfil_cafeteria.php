@@ -263,10 +263,10 @@ if (isset($_GET['exportar'])) {
                 <input type="text" id="busca" name="busca" placeholder="Buscar...">
                 <!-- <input type="submit" value="Buscar"> -->
             </form>
-            <button id="exportarS">Exportar para Excel</button>
-            <button id="exportarCsv">Exportar para CSV</button>
+            <!-- <button id="exportarS">Exportar para Excel</button> -->
+            <button id="exportarCsvClientes">Exportar para CSV</button>
 
-            <table>
+            <table id="tabelaClientes">
                 <thead>
                     <tr>
                         <th>Nome</th>
@@ -292,16 +292,9 @@ if (isset($_GET['exportar'])) {
                     }
                     // Percorre os resultados e adiciona as linhas na tabela
                     while ($row = mysqli_fetch_assoc($result)) {
-                        $email_cliente = $row['email'];
-                        $pontos_cliente = $row['pontos'];
-                        $data_nascimento = $row['data_nascimento'];
-                        $curso = $row['nome_curso'];
-                        $pontos_historico = $row['pontos_historico'];
-                        $total_cupons = $row['total_cupons'];
-                        $cupons_utilizados = $row['cupons_utilizados'];
                         // Calcular a idade com base na data de nascimento
                         $hoje = new DateTime();
-                        $nascimento = new DateTime($data_nascimento);
+                        $nascimento = new DateTime($row['data_nascimento']);
                         $idade = $hoje->diff($nascimento)->y;
 
                         echo '<tr>';
@@ -310,9 +303,9 @@ if (isset($_GET['exportar'])) {
                         echo '<td>' . $row['pontos'] . '</td>';
                         echo '<td>' . $idade . '</td>';
                         echo '<td>' . $row['nome_curso'] . '</td>';
-                        echo '<td>' . $pontos_historico . '</td>';
-                        echo '<td>' . $total_cupons . '</td>';
-                        echo '<td>' . $cupons_utilizados . '</td>';
+                        echo '<td>' . $row['pontos_historico'] . '</td>';
+                        echo '<td>' . $row['total_cupons'] . '</td>';
+                        echo '<td>' . $row['cupons_utilizados'] . '</td>';
                         echo '<td><a href="editar_cliente.php?email_cliente=' . $row['email'] . '" class="buttonEditar">Editar</a></td>';
                         echo '</tr>';
                     }
@@ -331,7 +324,8 @@ if (isset($_GET['exportar'])) {
                 <input type="text" id="buscador" name="buscador" placeholder="Buscar...">
                 <!-- <input type="submit" value="Buscar"> -->
             </form>
-            <table>
+            <button id="exportarCsvCodigos">Exportar para CSV</button>
+            <table id="tabelaCodigos">
                 <thead>
                     <tr>
                         <th>Código</th>
@@ -353,18 +347,12 @@ if (isset($_GET['exportar'])) {
                     }
                     // Percorre os resultados e adiciona as linhas na tabela
                     while ($row = mysqli_fetch_assoc($result)) {
-                        $codigo = $row['Codigo'];
-                        $gerado = $row['Gerado'];
-                        $data_gerado = $row['data_gerado'];
-                        $utilizado = $row['Utilizado'];
-                        $data_utilizado = $row['data_utilizado'];
-
                         echo '<tr>';
-                        echo '<td>' . $codigo . '</td>';
-                        echo '<td>' . $gerado . '</td>';
-                        echo '<td>' . $data_gerado . '</td>';
-                        echo '<td>' . $utilizado . '</td>';
-                        echo '<td>' . $data_utilizado . '</td>';
+                        echo '<td>' . $row['Codigo'] . '</td>';
+                        echo '<td>' . $row['Gerado'] . '</td>';
+                        echo '<td>' . $row['data_gerado'] . '</td>';
+                        echo '<td>' . $row['Utilizado'] . '</td>';
+                        echo '<td>' . $row['data_utilizado'] . '</td>';
                         // echo '<td><a href="editar_codigo.php?codigo_id=' . $row['id'] . '" class="buttonEditar">Editar</a></td>';
                         echo '</tr>';
                     }
@@ -373,6 +361,7 @@ if (isset($_GET['exportar'])) {
             </table>
         </div>
     </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -389,40 +378,45 @@ if (isset($_GET['exportar'])) {
 
     <script>
         $(document).ready(function () {
-            $("#exportarCsv").on('click', function (e) {
-                //Previne o comportamento padrão do link
+            // Exportar Clientes
+            $("#exportarCsvClientes").on('click', function (e) {
                 e.preventDefault();
+                exportarCsv('tabelaClientes', 'dados_clientes.csv');
+            });
 
-                //Obtém todos os cabeçalhos da tabela
+            // Exportar Códigos
+            $("#exportarCsvCodigos").on('click', function (e) {
+                e.preventDefault();
+                exportarCsv('tabelaCodigos', 'dados_codigos.csv');
+            });
+
+            function exportarCsv(tabelaId, arquivoNome) {
                 var headers = [];
-                $('table th').each(function () {
+                $('#' + tabelaId + ' th').each(function () {
                     headers.push($(this).text().trim());
                 });
 
-                //Obtém todas as linhas da tabela
                 var data = [];
-                $('table tbody tr').each(function () {
+                $('#' + tabelaId + ' tbody tr').each(function () {
                     var row = [];
                     $(this).find('td').each(function () {
                         row.push($(this).text().trim());
                     });
-                    data.push(row.join(";")); //Junta todos os elementos da linha com o delimitador ";"
+                    data.push(row.join(";"));
                 });
 
-                //Cria o conteúdo do arquivo CSV
                 var csvContent = headers.join(";") + "\n" + data.join("\n");
-
-                //Cria um link temporário para download do arquivo CSV
                 var encodedUri = encodeURI("data:text/csv;charset=utf-8," + csvContent);
                 var link = document.createElement("a");
                 link.setAttribute("href", encodedUri);
-                link.setAttribute("download", "dados_clientes.csv");
-                document.body.appendChild(link); // Requerido para o Firefox
+                link.setAttribute("download", arquivoNome);
+                document.body.appendChild(link);
 
-                link.click(); //Inicia o download
-            });
+                link.click();
+            }
         });
     </script>
+
 
 </body>
 
