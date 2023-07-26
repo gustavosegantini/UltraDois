@@ -1,6 +1,6 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
 
 session_start();
 // Conexão com o banco de dados
@@ -18,6 +18,8 @@ require 'vendor/autoload.php';
 
 function exportData($data)
 {
+    ob_start();
+
     $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
 
@@ -37,6 +39,7 @@ function exportData($data)
     header('Cache-Control: max-age=0');
 
     // Escreva a planilha para a saída PHP
+    ob_end_clean();
     $writer->save('php://output');
 
 }
