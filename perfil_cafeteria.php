@@ -263,7 +263,7 @@ if (isset($_GET['exportar'])) {
                 <input type="text" id="busca" name="busca" placeholder="Buscar...">
                 <!-- <input type="submit" value="Buscar"> -->
             </form>
-            <button id="exportar">Exportar para Excel</button>
+            <button id="exportarS">Exportar para Excel</button>
             <button id="exportar">Exportar para CSV</button>
 
             <table>
