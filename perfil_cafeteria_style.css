@@ -104,7 +104,7 @@ th {
 }
 .buttonEditar {
     background-color: var(--header-background-color);
-    color: rgb(255, 127, 22);
+    color: #fc6957;
     text-decoration: none;
     padding: 0.25rem 0.5rem;
     border-radius: 3px;
@@ -147,7 +147,8 @@ button {
     margin-top: 1rem;
     border-radius: 0.25rem;
     border: none;
-    background: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+    background: #fc6957;
+    /* background: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%); */
     color: var(--card-background-color);
     cursor: pointer;
 }
