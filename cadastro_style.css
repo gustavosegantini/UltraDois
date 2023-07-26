@@ -175,26 +175,3 @@ input[type="submit"]:hover {
 
 
 
-.password-container {
-    position: relative;
-    display: inline-block;
-}
-
-
-
-.show-password-button {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    font-size: 0.9rem;
-    color: var(--text-color);
-    cursor: pointer;
-    padding: 8px;
-    z-index: 1;
-}
-
-.show-password-button:focus {
-   
