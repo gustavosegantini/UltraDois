@@ -390,44 +390,40 @@ if (isset($_GET['exportar'])) {
     <script>
         $(document).ready(function () {
             $("#exportar").on('click', function (e) {
-                // O código JavaScript aqui é o mesmo que você já tem
-                $(document).ready(function () {
-                    $("#exportar").on('click', function (e) {
-                        //Previne o comportamento padrão do link
-                        e.preventDefault();
+                //Previne o comportamento padrão do link
+                e.preventDefault();
 
-                        //Obtém todos os cabeçalhos da tabela
-                        var headers = [];
-                        $('table th').each(function () {
-                            headers.push($(this).text().trim());
-                        });
-
-                        //Obtém todas as linhas da tabela
-                        var data = [];
-                        $('table tbody tr').each(function () {
-                            var row = [];
-                            $(this).find('td').each(function () {
-                                row.push($(this).text().trim());
-                            });
-                            data.push(row.join(";")); //Junta todos os elementos da linha com o delimitador ";"
-                        });
-
-                        //Cria o conteúdo do arquivo CSV
-                        var csvContent = headers.join(";") + "\n" + data.join("\n");
-
-                        //Cria um link temporário para download do arquivo CSV
-                        var encodedUri = encodeURI("data:text/csv;charset=utf-8," + csvContent);
-                        var link = document.createElement("a");
-                        link.setAttribute("href", encodedUri);
-                        link.setAttribute("download", "dados_clientes.csv");
-                        document.body.appendChild(link); // Requerido para o Firefox
-
-                        link.click(); //Inicia o download
-                    });
+                //Obtém todos os cabeçalhos da tabela
+                var headers = [];
+                $('table th').each(function () {
+                    headers.push($(this).text().trim());
                 });
+
+                //Obtém todas as linhas da tabela
+                var data = [];
+                $('table tbody tr').each(function () {
+                    var row = [];
+                    $(this).find('td').each(function () {
+                        row.push($(this).text().trim());
+                    });
+                    data.push(row.join(";")); //Junta todos os elementos da linha com o delimitador ";"
+                });
+
+                //Cria o conteúdo do arquivo CSV
+                var csvContent = headers.join(";") + "\n" + data.join("\n");
+
+                //Cria um link temporário para download do arquivo CSV
+                var encodedUri = encodeURI("data:text/csv;charset=utf-8," + csvContent);
+                var link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", "dados_clientes.csv");
+                document.body.appendChild(link); // Requerido para o Firefox
+
+                link.click(); //Inicia o download
             });
         });
     </script>
+
 </body>
 
 </html>
