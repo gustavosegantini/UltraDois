@@ -290,7 +290,7 @@ if (isset($_GET['exportar'])) {
                         $email_cliente = $row['email'];
                         $pontos_cliente = $row['pontos'];
                         $data_nascimento = $row['data_nascimento'];
-                        $curso = $row['curso'];
+                        $curso = $row['nome_curso'];
                         $pontos_historico = $row['pontos_historico'];
                         $total_cupons = $row['total_cupons'];
                         $cupons_utilizados = $row['cupons_utilizados'];
