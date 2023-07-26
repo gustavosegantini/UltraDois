@@ -18,7 +18,7 @@ require 'vendor/autoload.php';
 
 function exportData($data)
 {
-    ob_start();
+
 
     $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
