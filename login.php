@@ -27,7 +27,7 @@
     <div class="container">
         <div class="modal">
             <header>
-                <h1>UltraFidelidade</h1>
+                <h1>Loyal Link</h1>
             </header>
             <?php
             if (isset($_SESSION['loginErro'])) {
