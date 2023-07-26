@@ -39,7 +39,7 @@ function exportData($data)
     header('Cache-Control: max-age=0');
 
     // Escreva a planilha para a saída PHP
-    ob_end_clean();
+
     $writer->save('php://output');
 
 }
