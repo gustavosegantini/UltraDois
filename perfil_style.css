@@ -175,21 +175,23 @@ progress[value]::-webkit-progress-bar {
 }
 
 progress[value]::-webkit-progress-value {
-    background-image:
+    /* background-image:
         -webkit-linear-gradient(left,
             rgba(131, 58, 180, 1),
             rgba(253, 29, 29, 1),
-            rgba(252, 176, 69, 1));
+            rgba(252, 176, 69, 1)); */
     border-radius: 1rem;
+    background-color: #6638f0;
 }
 
 progress[value]::-moz-progress-bar {
-    background-image:
+    /* background-image:
         -moz-linear-gradient(left,
             rgba(131, 58, 180, 1),
             rgba(253, 29, 29, 1),
-            rgba(252, 176, 69, 1));
+            rgba(252, 176, 69, 1)); */
     border-radius: 1rem;
+    background-color: #6638f0;
 }
 
 
