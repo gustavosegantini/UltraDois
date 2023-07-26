@@ -343,6 +343,4 @@ if (isset($_GET['exportar'])) {
     </script>
 </body>
 
-</body>
-
 </html>
