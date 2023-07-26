@@ -66,10 +66,12 @@ if (isset($_GET['exportar'])) {
             'pontos' => $row['pontos'],
             'idade' => $idade,
             'nome_curso' => $row['nome_curso'],
+            // <-- use 'nome_curso' em vez de 'curso'
             'pontos_historico' => $row['pontos_historico'],
             'total_cupons' => $row['total_cupons'],
             'cupons_utilizados' => $row['cupons_utilizados']
         );
+
     }
 
     // Chamar a função para exportar os dados
