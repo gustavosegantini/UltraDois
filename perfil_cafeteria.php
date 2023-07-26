@@ -260,7 +260,7 @@ if (isset($_GET['exportar'])) {
             </header>
             <form action="perfil_cafeteria.php" method="get">
                 <!-- <label for="busca">Buscar cliente:</label> -->
-                <input type="text" id="busca" name="busca" placeholder="Buscar...">
+                <input type="text" id="busca" name="busca" placeholder="Buscar..."> <br>
                 <!-- <input type="submit" value="Buscar"> -->
                 <button id="exportarCsvClientes">Exportar para CSV</button><br>
             </form>
