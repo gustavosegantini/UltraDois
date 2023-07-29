@@ -333,8 +333,6 @@ if (isset($_GET['exportar'])) {
         </div>
 
 
-      
-
 
         <div class="modal">
             <header>
