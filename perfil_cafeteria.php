@@ -216,7 +216,15 @@ if (isset($_GET['exportar'])) {
                     <?php echo $total_cupons_utilizados; ?>
                 </span></p>
         </div>
-        
+        <div class="modal">
+            <header>
+                <h1>Produtos</h1>
+            </header>
+            <div id="lista-produtos">
+                <!-- Os produtos serão inseridos aqui pelo JavaScript -->
+            </div>
+            <div id="codigo-gerado" class="codigo-gerado"></div>
+        </div>
 
         <div class="modal">
 
