@@ -337,34 +337,97 @@ if (isset($_GET['exportar'])) {
         </div>
 
 
+        <div class="modal">
+            <header>
+                <h1>Cupons</h1>
+            </header>
+            <form action="perfil_cafeteria.php" method="get">
+                <input type="text" id="buscadorCupons" name="buscadorCupons" placeholder="Buscar...">
+            </form>
+            <button id="exportarCsvCupons">Exportar para CSV</button>
+            <br>
+            <table id="tabelaCupons">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cupom</th>
+                        <th>ID do Cliente</th>
+                        <th>Utilizado</th>
+                        <th>Data de Criação</th>
+                        <th>Data de Utilização</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $buscadorCupons = isset($_GET['buscadorCupons']) ? $_GET['buscadorCupons'] : '';
+                    $buscadorCupons = "%{$buscadorCupons}%";
+                    $stmt = $conn->prepare('SELECT 
+            cupons.id,
+            cupons.cupom,
+            cupons.id_cliente,
+            cupons.utilizado,
+            cupons.data_criacao,
+            cupons.data_utilizado
+          FROM 
+            cupons
+          WHERE 
+            cupons.cupom LIKE ? OR 
+            cupons.id_cliente LIKE ?');
+                    $stmt->bind_param('ss', $buscadorCupons, $buscadorCupons);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if (!$result) {
+                        die('Erro na consulta: ' . mysqli_error($conn));
+                    }
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<tr>';
+                        echo '<td>' . $row['id'] . '</td>';
+                        echo '<td>' . $row['cupom'] . '</td>';
+                        echo '<td>' . $row['id_cliente'] . '</td>';
+                        echo '<td>' . ($row['utilizado'] ? 'Sim' : 'Não') . '</td>';
+
+                        $data_criacao = isset($row['data_criacao']) ? date('d/m/y - H:i', strtotime($row['data_criacao'])) : '';
+                        echo '<td>' . $data_criacao . '</td>';
+
+                        $data_utilizado = isset($row['data_utilizado']) ? date('d/m/y - H:i', strtotime($row['data_utilizado'])) : '';
+                        echo '<td>' . $data_utilizado . '</td>';
+
+                        echo '</tr>';
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+
+
 
         <div class="modal">
-    <header>
-        <h1>Códigos</h1>
-    </header>
-    <form action="perfil_cafeteria.php" method="get">
-        <input type="text" id="buscador" name="buscador" placeholder="Buscar...">
-    </form>
-    <button id="exportarCsvCodigos">Exportar para CSV</button>
-    <br>
-    <table id="tabelaCodigos">
-        <thead>
-            <tr>
-                <th>Código</th>
-                <th>Gerado</th>
-                <th>Data de Geração</th>
-                <th>Utilizado</th>
-                <th>Data de Utilização</th>
-                <th>Nome do Produto</th>
-                <th>Tamanho</th>
-                <th>Preço</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $buscador = isset($_GET['buscador']) ? $_GET['buscador'] : '';
-            $buscador = "%{$buscador}%";
-            $stmt = $conn->prepare('SELECT 
+            <header>
+                <h1>Códigos</h1>
+            </header>
+            <form action="perfil_cafeteria.php" method="get">
+                <input type="text" id="buscador" name="buscador" placeholder="Buscar...">
+            </form>
+            <button id="exportarCsvCodigos">Exportar para CSV</button>
+            <br>
+            <table id="tabelaCodigos">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Gerado</th>
+                        <th>Data de Geração</th>
+                        <th>Utilizado</th>
+                        <th>Data de Utilização</th>
+                        <th>Nome do Produto</th>
+                        <th>Tamanho</th>
+                        <th>Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $buscador = isset($_GET['buscador']) ? $_GET['buscador'] : '';
+                    $buscador = "%{$buscador}%";
+                    $stmt = $conn->prepare('SELECT 
             Codigos.ID_Codigo, 
             Codigos.Codigo, 
             Codigos.Gerado, 
@@ -382,30 +445,30 @@ if (isset($_GET['exportar'])) {
             Codigos.Codigo LIKE ? OR 
             Codigos.Utilizado LIKE ? OR 
             Codigos.Gerado LIKE ?');
-            $stmt->bind_param('sss', $buscador, $buscador, $buscador);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            if (!$result) {
-                die('Erro na consulta: ' . mysqli_error($conn));
-            }
-            while ($row = $result->fetch_assoc()) {
-                echo '<tr>';
-                echo '<td>' . $row['Codigo'] . '</td>';
-                echo '<td>' . $row['Gerado'] . '</td>';
-                $data_gerado = isset($row['data_gerado']) ? date('d/m/y - H:i', strtotime($row['data_gerado'])) : '';
-                echo '<td>' . $data_gerado . '</td>';
-                echo '<td>' . $row['Utilizado'] . '</td>';
-                $data_utilizado = isset($row['data_utilizado']) ? date('d/m/y - H:i', strtotime($row['data_utilizado'])) : '';
-                echo '<td>' . $data_utilizado . '</td>';
-                echo '<td>' . $row['nome'] . '</td>';
-                echo '<td>' . $row['tamanho'] . '</td>';
-                echo '<td>' . $row['preco'] . '</td>';
-                echo '</tr>';
-            }
-            ?>
-        </tbody>
-    </table>
-</div>
+                    $stmt->bind_param('sss', $buscador, $buscador, $buscador);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if (!$result) {
+                        die('Erro na consulta: ' . mysqli_error($conn));
+                    }
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<tr>';
+                        echo '<td>' . $row['Codigo'] . '</td>';
+                        echo '<td>' . $row['Gerado'] . '</td>';
+                        $data_gerado = isset($row['data_gerado']) ? date('d/m/y - H:i', strtotime($row['data_gerado'])) : '';
+                        echo '<td>' . $data_gerado . '</td>';
+                        echo '<td>' . $row['Utilizado'] . '</td>';
+                        $data_utilizado = isset($row['data_utilizado']) ? date('d/m/y - H:i', strtotime($row['data_utilizado'])) : '';
+                        echo '<td>' . $data_utilizado . '</td>';
+                        echo '<td>' . $row['nome'] . '</td>';
+                        echo '<td>' . $row['tamanho'] . '</td>';
+                        echo '<td>' . $row['preco'] . '</td>';
+                        echo '</tr>';
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
 
     </div>
 
