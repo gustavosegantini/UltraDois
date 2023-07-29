@@ -430,7 +430,7 @@ if (isset($_GET['exportar'])) {
                 <tbody>
                     <?php
                     $buscador = isset($_GET['buscador']) ? $_GET['buscador'] : '';
-                    $query = "SELECT Codigos.ID_Codigo, Codigos.Codigo, Codigos.Gerado, Codigos.data_gerado, Codigos.Utilizado, Codigos.data_utilizado, produtos.nome, produtos.tamanho, produtos.preco FROM Codigos INNER JOIN produtos ON Codigos.ID_Produto = produtos.ID WHERE Codigos.Codigo";
+                    $query = "SELECT Codigos.ID_Codigo, Codigos.Codigo, Codigos.Gerado, Codigos.data_gerado, Codigos.Utilizado, Codigos.data_utilizado, produtos.nome, produtos.tamanho, produtos.preco FROM Codigos INNER JOIN produtos ON Codigos.ID_Produto = produtos.ID WHERE Codigos.Codigo LIKE '%$buscador%' OR Codigos.Utilizado LIKE '%$buscador%' OR Codigos.Gerado LIKE '%$buscador%'";
                     $result = mysqli_query($conn, $query);
                     if (!$result) {
                         die('Erro na consulta: ' . mysqli_error($conn));
