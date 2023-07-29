@@ -211,6 +211,20 @@ if (isset($_GET['exportar'])) {
             </header>
             <div id="lista-produtos">
                 <!-- Os produtos serão inseridos aqui pelo JavaScript -->
+                <?php
+                //Produtos:
+                
+                $sql = "SELECT * FROM produtos";
+                $result = mysqli_query($conn, $sql);
+
+                $produtos = array();
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $produtos[] = $row;
+                }
+
+                header('Content-Type: application/json');
+                echo json_encode($produtos);
+                ?>
             </div>
             <div id="codigo-gerado" class="codigo-gerado"></div>
         </div>
