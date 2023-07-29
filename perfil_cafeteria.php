@@ -381,8 +381,7 @@ if (isset($_GET['exportar'])) {
                 WHERE 
                     Codigos.Codigo LIKE ? OR 
                     Codigos.Utilizado LIKE ? OR 
-                    Codigos.Gerado LIKE ?
-            ');
+                    Codigos.Gerado LIKE ?');
                     $stmt->bind_param('sss', $buscador, $buscador, $buscador);
                     $stmt->execute();
                     $result = $stmt->get_result();
