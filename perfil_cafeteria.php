@@ -217,10 +217,10 @@ if (isset($_GET['exportar'])) {
 
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo '<div class="produto" data-id="' . $row['ID'] . '">';
-                    echo '<h2>' . $row['nome'] . '</h2>';
-                    echo '<p>Tamanho: ' . $row['tamanho'] . '</p>';
-                    echo '<p>Preço: ' . $row['preco'] . '</p>';
+                    echo '<h2>' . $row['nome'] . ' - ' . $row['tamanho'] . '</h2>';
+                    echo '<p>' . $row['preco'] . '</p>';
                     echo '</div>';
+
                 }
                 ?>
             </div>
@@ -479,7 +479,7 @@ if (isset($_GET['exportar'])) {
             });
         });
 
-       
+
 
 
     </script>
