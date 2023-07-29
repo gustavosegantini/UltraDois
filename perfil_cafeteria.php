@@ -479,20 +479,7 @@ if (isset($_GET['exportar'])) {
             });
         });
 
-        function gerarCodigo(idProduto) {
-            $.ajax({
-                url: "gerar_codigo.php",
-                type: "POST",
-                data: {
-                    idProduto: idProduto
-                },
-                success: function (codigo) {
-                    // O código foi gerado com sucesso
-                    // Insira o código na div #codigo-gerado
-                    $('#codigo-gerado').html(codigo);
-                }
-            });
-        }
+       
 
 
     </script>
