@@ -210,24 +210,23 @@ if (isset($_GET['exportar'])) {
                 <h1>Produtos</h1>
             </header>
             <div id="lista-produtos">
-                <!-- Os produtos serão inseridos aqui pelo JavaScript -->
+                <!-- Os produtos serão inseridos aqui pelo PHP -->
                 <?php
-                //Produtos:
-                
                 $sql = "SELECT * FROM produtos";
                 $result = mysqli_query($conn, $sql);
 
-                $produtos = array();
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $produtos[] = $row;
+                    echo '<div class="produto" data-id="' . $row['ID'] . '">';
+                    echo '<h2>' . $row['nome'] . '</h2>';
+                    echo '<p>Tamanho: ' . $row['tamanho'] . '</p>';
+                    echo '<p>Preço: ' . $row['preco'] . '</p>';
+                    echo '</div>';
                 }
-
-                header('Content-Type: application/json');
-                echo json_encode($produtos);
                 ?>
             </div>
             <div id="codigo-gerado" class="codigo-gerado"></div>
         </div>
+
 
         <div class="modal">
 
@@ -472,6 +471,29 @@ if (isset($_GET['exportar'])) {
                     listaProdutos.appendChild(produtoElemento);
                 }
             });
+
+        document.querySelectorAll('.produto').forEach(function (produto) {
+            produto.addEventListener('click', function () {
+                var idProduto = this.getAttribute('data-id');
+                gerarCodigo(idProduto);
+            });
+        });
+
+        function gerarCodigo(idProduto) {
+            $.ajax({
+                url: "gerar_codigo.php",
+                type: "POST",
+                data: {
+                    idProduto: idProduto
+                },
+                success: function (codigo) {
+                    // O código foi gerado com sucesso
+                    // Insira o código na div #codigo-gerado
+                    $('#codigo-gerado').html(codigo);
+                }
+            });
+        }
+
 
     </script>
 
