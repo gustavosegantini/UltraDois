@@ -577,6 +577,34 @@ if (isset($_GET['exportar'])) {
             });
         });
 
+        $(document).ready(function () {
+            $("#buscadorCupons").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $.ajax({
+                    url: '/caminho/para/sua/pagina_php_de_busca.php',
+                    data: { buscadorCupons: value },
+                    success: function (res) {
+                        // Aqui você deve processar a resposta e atualizar a tabela
+                        // Este exemplo presume que 'res' é um HTML já formatado para inserir na tabela
+                        $('#tabelaCupons tbody').html(res);
+                    }
+                });
+            });
+
+            $("#buscador").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $.ajax({
+                    url: '/caminho/para/sua/pagina_php_de_busca.php',
+                    data: { buscador: value },
+                    success: function (res) {
+                        // Aqui você deve processar a resposta e atualizar a tabela
+                        // Este exemplo presume que 'res' é um HTML já formatado para inserir na tabela
+                        $('#tabelaCodigos tbody').html(res);
+                    }
+                });
+            });
+        });
+
 
 
 
