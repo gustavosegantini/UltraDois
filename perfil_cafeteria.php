@@ -403,52 +403,7 @@ if (isset($_GET['exportar'])) {
         </div>
 
 
-        <div class="modal">
-            <header>
-                <h1>Códigos</h1>
-            </header>
-            <form action="perfil_cafeteria.php" method="get">
-                <!-- <label for="buscador">Buscar código:</label> -->
-                <input type="text" id="buscador" name="buscador" placeholder="Buscar...">
-                <!-- <input type="submit" value="Buscar"> -->
-            </form>
-            <button id="exportarCsvCodigos">Exportar para CSV</button><br>
-            <table id="tabelaCodigos">
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Gerado</th>
-                        <th>Data de Geração</th>
-                        <th>Utilizado</th>
-                        <th>Data de Utilização</th>
-                        <!-- <th>Ações</th> -->
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    // Consulta para buscar todos os códigos
-                    $buscador = isset($_GET['buscador']) ? $_GET['buscador'] : '';
-                    $query = "SELECT Codigos.ID_Codigo, Codigos.Codigo, Codigos.Gerado, Codigos.data_gerado, Codigos.Utilizado, Codigos.data_utilizado FROM Codigos WHERE Codigos.Codigo LIKE '%$buscador%' OR Codigos.Utilizado LIKE '%$buscador%' OR Codigos.Gerado LIKE '%$buscador%'";
-                    $result = mysqli_query($conn, $query);
-                    if (!$result) {
-                        die('Erro na consulta: ' . mysqli_error($conn));
-                    }
-                    // Percorre os resultados e adiciona as linhas na tabela
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo '<tr>';
-                        echo '<td>' . $row['Codigo'] . '</td>';
-                        echo '<td>' . $row['Gerado'] . '</td>';
-                        echo '<td>' . $row['data_gerado'] . '</td>';
-                        echo '<td>' . $row['Utilizado'] . '</td>';
-                        echo '<td>' . $row['data_utilizado'] . '</td>';
-                        // echo '<td><a href="editar_codigo.php?codigo_id=' . $row['id'] . '" class="buttonEditar">Editar</a></td>';
-                        echo '</tr>';
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-
+   
 
 
 
