@@ -353,6 +353,48 @@ if (isset($_GET['exportar'])) {
             </table>
         </div>
 
+        <div class="modal">
+            <header>
+                <h1>Produtos</h1>
+            </header>
+            <form action="perfil_cafeteria.php" method="get">
+                <input type="text" id="buscaProduto" name="buscaProduto" placeholder="Buscar...">
+                <button class="exportar" id="exportarCsvProdutos">Exportar para CSV</button><br>
+            </form>
+            <table id="tabelaProdutos">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tamanho</th>
+                        <th>Preço</th>
+                        <th>Quantidade Vendida</th>
+                        <th>Valor Total Vendido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $buscaProduto = isset($_GET['buscaProduto']) ? $_GET['buscaProduto'] : '';
+                    $query = "SELECT p.nome, p.tamanho, p.preco, COUNT(c.ID_Codigo) as quantidade_vendida, COUNT(c.ID_Codigo)*p.preco as valor_total FROM produtos p LEFT JOIN Codigos c ON p.ID = c.ID_Produto WHERE p.nome LIKE '%$buscaProduto%' GROUP BY p.ID";
+
+                    $result = mysqli_query($conn, $query);
+                    if (!$result) {
+                        die('Erro na consulta: ' . mysqli_error($conn));
+                    }
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo '<tr>';
+                        echo '<td>' . $row['nome'] . '</td>';
+                        echo '<td>' . $row['tamanho'] . '</td>';
+                        echo '<td>' . $row['preco'] . '</td>';
+                        echo '<td>' . $row['quantidade_vendida'] . '</td>';
+                        echo '<td>' . $row['valor_total'] . '</td>';
+                        echo '</tr>';
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+
+
 
         <div class="modal">
             <header>
