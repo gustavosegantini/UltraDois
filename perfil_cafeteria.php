@@ -349,8 +349,9 @@ if (isset($_GET['exportar'])) {
             <table id="tabelaCupons">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Cupom</th>
-                        <th>Email do Cliente</th>
+                        <th>ID do Cliente</th>
                         <th>Utilizado</th>
                         <th>Data de Criação</th>
                         <th>Data de Utilização</th>
@@ -361,18 +362,17 @@ if (isset($_GET['exportar'])) {
                     $buscadorCupons = isset($_GET['buscadorCupons']) ? $_GET['buscadorCupons'] : '';
                     $buscadorCupons = "%{$buscadorCupons}%";
                     $stmt = $conn->prepare('SELECT 
+            cupons.id,
             cupons.cupom,
-            perfil_cliente.email,
+            cupons.id_cliente,
             cupons.utilizado,
             cupons.data_criacao,
             cupons.data_utilizado
           FROM 
             cupons
-          INNER JOIN 
-            perfil_cliente ON cupons.id_cliente = perfil_cliente.id
           WHERE 
             cupons.cupom LIKE ? OR 
-            perfil_cliente.email LIKE ?');
+            cupons.id_cliente LIKE ?');
                     $stmt->bind_param('ss', $buscadorCupons, $buscadorCupons);
                     $stmt->execute();
                     $result = $stmt->get_result();
@@ -381,8 +381,9 @@ if (isset($_GET['exportar'])) {
                     }
                     while ($row = $result->fetch_assoc()) {
                         echo '<tr>';
+                        echo '<td>' . $row['id'] . '</td>';
                         echo '<td>' . $row['cupom'] . '</td>';
-                        echo '<td>' . $row['email'] . '</td>';
+                        echo '<td>' . $row['id_cliente'] . '</td>';
                         echo '<td>' . ($row['utilizado'] ? 'Sim' : 'Não') . '</td>';
 
                         $data_criacao = isset($row['data_criacao']) ? date('d/m/y - H:i', strtotime($row['data_criacao'])) : '';
@@ -397,7 +398,6 @@ if (isset($_GET['exportar'])) {
                 </tbody>
             </table>
         </div>
-
 
 
 
