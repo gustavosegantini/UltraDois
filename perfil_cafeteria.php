@@ -352,7 +352,6 @@ if (isset($_GET['exportar'])) {
                         <th>Data de Geração</th>
                         <th>Utilizado</th>
                         <th>Data de Utilização</th>
-                        <!-- <th>Ações</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -379,6 +378,8 @@ if (isset($_GET['exportar'])) {
                 </tbody>
             </table>
         </div>
+
+
 
 
 
