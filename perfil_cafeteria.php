@@ -522,7 +522,7 @@ if (isset($_GET['exportar'])) {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: `ID_Produto=${id_produto}`
+                body: `id_produto=${id_produto}`
             })
                 .then(response => response.text())
                 .then(codigo => {
