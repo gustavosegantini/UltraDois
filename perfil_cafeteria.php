@@ -422,9 +422,6 @@ if (isset($_GET['exportar'])) {
                         <th>Data de Geração</th>
                         <th>Utilizado</th>
                         <th>Data de Utilização</th>
-                        <th>Nome do Produto</th>
-                        <th>Tamanho</th>
-                        <th>Preço</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -442,9 +439,6 @@ if (isset($_GET['exportar'])) {
                         echo '<td>' . $row['data_gerado'] . '</td>';
                         echo '<td>' . $row['Utilizado'] . '</td>';
                         echo '<td>' . $row['data_utilizado'] . '</td>';
-                        echo '<td>' . $row['nome'] . '</td>';
-                        echo '<td>' . $row['tamanho'] . '</td>';
-                        echo '<td>' . $row['preco'] . '</td>';
                         echo '</tr>';
                     }
                     ?>
