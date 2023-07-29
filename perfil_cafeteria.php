@@ -374,11 +374,11 @@ if (isset($_GET['exportar'])) {
                     produtos.nome, 
                     produtos.tamanho, 
                     produtos.preco
-                FROM 
+                  FROM 
                     Codigos 
-                INNER JOIN 
+                  INNER JOIN 
                     produtos ON Codigos.produto_id = produtos.ID
-                WHERE 
+                  WHERE 
                     Codigos.Codigo LIKE ? OR 
                     Codigos.Utilizado LIKE ? OR 
                     Codigos.Gerado LIKE ?');
