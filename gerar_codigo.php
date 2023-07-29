@@ -24,6 +24,7 @@ $id_produto = $_POST['id_produto']; // Obtém o ID do produto
 $codigo_gerado = generate_unique_code($conn);
 $email = $_SESSION['email_cafeteria'];
 
+date_default_timezone_set('America/Sao_Paulo');
 $data_atual = date('Y-m-d H:i:s');
 
 $sql = "INSERT INTO Codigos (Codigo, ID_Produto, Gerado, data_gerado) VALUES (?, ?, ?, ?)";
