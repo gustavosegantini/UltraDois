@@ -338,9 +338,7 @@ if (isset($_GET['exportar'])) {
                 <h1>Códigos</h1>
             </header>
             <form action="perfil_cafeteria.php" method="get">
-                <!-- <label for="buscador">Buscar código:</label> -->
                 <input type="text" id="buscador" name="buscador" placeholder="Buscar...">
-                <!-- <input type="submit" value="Buscar"> -->
             </form>
             <button id="exportarCsvCodigos">Exportar para CSV</button><br>
             <table id="tabelaCodigos">
@@ -351,14 +349,36 @@ if (isset($_GET['exportar'])) {
                         <th>Data de Geração</th>
                         <th>Utilizado</th>
                         <th>Data de Utilização</th>
-                        <!-- <th>Ações</th> -->
+                        <th>Nome do Produto</th> <!-- Adicionado -->
+                        <th>Tamanho</th> <!-- Adicionado -->
+                        <th>Preço</th> <!-- Adicionado -->
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    // Consulta para buscar todos os códigos
                     $buscador = isset($_GET['buscador']) ? $_GET['buscador'] : '';
-                    $query = "SELECT Codigos.ID_Codigo, Codigos.Codigo, Codigos.Gerado, Codigos.data_gerado, Codigos.Utilizado, Codigos.data_utilizado FROM Codigos WHERE Codigos.Codigo LIKE '%$buscador%' OR Codigos.Utilizado LIKE '%$buscador%' OR Codigos.Gerado LIKE '%$buscador%'";
+                    // Atualizado para incluir informações do produto
+                    $query = "
+                SELECT 
+                    Codigos.ID_Codigo, 
+                    Codigos.Codigo, 
+                    Codigos.Gerado, 
+                    Codigos.data_gerado, 
+                    Codigos.Utilizado, 
+                    Codigos.data_utilizado, 
+                    produtos.nome,  // Adicionado
+                    produtos.tamanho,  // Adicionado
+                    produtos.preco  // Adicionado
+                FROM 
+                    Codigos 
+                INNER JOIN 
+                    produtos ON Codigos.produto_id = produtos.ID
+                WHERE 
+                    Codigos.Codigo LIKE '%$buscador%' OR 
+                    Codigos.Utilizado LIKE '%$buscador%' OR 
+                    Codigos.Gerado LIKE '%$buscador%'
+            ";
+
                     $result = mysqli_query($conn, $query);
                     if (!$result) {
                         die('Erro na consulta: ' . mysqli_error($conn));
@@ -368,16 +388,23 @@ if (isset($_GET['exportar'])) {
                         echo '<tr>';
                         echo '<td>' . $row['Codigo'] . '</td>';
                         echo '<td>' . $row['Gerado'] . '</td>';
-                        echo '<td>' . $row['data_gerado'] . '</td>';
+                        // Formatação da data
+                        $data_gerado = date("d/m/y - H:i", strtotime($row['data_gerado']));
+                        echo '<td>' . $data_gerado . '</td>';
                         echo '<td>' . $row['Utilizado'] . '</td>';
-                        echo '<td>' . $row['data_utilizado'] . '</td>';
-                        // echo '<td><a href="editar_codigo.php?codigo_id=' . $row['id'] . '" class="buttonEditar">Editar</a></td>';
+                        // Formatação da data
+                        $data_utilizado = date("d/m/y - H:i", strtotime($row['data_utilizado']));
+                        echo '<td>' . $data_utilizado . '</td>';
+                        echo '<td>' . $row['nome'] . '</td>'; // Adicionado
+                        echo '<td>' . $row['tamanho'] . '</td>'; // Adicionado
+                        echo '<td>' . $row['preco'] . '</td>'; // Adicionado
                         echo '</tr>';
                     }
                     ?>
                 </tbody>
             </table>
         </div>
+
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
