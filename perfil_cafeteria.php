@@ -500,6 +500,12 @@ if (isset($_GET['exportar'])) {
                 exportarCsv('tabelaCodigos', 'dados_codigos.csv');
             });
 
+             // Exportar Cupons
+             $("#exportarCsvCupons").on('click', function (e) {
+                e.preventDefault();
+                exportarCsv('tabelaCupons', 'dados_cupons.csv');
+            });
+
             function exportarCsv(tabelaId, arquivoNome) {
                 var headers = [];
                 $('#' + tabelaId + ' th').each(function () {
