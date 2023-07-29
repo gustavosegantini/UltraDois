@@ -216,15 +216,7 @@ if (isset($_GET['exportar'])) {
                     <?php echo $total_cupons_utilizados; ?>
                 </span></p>
         </div>
-        <div class="modal">
-            <header>
-                <h1>Produtos</h1>
-            </header>
-            <div id="lista-produtos">
-                <!-- Os produtos serão inseridos aqui pelo JavaScript -->
-            </div>
-            <div id="codigo-gerado" class="codigo-gerado"></div>
-        </div>
+        
 
         <div class="modal">
 
@@ -433,7 +425,43 @@ if (isset($_GET['exportar'])) {
         });
 
         //Produtos:
-        
+        function gerarCodigo(id_produto) {
+            // A solicitação POST é feita para gerar_codigo.php com o ID do produto
+            fetch('gerar_codigo.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `id_produto=${id_produto}`
+            })
+                .then(response => response.text())
+                .then(codigo => {
+                    document.getElementById('codigo-gerado').innerText = `Código gerado: ${codigo}`;
+                })
+                .catch(error => console.error('Erro:', error));
+        }
+
+        fetch('get_produtos.php')
+            .then(response => response.json())
+            .then(produtos => {
+                let listaProdutos = document.getElementById('lista-produtos');
+
+                for (let produto of produtos) {
+                    let produtoElemento = document.createElement('div');
+                    produtoElemento.classList.add('produto');
+                    produtoElemento.innerHTML = `
+                <h2>${produto.nome}</h2>
+                <p>Tamanho: ${produto.tamanho}</p>
+                <p>Preço: ${produto.preco}</p>
+            `;
+                    produtoElemento.setAttribute('data-id-produto', produto.ID);
+                    produtoElemento.addEventListener('click', function () {
+                        gerarCodigo(this.getAttribute('data-id-produto'));
+                    });
+                    listaProdutos.appendChild(produtoElemento);
+                }
+            });
+
     </script>
 
 
