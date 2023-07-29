@@ -406,61 +406,6 @@ if (isset($_GET['exportar'])) {
                 </tbody>
             </table>
         </div>
-
-
-
-        <div class="modal">
-            <header>
-                <h1>Códigos</h1>
-            </header>
-            <form action="perfil_cafeteria.php" method="get">
-                <input type="text" id="buscador" name="buscador" placeholder="Buscar...">
-            </form>
-            <button id="exportarCsvCodigos">Exportar para CSV</button><br>
-            <table id="tabelaCodigos">
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Gerado</th>
-                        <th>Data de Geração</th>
-                        <th>Utilizado</th>
-                        <th>Data de Utilização</th>
-                        <th>Nome do Produto</th>
-                        <th>Tamanho</th>
-                        <th>Preço</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $buscador = isset($_GET['buscador']) ? $_GET['buscador'] : '';
-                    $query = "SELECT Codigos.ID_Codigo, Codigos.Codigo, Codigos.Gerado, Codigos.data_gerado, Codigos.Utilizado, Codigos.data_utilizado, produtos.nome, produtos.tamanho, produtos.preco FROM Codigos INNER JOIN produtos ON Codigos.ID_Produto = produtos.ID WHERE Codigos.Codigo LIKE '%$buscador%' OR Codigos.Utilizado LIKE '%$buscador%' OR Codigos.Gerado LIKE '%$buscador%'";
-                    $result = mysqli_query($conn, $query);
-                    if (!$result) {
-                        die('Erro na consulta: ' . mysqli_error($conn));
-                    }
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo '<tr>';
-                        echo '<td>' . $row['Codigo'] . '</td>';
-                        echo '<td>' . $row['Gerado'] . '</td>';
-                        echo '<td>' . $row['data_gerado'] . '</td>';
-                        echo '<td>' . $row['Utilizado'] . '</td>';
-                        echo '<td>' . $row['data_utilizado'] . '</td>';
-                        echo '<td>' . $row['nome'] . '</td>';
-                        echo '<td>' . $row['tamanho'] . '</td>';
-                        echo '<td>' . $row['preco'] . '</td>';
-                        echo '</tr>';
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-
-
-
-
-
-
-
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
