@@ -15,18 +15,7 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
 
 require 'vendor/autoload.php';
 
-//Produtos:
 
-$sql = "SELECT * FROM produtos";
-$result = mysqli_query($conn, $sql);
-
-$produtos = array();
-while ($row = mysqli_fetch_assoc($result)) {
-    $produtos[] = $row;
-}
-
-header('Content-Type: application/json');
-echo json_encode($produtos);
 
 
 function exportData($data)
