@@ -376,7 +376,6 @@ if (isset($_GET['exportar'])) {
                         echo '<td>' . $row['data_gerado'] . '</td>';
                         echo '<td>' . $row['Utilizado'] . '</td>';
                         echo '<td>' . $row['data_utilizado'] . '</td>';
-                        echo '<td>' . $data_utilizado . '</td>';
                         echo '<td>' . $row['nome'] . '</td>';
                         echo '<td>' . $row['tamanho'] . '</td>';
                         echo '<td>' . $row['preco'] . '</td>';
