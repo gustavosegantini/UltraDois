@@ -381,9 +381,24 @@ if (isset($_GET['exportar'])) {
                         die('Erro na consulta: ' . mysqli_error($conn));
                     }
                     while ($row = mysqli_fetch_assoc($result)) {
+                        $tamanho = '';
+                        switch ($row['tamanho']) {
+                            case 0:
+                                $tamanho = 'Pequeno';
+                                break;
+                            case 1:
+                                $tamanho = 'Médio';
+                                break;
+                            case 2:
+                                $tamanho = 'Grande';
+                                break;
+                            case 3:
+                                $tamanho = 'Longo';
+                                break;
+                        }
                         echo '<tr>';
                         echo '<td>' . $row['nome'] . '</td>';
-                        echo '<td>' . $row['tamanho'] . '</td>';
+                        echo '<td>' . $tamanho . '</td>';
                         echo '<td>' . $row['preco'] . '</td>';
                         echo '<td>' . $row['quantidade_vendida'] . '</td>';
                         echo '<td>' . $row['valor_total'] . '</td>';
@@ -393,6 +408,7 @@ if (isset($_GET['exportar'])) {
                 </tbody>
             </table>
         </div>
+
 
 
 
