@@ -422,13 +422,21 @@ if (isset($_GET['exportar'])) {
                         <th>Data de Geração</th>
                         <th>Utilizado</th>
                         <th>Data de Utilização</th>
+                        <th>Nome do Produto</th>
+                        <th>Tamanho</th>
+                        <th>Preço</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     $buscador = isset($_GET['buscador']) ? $_GET['buscador'] : '';
-                    $query = "SELECT Codigos.ID_Codigo, Codigos.Codigo, Codigos.Gerado, Codigos.data_gerado, Codigos.Utilizado, Codigos.data_utilizado, produtos.nome, produtos.tamanho, produtos.preco FROM Codigos INNER JOIN produtos ON Codigos.ID_Produto = produtos.ID WHERE Codigos.Codigo LIKE '%$buscador%' OR Codigos.Utilizado LIKE '%$buscador%' OR Codigos.Gerado LIKE '%$buscador%'";
-                    $result = mysqli_query($conn, $query);
+                    $query = "SELECT Codigos.ID_Codigo, Codigos.Codigo, Codigos.Gerado, Codigos.data_gerado, Codigos.Utilizado, Codigos.data_utilizado, produtos.nome, produtos.tamanho, produtos.preco FROM Codigos INNER JOIN produtos ON Codigos.ID_Produto = produtos.ID WHERE Codigos.Codigo LIKE ? OR Codigos.Utilizado LIKE ? OR Codigos.Gerado LIKE ?";
+                    $stmt = mysqli_prepare($conn, $query);
+                    $buscador_param = '%' . $buscador . '%';
+                    mysqli_stmt_bind_param($stmt, 'sss', $buscador_param, $buscador_param, $buscador_param);
+                    mysqli_stmt_execute($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
+
                     if (!$result) {
                         die('Erro na consulta: ' . mysqli_error($conn));
                     }
@@ -439,6 +447,9 @@ if (isset($_GET['exportar'])) {
                         echo '<td>' . $row['data_gerado'] . '</td>';
                         echo '<td>' . $row['Utilizado'] . '</td>';
                         echo '<td>' . $row['data_utilizado'] . '</td>';
+                        echo '<td>' . $row['nome'] . '</td>';
+                        echo '<td>' . $row['tamanho'] . '</td>';
+                        echo '<td>' . $row['preco'] . '</td>';
                         echo '</tr>';
                     }
                     ?>
