@@ -373,10 +373,10 @@ if (isset($_GET['exportar'])) {
                     Codigos 
                 INNER JOIN 
                     produtos ON Codigos.produto_id = produtos.ID
-                WHERE 
-                    Codigos.Codigo LIKE ? OR 
-                    Codigos.Utilizado LIKE ? OR 
-                    Codigos.Gerado LIKE ?
+                -- WHERE 
+                --     Codigos.Codigo LIKE ? OR 
+                --     Codigos.Utilizado LIKE ? OR 
+                --     Codigos.Gerado LIKE ?
             ');
                     $stmt->bind_param('sss', $buscador, $buscador, $buscador);
                     $stmt->execute();
