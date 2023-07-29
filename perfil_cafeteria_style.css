@@ -45,7 +45,15 @@ input[type="submit"]:hover {
     overflow-y: scroll;
 }
 
+#lista-produtos {
+    display: flex;
+    flex-wrap: wrap; /* Isso permite que os itens passem para a linha seguinte se não houver espaço suficiente na linha atual */
+    justify-content: space-between; /* Isso adiciona espaço igual entre os produtos */
+}
+
 .produto {
+    flex-basis: calc(33.33% - 2rem); /* Isso faz com que cada produto ocupe aproximadamente um terço do espaço disponível, subtraindo o espaço para a margem. */
+    margin: 1rem; /* Isso adiciona algum espaço ao redor de cada produto */
     padding: 1rem;
     margin: 1rem 0;
     background-color: var(--card-background-color);
