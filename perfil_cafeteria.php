@@ -392,11 +392,12 @@ if (isset($_GET['exportar'])) {
                         echo '<tr>';
                         echo '<td>' . $row['Codigo'] . '</td>';
                         echo '<td>' . $row['Gerado'] . '</td>';
-                        $data_gerado = date('d/m/y - H:i', strtotime($row['data_gerado']));
-                        echo '<td>' . $data_gerado . '</td>';
-                        echo '<td>' . $row['Utilizado'] . '</td>';
-                        $data_utilizado = date('d/m/y - H:i', strtotime($row['data_utilizado']));
-                        echo '<td>' . $data_utilizado . '</td>';
+                        $data_gerado = isset($row['data_gerado']) ? date('d/m/y - H:i', strtotime($row['data_gerado'])) : '';
+echo '<td>' . $data_gerado . '</td>';
+
+$data_utilizado = isset($row['data_utilizado']) ? date('d/m/y - H:i', strtotime($row['data_utilizado'])) : '';
+echo '<td>' . $data_utilizado . '</td>';
+
                         echo '<td>' . $row['nome'] . '</td>';
                         echo '<td>' . $row['tamanho'] . '</td>';
                         echo '<td>' . $row['preco'] . '</td>';
