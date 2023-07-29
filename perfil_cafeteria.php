@@ -340,7 +340,8 @@ if (isset($_GET['exportar'])) {
             <form action="perfil_cafeteria.php" method="get">
                 <input type="text" id="buscador" name="buscador" placeholder="Buscar...">
             </form>
-            <button id="exportarCsvCodigos">Exportar para CSV</button><br>
+            <button id="exportarCsvCodigos">Exportar para CSV</button>
+            <br>
             <table id="tabelaCodigos">
                 <thead>
                     <tr>
@@ -349,61 +350,59 @@ if (isset($_GET['exportar'])) {
                         <th>Data de Geração</th>
                         <th>Utilizado</th>
                         <th>Data de Utilização</th>
-                        <th>Nome do Produto</th> <!-- Adicionado -->
-                        <th>Tamanho</th> <!-- Adicionado -->
-                        <th>Preço</th> <!-- Adicionado -->
+                        <th>Nome do Produto</th>
+                        <th>Tamanho</th>
+                        <th>Preço</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     $buscador = isset($_GET['buscador']) ? $_GET['buscador'] : '';
-                    // Atualizado para incluir informações do produto
-                    $query = "
-                SELECT 
+                    $buscador = "%{$buscador}%";
+                    $stmt = $conn->prepare('SELECT
                     Codigos.ID_Codigo, 
                     Codigos.Codigo, 
                     Codigos.Gerado, 
                     Codigos.data_gerado, 
                     Codigos.Utilizado, 
                     Codigos.data_utilizado, 
-                    produtos.nome,  // Adicionado
-                    produtos.tamanho,  // Adicionado
-                    produtos.preco  // Adicionado
+                    produtos.nome, 
+                    produtos.tamanho, 
+                    produtos.preco
                 FROM 
                     Codigos 
                 INNER JOIN 
                     produtos ON Codigos.produto_id = produtos.ID
                 WHERE 
-                    Codigos.Codigo LIKE '%$buscador%' OR 
-                    Codigos.Utilizado LIKE '%$buscador%' OR 
-                    Codigos.Gerado LIKE '%$buscador%'
-            ";
-
-                    $result = mysqli_query($conn, $query);
+                    Codigos.Codigo LIKE ? OR 
+                    Codigos.Utilizado LIKE ? OR 
+                    Codigos.Gerado LIKE ?
+            ');
+                    $stmt->bind_param('sss', $buscador, $buscador, $buscador);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
                     if (!$result) {
                         die('Erro na consulta: ' . mysqli_error($conn));
                     }
-                    // Percorre os resultados e adiciona as linhas na tabela
-                    while ($row = mysqli_fetch_assoc($result)) {
+                    while ($row = $result->fetch_assoc()) {
                         echo '<tr>';
                         echo '<td>' . $row['Codigo'] . '</td>';
                         echo '<td>' . $row['Gerado'] . '</td>';
-                        // Formatação da data
-                        $data_gerado = date("d/m/y - H:i", strtotime($row['data_gerado']));
+                        $data_gerado = date('d/m/y - H:i', strtotime($row['data_gerado']));
                         echo '<td>' . $data_gerado . '</td>';
                         echo '<td>' . $row['Utilizado'] . '</td>';
-                        // Formatação da data
-                        $data_utilizado = date("d/m/y - H:i", strtotime($row['data_utilizado']));
+                        $data_utilizado = date('d/m/y - H:i', strtotime($row['data_utilizado']));
                         echo '<td>' . $data_utilizado . '</td>';
-                        echo '<td>' . $row['nome'] . '</td>'; // Adicionado
-                        echo '<td>' . $row['tamanho'] . '</td>'; // Adicionado
-                        echo '<td>' . $row['preco'] . '</td>'; // Adicionado
+                        echo '<td>' . $row['nome'] . '</td>';
+                        echo '<td>' . $row['tamanho'] . '</td>';
+                        echo '<td>' . $row['preco'] . '</td>';
                         echo '</tr>';
                     }
                     ?>
                 </tbody>
             </table>
         </div>
+
 
     </div>
 
