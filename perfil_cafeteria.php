@@ -15,6 +15,19 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
 
 require 'vendor/autoload.php';
 
+//Produtos:
+
+$sql = "SELECT * FROM produtos";
+$result = mysqli_query($conn, $sql);
+
+$produtos = array();
+while ($row = mysqli_fetch_assoc($result)) {
+    $produtos[] = $row;
+}
+
+header('Content-Type: application/json');
+echo json_encode($produtos);
+
 
 function exportData($data)
 {
@@ -204,13 +217,15 @@ if (isset($_GET['exportar'])) {
                 </span></p>
         </div>
         <div class="modal">
-
             <header>
-                <h1>Gerar Código</h1>
+                <h1>Produtos</h1>
             </header>
-            <button class="buttonCodigo" onclick="gerarCodigo()">Gerar Código</button>
+            <div id="lista-produtos">
+                <!-- Os produtos serão inseridos aqui pelo JavaScript -->
+            </div>
             <div id="codigo-gerado" class="codigo-gerado"></div>
         </div>
+
         <div class="modal">
 
 
@@ -265,7 +280,7 @@ if (isset($_GET['exportar'])) {
                 <button class="exportar" id="exportarCsvClientes">Exportar para CSV</button><br>
             </form>
             <!-- <button id="exportarS">Exportar para Excel</button> -->
-            
+
 
             <table id="tabelaClientes">
                 <thead>
@@ -416,6 +431,45 @@ if (isset($_GET['exportar'])) {
                 link.click();
             }
         });
+
+        //Produtos:
+        function gerarCodigo(id_produto) {
+            // A solicitação POST é feita para gerar_codigo.php com o ID do produto
+            fetch('gerar_codigo.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `id_produto=${id_produto}`
+            })
+                .then(response => response.text())
+                .then(codigo => {
+                    document.getElementById('codigo-gerado').innerText = `Código gerado: ${codigo}`;
+                })
+                .catch(error => console.error('Erro:', error));
+        }
+
+        fetch('get_produtos.php')
+            .then(response => response.json())
+            .then(produtos => {
+                let listaProdutos = document.getElementById('lista-produtos');
+
+                for (let produto of produtos) {
+                    let produtoElemento = document.createElement('div');
+                    produtoElemento.classList.add('produto');
+                    produtoElemento.innerHTML = `
+                <h2>${produto.nome}</h2>
+                <p>Tamanho: ${produto.tamanho}</p>
+                <p>Preço: ${produto.preco}</p>
+            `;
+                    produtoElemento.setAttribute('data-id-produto', produto.ID);
+                    produtoElemento.addEventListener('click', function () {
+                        gerarCodigo(this.getAttribute('data-id-produto'));
+                    });
+                    listaProdutos.appendChild(produtoElemento);
+                }
+            });
+
     </script>
 
 
