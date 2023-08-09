@@ -486,14 +486,14 @@ if (isset($_GET['exportar'])) {
             <table id="tabelaCodigos">
                 <thead>
                     <tr>
-                        <th>Código</th>
-                        <th>Gerado</th>
-                        <th>Data de Geração</th>
-                        <th>Utilizado</th>
-                        <th>Data de Utilização</th>
-                        <th>Nome do Produto</th>
+                        <th>Produto</th>
                         <th>Tamanho</th>
                         <th>Preço</th>
+                        <th>Vendedor</th>
+                        <th>Data da Venda</th>
+                        <th>Código de Fidelidade</th>
+                        <th>Cliente</th>
+                        <th>Data de Resgate</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -501,23 +501,23 @@ if (isset($_GET['exportar'])) {
                     $buscador = isset($_GET['buscador']) ? $_GET['buscador'] : '';
                     $buscador = "%{$buscador}%";
                     $stmt = $conn->prepare('SELECT 
-                Codigos.ID_Codigo, 
-                Codigos.Codigo, 
-                Codigos.Gerado, 
-                Codigos.data_gerado, 
-                Codigos.Utilizado, 
-                Codigos.data_utilizado, 
-                produtos.nome, 
-                produtos.tamanho, 
-                produtos.preco
-            FROM 
-                Codigos 
-            INNER JOIN 
-                produtos ON Codigos.ID_Produto = produtos.ID
-            WHERE 
-                Codigos.Codigo LIKE ? OR 
-                Codigos.Utilizado LIKE ? OR 
-                Codigos.Gerado LIKE ?');
+            Codigos.ID_Codigo, 
+            Codigos.Codigo, 
+            Codigos.Gerado, 
+            Codigos.data_gerado, 
+            Codigos.Utilizado, 
+            Codigos.data_utilizado, 
+            produtos.nome, 
+            produtos.tamanho, 
+            produtos.preco
+        FROM 
+            Codigos 
+        INNER JOIN 
+            produtos ON Codigos.ID_Produto = produtos.ID
+        WHERE 
+            Codigos.Codigo LIKE ? OR 
+            Codigos.Utilizado LIKE ? OR 
+            Codigos.Gerado LIKE ?');
                     $stmt->bind_param('sss', $buscador, $buscador, $buscador);
                     $stmt->execute();
                     $result = $stmt->get_result();
@@ -526,14 +526,6 @@ if (isset($_GET['exportar'])) {
                     }
                     while ($row = $result->fetch_assoc()) {
                         echo '<tr>';
-                        echo '<td>' . $row['Codigo'] . '</td>';
-                        echo '<td>' . $row['Gerado'] . '</td>';
-                        $data_gerado = isset($row['data_gerado']) ? date('d/m/y - H:i', strtotime($row['data_gerado'])) : '';
-                        echo '<td>' . $data_gerado . '</td>';
-                        $utilizado = $row['Utilizado'] == 0 ? 'Não Resgatado' : $row['Utilizado'];
-                        echo '<td>' . $utilizado . '</td>';
-                        $data_utilizado = isset($row['data_utilizado']) ? date('d/m/y - H:i', strtotime($row['data_utilizado'])) : '';
-                        echo '<td>' . $data_utilizado . '</td>';
                         echo '<td>' . $row['nome'] . '</td>';
 
                         $tamanho = '';
@@ -553,12 +545,21 @@ if (isset($_GET['exportar'])) {
                         }
                         echo '<td>' . $tamanho . '</td>';
                         echo '<td>' . $row['preco'] . '</td>';
+                        echo '<td>' . $row['Gerado'] . '</td>';
+                        $data_gerado = isset($row['data_gerado']) ? date('d/m/y - H:i', strtotime($row['data_gerado'])) : '';
+                        echo '<td>' . $data_gerado . '</td>';
+                        echo '<td>' . $row['Codigo'] . '</td>';
+                        $utilizado = $row['Utilizado'] == 0 ? 'Não Resgatado' : $row['Utilizado'];
+                        echo '<td>' . $utilizado . '</td>';
+                        $data_utilizado = isset($row['data_utilizado']) ? date('d/m/y - H:i', strtotime($row['data_utilizado'])) : '';
+                        echo '<td>' . $data_utilizado . '</td>';
                         echo '</tr>';
                     }
                     ?>
                 </tbody>
             </table>
         </div>
+
 
 
 
