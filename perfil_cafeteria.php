@@ -474,10 +474,9 @@ if (isset($_GET['exportar'])) {
         </div>
 
 
-
         <div class="modal">
             <header>
-                <h1>Códigos</h1>
+                <h1>Vendas</h1>
             </header>
             <form action="perfil_cafeteria.php" method="get">
                 <input type="text" id="buscador" name="buscador" placeholder="Buscar...">
