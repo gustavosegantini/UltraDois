@@ -133,6 +133,27 @@ input[type="submit"]:hover {
 }
 
 .alert {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+.alert-danger {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+    text-align: center;
+}
+
+/* .alert {
     font-size: 1rem;
     font-weight: 700;
     padding: 0.5rem;
@@ -149,7 +170,7 @@ input[type="submit"]:hover {
 .error {
     background-color: var(--error-color);
     color: var(--card-background-color);
-}
+} */
 
 .credit-banner {
     background-color: var(--credit-banner-color);
