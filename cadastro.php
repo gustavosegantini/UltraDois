@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Cliente</title>
     <link rel="stylesheet" href="cadastro_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 
 <body>
@@ -24,12 +25,26 @@
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" placeholder="Seu e-mail" required>
 
-                <label for="senha">Senha:</label>
+                <div class="input-wrapper">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" placeholder="Sua Senha" required>
+                    <i class="far fa-eye password-icon" onclick="togglePasswordVisibility('senha')"></i>
+                </div>
+
+                <div class="input-wrapper">
+                    <label for="confirmar_senha">Confirmar Senha:</label>
+                    <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Confirmar Senha"
+                        required>
+                    <i class="far fa-eye password-icon" onclick="togglePasswordVisibility('confirmar_senha')"></i>
+                </div>
+
+
+                <!-- <label for="senha">Senha:</label>
                 <input type="password" id="senha" name="senha" placeholder="Sua Senha" required>
 
                 <label for="confirmar_senha">Confirmar Senha:</label>
                 <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Confirmar Senha"
-                    required>
+                    required> -->
 
                 <!-- Adicionando campo Data de Nascimento -->
                 <label for="data_nascimento">Data de Nascimento:</label>
@@ -63,5 +78,23 @@
         </div>
     </div>
 </body>
+
+<script>
+    function togglePasswordVisibility(inputId) {
+        const input = document.getElementById(inputId);
+        const icon = input.nextElementSibling;
+
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
+</script>
+
 
 </html>
