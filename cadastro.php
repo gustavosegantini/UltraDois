@@ -31,6 +31,8 @@
                 <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Confirmar Senha"
                     required>
 
+
+                    
                 <!-- Adicionando campo Data de Nascimento -->
                 <label for="data_nascimento">Data de Nascimento:</label>
                 <input type="datepicker" id="data_nascimento" name="data_nascimento" placeholder="DD/MM/AAAA" required>
