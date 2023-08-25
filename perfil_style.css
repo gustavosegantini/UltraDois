@@ -139,14 +139,14 @@ input[type="submit"]:hover {
     border-radius: 5px;
 }
 
-.alert-danger {
+.error {
     background-color: #f2dede;
     border-color: #ebccd1;
     color: #a94442;
     text-align: center;
 }
 
-.alert-success {
+.success {
     background-color: #dff0d8;
     border-color: #d6e9c6;
     color: #3c763d;
