@@ -8,18 +8,21 @@
     <title>Login</title>
     <link rel="stylesheet" href="login_style.css">
     <script>
+        
+
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('senha');
-            const toggleButton = document.getElementById('toggle-password');
+            const eyeIcon = document.getElementById('toggle-password');
 
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
-                toggleButton.innerText = 'Ocultar';
+                eyeIcon.textContent = '🙈';
             } else {
                 passwordInput.type = 'password';
-                toggleButton.innerText = 'Mostrar';
+                eyeIcon.textContent = '👁';
             }
         }
+
     </script>
 </head>
 
@@ -53,8 +56,9 @@
                 <label for="senha">Senha:</label>
                 <div class="password-container">
                     <input type="password" id="senha" name="senha" required>
-                    <button type="button" id="toggle-password" class="show-password-button"
-                        onclick="togglePasswordVisibility()">Mostrar</button>
+                    <span id="toggle-password" class="eye-icon" onclick="togglePasswordVisibility()">
+                        👁
+                    </span>
                 </div>
 
                 <input type="submit" value="Entrar">
@@ -70,5 +74,7 @@
         </div>
     </footer>
 </body>
+
+
 
 </html>
