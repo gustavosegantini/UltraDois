@@ -279,8 +279,8 @@ if (isset($_GET['exportar'])) {
             }
             ?>
             <form action="perfil_cafeteria.php" method="post">
-                <label for="codigo_cupom">Verificar código de desconto do cliente:</label>
-                <input type="text" id="codigo_cupom" name="codigo_cupom">
+                <!-- <label for="codigo_cupom">Verificar código de desconto do cliente:</label> -->
+                <input type="text" id="codigo_cupom" name="codigo_cupom" placeholder="Código do Cupom">
                 <input type="submit" value="Verificar Código">
             </form><br>
             <?php
