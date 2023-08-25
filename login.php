@@ -47,7 +47,7 @@
                 </div>
 
                 <input type="submit" value="Entrar">
-            </form>
+            </form><br>
             <p>Ainda não possui uma conta? <a href="cadastro.php">Cadastre-se</a></p><br>
             <p>Esqueceu sua senha? <a href="esqueci_senha.php">Clique Aqui</a></p><br>
 
