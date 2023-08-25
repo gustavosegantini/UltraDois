@@ -97,7 +97,7 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="password"],
-/* input[type="date"], */
+input[type="date"],
 select {
     font-size: 1rem;
     padding: 0.5rem;
@@ -109,37 +109,6 @@ select {
     opacity: 0.7;
     /* Opacidade reduzida */
 }
-
-:root {
-    --input-border-color: #ccc; /* Exemplo de cor */
-    --input-focus-border-color: #007BFF; /* Cor quando o campo está focado */
-}
-
-input[type="date"]::-webkit-inner-spin-button,
-input[type="date"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-    color: var(--input-border-color);
-    opacity: 1; /* Restaura a opacidade */
-}
-
-input[type="date"]:focus {
-    border-color: var(--input-focus-border-color); /* Muda a cor da borda quando focado */
-    outline: none; /* Remove o contorno padrão do navegador */
-}
-
-input[type="date"]::-webkit-clear-button {
-    display: none; /* Remove o botão 'x' no Chrome */
-}
-
-/* Estilos para o Firefox */
-input[type="date"]::-moz-clear {
-    display: none;
-}
-
 
 input[type="submit"] {
     font-size: 1rem;
