@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="cadastro_style.css">
+    <link rel="stylesheet" href="login_style.css">
     <script>
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('senha');
@@ -47,7 +47,7 @@
             ?>
 
             <form method="POST" action="autenticar_login.php">
-                <label for="email">E-mail:</label><br>
+                <label for="email">E-mail:</label>
                 <input type="email" id="email" name="email" required>
 
                 <label for="senha">Senha:</label>
@@ -58,8 +58,8 @@
                 </div>
 
                 <input type="submit" value="Entrar">
-            </form><br>
-            <p>Ainda não possui uma conta? <a href="cadastro.php">Cadastre-se</a></p><br>
+            </form>
+            <p>Ainda não possui uma conta? <a href="cadastro.php">Cadastre-se</a></p>
             <p>Esqueceu sua senha? <a href="esqueci_senha.php">Clique Aqui</a></p>
 
         </div>
