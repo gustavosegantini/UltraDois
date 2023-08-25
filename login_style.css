@@ -176,6 +176,7 @@ input[type="submit"]:hover {
 .input-wrapper {
     position: relative;
 }
+
 .password-icon {
     position: absolute;
     top: 50%;
@@ -183,6 +184,7 @@ input[type="submit"]:hover {
     transform: translateY(-50%);
     cursor: pointer;
 }
+
 /* .password-icon {
     position: absolute;
     top: 50%;
@@ -217,6 +219,27 @@ input[type="submit"]:hover {
     color: #6638f0;
     font-weight: bold;
     margin-left: 8px;
+}
+
+.alert {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+.alert-danger {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+    text-align: center;
 }
 
 /* Responsividade para dispositivos móveis */
