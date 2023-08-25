@@ -34,8 +34,11 @@
             ?>
 
             <form method="POST" action="autenticar_login.php">
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" required>
+
+                <div class="input-wrapper">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" placeholder="exemple@mail.com" required>
+                </div>
 
                 <div class="input-wrapper">
                     <label for="senha">Senha:</label>
@@ -45,8 +48,8 @@
 
                 <input type="submit" value="Entrar">
             </form>
-            <p>Ainda não possui uma conta? <a href="cadastro.php">Cadastre-se</a></p>
-            <p>Esqueceu sua senha? <a href="esqueci_senha.php">Clique Aqui</a></p>
+            <p>Ainda não possui uma conta? <a href="cadastro.php">Cadastre-se</a></p><br>
+            <p>Esqueceu sua senha? <a href="esqueci_senha.php">Clique Aqui</a></p><br>
 
         </div>
     </div>
