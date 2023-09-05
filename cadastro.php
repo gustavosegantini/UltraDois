@@ -88,7 +88,7 @@
                         Privacidade</a>.
                 </label>
 
-                <div class="g-recaptcha" data-sitekey="6LdUBvwnAAAAAB9J2Lvgw6K14_1zhvAm4OSibCRY"></div>
+               
 
                 <input type="submit" value="Cadastrar">
             </form>
