@@ -1,56 +1,68 @@
 <?php
-// Verifica se os campos foram preenchidos
-if (isset($_POST['nome']) && isset($_POST['sobrenome']) && isset($_POST['email']) && isset($_POST['senha']) && isset($_POST['confirmar_senha']) && isset($_POST['data_nascimento']) && isset($_POST['curso'])) {
 
-    // Verifica se as senhas coincidem
-    if ($_POST['senha'] == $_POST['confirmar_senha']) {
+if ($_POST) {
+    // Inicialize a variável de segredo do reCAPTCHA com sua chave secreta
+    $recaptchaSecret = '6LdUBvwnAAAAAB9J2Lvgw6K14_1zhvAm4OSibCRY';
+    $recaptchaResponse = $_POST['g-recaptcha-response'];
 
-        session_start();
-        include '../conexao.php';
+    // Verifique a resposta do reCAPTCHA
+    $responseKeys = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $recaptchaSecret . '&response=' . $recaptchaResponse), true);
 
-        // Verifica se a conexão foi estabelecida com sucesso
-        if ($conn->connect_error) {
-            die("Conexão falhou: " . $conn->connect_error);
-        }
+    if (intval($responseKeys["success"]) !== 1) {
+        echo 'Por favor, complete o reCAPTCHA.';
+    } else {
+        // Verifica se os campos foram preenchidos
+        if (isset($_POST['nome']) && isset($_POST['sobrenome']) && isset($_POST['email']) && isset($_POST['senha']) && isset($_POST['confirmar_senha']) && isset($_POST['data_nascimento']) && isset($_POST['curso'])) {
 
-        // Prepara a query SQL
-        $stmt = $conn->prepare("INSERT INTO perfil_cliente (nome, sobrenome, email, senha, data_nascimento, curso) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssss", $nome, $sobrenome, $email, $senha, $data_nascimento, $curso);
+            // Verifica se as senhas coincidem
+            if ($_POST['senha'] == $_POST['confirmar_senha']) {
 
-        // Define os parâmetros e executa a query
-        $nome = $_POST['nome'];
-        $sobrenome = $_POST['sobrenome'];
-        $email = $_POST['email'];
-        $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
-        $data_nascimento = $_POST['data_nascimento'];
-        $curso = $_POST['curso'];
+                session_start();
+                include '../conexao.php';
 
-        $stmt->execute();
+                // Verifica se a conexão foi estabelecida com sucesso
+                if ($conn->connect_error) {
+                    die("Conexão falhou: " . $conn->connect_error);
+                }
 
-        // Verifica se a query foi executada com sucesso
-        if ($stmt->affected_rows > 0) {
-            // Registro bem-sucedido
-            $_SESSION['email'] = $email;
-            // Redireciona para a página de sucesso
-            header("Location: perfil.php");
-            exit();
+                // Prepara a query SQL
+                $stmt = $conn->prepare("INSERT INTO perfil_cliente (nome, sobrenome, email, senha, data_nascimento, curso) VALUES (?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("ssssss", $nome, $sobrenome, $email, $senha, $data_nascimento, $curso);
+
+                // Define os parâmetros e executa a query
+                $nome = $_POST['nome'];
+                $sobrenome = $_POST['sobrenome'];
+                $email = $_POST['email'];
+                $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+                $data_nascimento = $_POST['data_nascimento'];
+                $curso = $_POST['curso'];
+
+                $stmt->execute();
+
+                // Verifica se a query foi executada com sucesso
+                if ($stmt->affected_rows > 0) {
+                    // Registro bem-sucedido
+                    $_SESSION['email'] = $email;
+                    // Redireciona para a página de sucesso
+                    header("Location: perfil.php");
+                    exit();
+                } else {
+                    // Mostra uma mensagem de erro
+                    echo "Erro ao cadastrar cliente. Por favor, tente novamente mais tarde.";
+                }
+
+                // Fecha a conexão com o banco de dados
+                $stmt->close();
+                $conn->close();
+
+            } else {
+                // Mostra uma mensagem de erro
+                echo "As senhas não coincidem. Por favor, tente novamente.";
+            }
         } else {
             // Mostra uma mensagem de erro
-            echo "Erro ao cadastrar cliente. Por favor, tente novamente mais tarde.";
+            echo "Por favor, preencha todos os campos.";
         }
-
-
-        // Fecha a conexão com o banco de dados
-        $stmt->close();
-        $conn->close();
-
-    } else {
-        // Mostra uma mensagem de erro
-        echo "As senhas não coincidem. Por favor, tente novamente.";
     }
-
-} else {
-    // Mostra uma mensagem de erro
-    echo "Por favor, preencha todos os campos.";
 }
 ?>
