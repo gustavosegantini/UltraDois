@@ -16,12 +16,16 @@
         e.preventDefault();
         grecaptcha.enterprise.ready(async () => {
             const token = await grecaptcha.enterprise.execute('6LdUBvwnAAAAAB9J2Lvgw6K14_1zhvAm4OSibCRY', { action: 'LOGIN' });
-            // IMPORTANT: The 'token' that results from execute is an encrypted response sent by
-            // reCAPTCHA Enterprise to the end user's browser.
-            // This token must be validated by creating an assessment.
-            // See https://cloud.google.com/recaptcha-enterprise/docs/create-assessment
+            const form = document.querySelector('form');
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'g-recaptcha-response';
+            input.value = token;
+            form.appendChild(input);
+            form.submit();
         });
     }
+
 </script>
 
 <body>
@@ -88,9 +92,10 @@
                         Privacidade</a>.
                 </label>
 
-                <div class="g-recaptcha" data-sitekey="6LdUBvwnAAAAAB9J2Lvgw6K14_1zhvAm4OSibCRY" data-action="LOGIN"></div>
 
-                <input type="submit" value="Cadastrar">
+
+                <input type="submit" value="Cadastrar" onclick="onClick(event)">
+
             </form>
         </div>
     </div>
