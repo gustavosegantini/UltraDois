@@ -7,22 +7,7 @@
     <title>Cadastro de Cliente</title>
     <link rel="stylesheet" href="cadastro_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <script
-        src="https://www.google.com/recaptcha/enterprise.js?render=6LdUBvwnAAAAAB9J2Lvgw6K14_1zhvAm4OSibCRY"></script>
 </head>
-
-<script>
-    function onClick(e) {
-        e.preventDefault();
-        grecaptcha.enterprise.ready(async () => {
-            const token = await grecaptcha.enterprise.execute('6LdUBvwnAAAAAB9J2Lvgw6K14_1zhvAm4OSibCRY', { action: 'LOGIN' });
-            // IMPORTANT: The 'token' that results from execute is an encrypted response sent by
-            // reCAPTCHA Enterprise to the end user's browser.
-            // This token must be validated by creating an assessment.
-            // See https://cloud.google.com/recaptcha-enterprise/docs/create-assessment
-        });
-    }
-</script>
 
 <body>
     <div class="container">
@@ -88,9 +73,7 @@
                         Privacidade</a>.
                 </label>
 
-                <div class="g-recaptcha" data-sitekey="6LdUBvwnAAAAAB9J2Lvgw6K14_1zhvAm4OSibCRY" data-action="LOGIN"></div>
-
-                <input type="submit" value="Cadastrar" onclick="onClick(event)">
+                <input type="submit" value="Cadastrar">
             </form>
         </div>
     </div>
