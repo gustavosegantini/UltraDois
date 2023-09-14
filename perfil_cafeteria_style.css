@@ -118,17 +118,22 @@ label {
 }
 table {
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1.5rem;
+    border-collapse: separate;
+    border-spacing: 0 0.5rem; /* Isso adicionará um espaço vertical entre as linhas */
 }
-th,
-td {
+
+th, td {
     padding: 0.5rem;
     text-align: left;
-    border-bottom: 1px solid #ccc;
+    border-bottom: none; /* Remova a borda inferior que estava sendo aplicada anteriormente */
+    box-shadow: 0 1px 0 #ccc; /* Isso adicionará uma sombra sutil entre as células */
 }
-th {
-    background-color: #f2f2f2;
+
+tr {
+    background-color: #fff; /* Defina uma cor de fundo para cada linha */
+    border-radius: 8px; /* Isso arredondará os cantos de cada linha */
+    margin-bottom: 0.5rem; /* Isso adicionará algum espaço entre as linhas */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Isso adicionará uma sombra sutil ao redor de cada linha */
 }
 .info-banner {
     background-color: #e0e0e0;
