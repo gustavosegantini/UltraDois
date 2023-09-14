@@ -38,6 +38,19 @@
 
 <script>
     function gerarCodigo() {
+            $.ajax({
+                url: 'gerar_codigo.php',
+                type: 'POST',
+                success: function (codigo) {
+                    $('#codigo-gerado').html(codigo);
+
+                },
+                error: function () {
+                    alert('Erro ao gerar código');
+                }
+            });
+        }
+    function gerarCodigo(id_produto) {
         // ... (o seu código JavaScript para gerar código)
         // A solicitação POST é feita para gerar_codigo.php com o ID do produto
         fetch('gerar_codigo.php', {

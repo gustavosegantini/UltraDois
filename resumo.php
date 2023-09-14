@@ -74,8 +74,20 @@ $total_cupons_utilizados = $row_cupons_utilizados['total_cupons_utilizados'];
 
 <script>
     function atualizarResumo() {
-        // ... (o seu código JavaScript para atualizar o resumo)
-    }
+            $.ajax({
+                url: 'atualizar_resumo.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('#total-usuarios').html(data.total_usuarios);
+                    $('#total-cupons').html(data.total_cupons);
+                    $('#total-cupons-utilizados').html(data.total_cupons_utilizados);
+                },
+                error: function () {
+                    alert('Erro ao atualizar resumo');
+                }
+            });
+        }
 
     // ... (outros códigos JavaScript necessários para a funcionalidade resumo)
 </script>
