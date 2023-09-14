@@ -159,10 +159,6 @@ tr {
     /* Isso adicionará uma sombra sutil ao redor de cada linha */
 }
 
-tr:first-child {
-    border-top-left-radius: 8px;
-
-
     .info-banner {
         background-color: #e0e0e0;
         padding: 1rem;
