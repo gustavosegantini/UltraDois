@@ -305,7 +305,7 @@ if (isset($_GET['exportar'])) {
             <!-- <button id="exportarS">Exportar para Excel</button> -->
 
 
-            <table id="tabelaClientes">
+            <table id="tabelaClientes" id="custom-table">
                 <thead>
                     <tr>
                         <th>Nome</th>
