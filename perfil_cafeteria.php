@@ -305,7 +305,7 @@ if (isset($_GET['exportar'])) {
             <!-- <button id="exportarS">Exportar para Excel</button> -->
 
 
-            <table id="tabelaClientes" class="custom-table">
+            <table id="tabelaClientes">
                 <thead>
                     <tr>
                         <th>Nome</th>
@@ -347,7 +347,6 @@ if (isset($_GET['exportar'])) {
                         echo '<td>' . $row['cupons_utilizados'] . '</td>';
                         echo '<td><a href="editar_cliente.php?email_cliente=' . $row['email'] . '" class="buttonEditar">Editar</a></td>';
                         echo '</tr>';
-                        echo '<tr class="spacer"><td colspan="9"></td></tr>'; // Adiciona uma linha espaçadora
                     }
                     ?>
                 </tbody>
