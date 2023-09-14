@@ -150,6 +150,16 @@ if (isset($_GET['exportar'])) {
             });
         });
     </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <!-- Other Styles -->
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
@@ -292,17 +302,17 @@ if (isset($_GET['exportar'])) {
             ?>
         </div>
 
-        <div class="modal">
+        <!-- <div class="modal">
             <header>
                 <h1>Clientes e Pontos</h1>
             </header>
             <form action="perfil_cafeteria.php" method="get">
-                <!-- <label for="busca">Buscar cliente:</label> -->
+               
                 <input type="text" id="busca" name="busca" placeholder="Buscar...">
-                <!-- <input type="submit" value="Buscar"> -->
+           
                 <button class="exportar" id="exportarCsvClientes">Exportar para CSV</button><br>
             </form>
-            <!-- <button id="exportarS">Exportar para Excel</button> -->
+       
 
 
             <table id="tabelaClientes">
@@ -320,38 +330,80 @@ if (isset($_GET['exportar'])) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    // Consulta para buscar todos os clientes e seus pontos
-                    $busca = isset($_GET['busca']) ? $_GET['busca'] : '';
-                    $query = "SELECT perfil_cliente.nome, perfil_cliente.email, perfil_cliente.pontos, data_nascimento, cursos.nome_curso as nome_curso, COUNT(cupons.id) as total_cupons, SUM(cupons.utilizado) as cupons_utilizados, pontos_historico FROM perfil_cliente LEFT JOIN cupons ON cupons.id_cliente = perfil_cliente.id INNER JOIN cursos ON perfil_cliente.curso = cursos.id WHERE perfil_cliente.nome LIKE '%$busca%' OR perfil_cliente.email LIKE '%$busca%' GROUP BY perfil_cliente.id";
-
-                    $result = mysqli_query($conn, $query);
-                    if (!$result) {
-                        die('Erro na consulta: ' . mysqli_error($conn));
-                    }
-                    // Percorre os resultados e adiciona as linhas na tabela
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        // Calcular a idade com base na data de nascimento
-                        $hoje = new DateTime();
-                        $nascimento = new DateTime($row['data_nascimento']);
-                        $idade = $hoje->diff($nascimento)->y;
-
-                        echo '<tr>';
-                        echo '<td>' . $row['nome'] . '</td>';
-                        echo '<td>' . $row['email'] . '</td>';
-                        echo '<td>' . $row['pontos'] . '</td>';
-                        echo '<td>' . $idade . '</td>';
-                        echo '<td>' . $row['nome_curso'] . '</td>';
-                        echo '<td>' . $row['pontos_historico'] . '</td>';
-                        echo '<td>' . $row['total_cupons'] . '</td>';
-                        echo '<td>' . $row['cupons_utilizados'] . '</td>';
-                        echo '<td><a href="editar_cliente.php?email_cliente=' . $row['email'] . '" class="buttonEditar">Editar</a></td>';
-                        echo '</tr>';
-                    }
-                    ?>
+                   
                 </tbody>
             </table>
+        </div> -->
+
+        <div class="content">
+            <div class="container">
+                <h2 class="mb-5">Clientes e Pontos</h2>
+
+                <div class="table-responsive custom-table-responsive">
+                    <form action="perfil_cafeteria.php" method="get">
+                        <input type="text" id="busca" name="busca" placeholder="Buscar...">
+                        <button class="exportar" id="exportarCsvClientes">Exportar para CSV</button>
+                    </form>
+
+                    <table class="table custom-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    <label class="control control--checkbox">
+                                        <input type="checkbox" class="js-check-all" />
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                </th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Pontos</th>
+                                <th scope="col">Idade</th>
+                                <th scope="col">Curso</th>
+                                <th scope="col">Pontos Acumulados</th>
+                                <th scope="col">Cupons Total</th>
+                                <th scope="col">Cupons Utilizados</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // (seu código PHP vai aqui)
+                            
+                            // Consulta para buscar todos os clientes e seus pontos
+                            $busca = isset($_GET['busca']) ? $_GET['busca'] : '';
+                            $query = "SELECT perfil_cliente.nome, perfil_cliente.email, perfil_cliente.pontos, data_nascimento, cursos.nome_curso as nome_curso, COUNT(cupons.id) as total_cupons, SUM(cupons.utilizado) as cupons_utilizados, pontos_historico FROM perfil_cliente LEFT JOIN cupons ON cupons.id_cliente = perfil_cliente.id INNER JOIN cursos ON perfil_cliente.curso = cursos.id WHERE perfil_cliente.nome LIKE '%$busca%' OR perfil_cliente.email LIKE '%$busca%' GROUP BY perfil_cliente.id";
+
+                            $result = mysqli_query($conn, $query);
+                            if (!$result) {
+                                die('Erro na consulta: ' . mysqli_error($conn));
+                            }
+                            // Percorre os resultados e adiciona as linhas na tabela
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                // Calcular a idade com base na data de nascimento
+                                $hoje = new DateTime();
+                                $nascimento = new DateTime($row['data_nascimento']);
+                                $idade = $hoje->diff($nascimento)->y;
+
+                                echo '<tr>';
+                                echo '<td>' . $row['nome'] . '</td>';
+                                echo '<td>' . $row['email'] . '</td>';
+                                echo '<td>' . $row['pontos'] . '</td>';
+                                echo '<td>' . $idade . '</td>';
+                                echo '<td>' . $row['nome_curso'] . '</td>';
+                                echo '<td>' . $row['pontos_historico'] . '</td>';
+                                echo '<td>' . $row['total_cupons'] . '</td>';
+                                echo '<td>' . $row['cupons_utilizados'] . '</td>';
+                                echo '<td><a href="editar_cliente.php?email_cliente=' . $row['email'] . '" class="buttonEditar">Editar</a></td>';
+                                echo '</tr>';
+                            }
+
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
 
         <div class="modal">
             <header>
@@ -680,7 +732,10 @@ if (isset($_GET['exportar'])) {
 
 
     </script>
-
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 
