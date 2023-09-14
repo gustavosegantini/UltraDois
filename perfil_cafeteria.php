@@ -292,10 +292,10 @@ if (isset($_GET['exportar'])) {
             ?>
         </div>
 
-        <div class="modal">
+        <!-- <div class="modal">
             <header>
                 <h1>Clientes e Pontos</h1>
-            </header>
+            </header> -->
             <form action="perfil_cafeteria.php" method="get">
                 <!-- <label for="busca">Buscar cliente:</label> -->
                 <input type="text" id="busca" name="busca" placeholder="Buscar...">
@@ -351,7 +351,7 @@ if (isset($_GET['exportar'])) {
                     ?>
                 </tbody>
             </table>
-        </div>
+        <!-- </div> -->
 
         <div class="modal">
             <header>
