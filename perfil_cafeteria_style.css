@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 html,
 body {
     font-family: Arial, sans-serif;
@@ -13,6 +14,7 @@ body {
     background-attachment: fixed;
 
 }
+
 input[type="text"] {
     font-size: 1rem;
     padding: 0.5rem;
@@ -20,6 +22,7 @@ input[type="text"] {
     border-radius: 0.25rem;
     border: 1px solid var(--input-border-color);
 }
+
 input[type="submit"] {
     font-size: 1rem;
     padding: 0.75rem;
@@ -31,10 +34,12 @@ input[type="submit"] {
     color: var(--card-background-color);
     cursor: pointer;
 }
+
 input[type="submit"]:hover {
     background: rgb(162, 130, 203);
     background: linear-gradient(45deg, rgba(162, 130, 203, 1) 0%, rgba(218, 151, 146, 1) 100%);
 }
+
 .container {
     display: flex;
     flex-direction: column;
@@ -47,13 +52,17 @@ input[type="submit"]:hover {
 
 #lista-produtos {
     display: flex;
-    flex-wrap: wrap; /* Isso permite que os itens passem para a linha seguinte se não houver espaço suficiente na linha atual */
-    justify-content: space-between; /* Isso adiciona espaço igual entre os produtos */
+    flex-wrap: wrap;
+    /* Isso permite que os itens passem para a linha seguinte se não houver espaço suficiente na linha atual */
+    justify-content: space-between;
+    /* Isso adiciona espaço igual entre os produtos */
 }
 
 .produto {
-    flex-basis: calc(33.33% - 2rem); /* Isso faz com que cada produto ocupe aproximadamente um terço do espaço disponível, subtraindo o espaço para a margem. */
-    margin: 1rem; /* Isso adiciona algum espaço ao redor de cada produto */
+    flex-basis: calc(33.33% - 2rem);
+    /* Isso faz com que cada produto ocupe aproximadamente um terço do espaço disponível, subtraindo o espaço para a margem. */
+    margin: 1rem;
+    /* Isso adiciona algum espaço ao redor de cada produto */
     padding: 1rem;
     margin: 1rem 0;
     background-color: var(--card-background-color);
@@ -81,8 +90,10 @@ input[type="submit"]:hover {
 
 .modal {
     display: flex;
-    flex-direction: column; /* Para posicionar os conteúdos um abaixo do outro */
-    align-items: flex-start; /* Para alinhar os conteúdos à esquerda */
+    flex-direction: column;
+    /* Para posicionar os conteúdos um abaixo do outro */
+    align-items: flex-start;
+    /* Para alinhar os conteúdos à esquerda */
     padding: 1rem;
     background-color: var(--card-background-color);
     border-radius: 18px;
@@ -95,11 +106,13 @@ input[type="submit"]:hover {
 
 header {
     padding: 1.5rem 0;
-    text-align: left; /* Para justificar o título à esquerda */
+    text-align: left;
+    /* Para justificar o título à esquerda */
     color: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
     position: relative;
     border-radius: 8px;
-    width: 100%; /* Para que o header ocupe todo o espaço horizontal do modal */
+    width: 100%;
+    /* Para que o header ocupe todo o espaço horizontal do modal */
 }
 
 header h1 {
@@ -111,31 +124,54 @@ header h1 {
 form {
     margin-bottom: 1.5rem;
 }
+
 label {
     display: inline-block;
     width: 180px;
     text-align: left;
 }
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1.5rem;
-}
+
 th,
 td {
     padding: 0.5rem;
     text-align: left;
-    border-bottom: 1px solid #ccc;
+    border-bottom: none;
+    /* Remove a borda inferior */
 }
+
 th {
     background-color: #f2f2f2;
 }
+
+/* Adiciona estilo de caixa para cada linha */
+tr {
+    margin-bottom: 0.5rem;
+    /* Espaço entre as linhas */
+    background-color: white;
+    /* Fundo branco para cada linha */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Sombra ao redor da linha para criar o efeito de elevação */
+    border-radius: 5px;
+    /* Bordas arredondadas */
+}
+
+/* Adiciona espaço entre as linhas */
+tbody tr:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+/* Estilo adicional para a célula para garantir que o conteúdo não está muito colado às bordas da caixa */
+td {
+    padding: 1rem;
+}
+
 .info-banner {
     background-color: #e0e0e0;
     padding: 1rem;
     border-radius: 5px;
     margin-bottom: 1.5rem;
 }
+
 .buttonEditar {
     background-color: var(--header-background-color);
     color: #6638f0;
@@ -143,6 +179,7 @@ th {
     padding: 0.25rem 0.5rem;
     border-radius: 3px;
 }
+
 /* .buttonCodigo {
     font-size: 1rem;
     padding: 0.75rem;
@@ -160,15 +197,18 @@ th {
     font-weight: bold;
     margin-top: 0.5rem;
 }
+
 .alert {
     padding: 1rem;
     border-radius: 5px;
     margin-bottom: 1.5rem;
 }
+
 .success {
     background-color: var(--success-color);
     color: white;
 }
+
 .error {
     background-color: var(--error-color);
     color: white;
