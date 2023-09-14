@@ -131,56 +131,54 @@ label {
     text-align: left;
 }
 
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.5rem;
+    /* Isso adicionará um espaço vertical entre as linhas */
+}
+
 th,
 td {
     padding: 0.5rem;
     text-align: left;
     border-bottom: none;
-    /* Remove a borda inferior */
+    /* Remova a borda inferior que estava sendo aplicada anteriormente */
+    box-shadow: 0 1px 0 #ccc;
+    /* Isso adicionará uma sombra sutil entre as células */
 }
 
-th {
-    background-color: #f2f2f2;
-}
-
-/* Adiciona estilo de caixa para cada linha */
 tr {
+    background-color: #fff;
+    /* Defina uma cor de fundo para cada linha */
+    border-radius: 8px;
+    /* Isso arredondará os cantos de cada linha */
     margin-bottom: 0.5rem;
-    /* Espaço entre as linhas */
-    background-color: white;
-    /* Fundo branco para cada linha */
+    /* Isso adicionará algum espaço entre as linhas */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    /* Sombra ao redor da linha para criar o efeito de elevação */
-    border-radius: 5px;
-    /* Bordas arredondadas */
+    /* Isso adicionará uma sombra sutil ao redor de cada linha */
 }
 
-/* Adiciona espaço entre as linhas */
-tbody tr:not(:last-child) {
-    margin-bottom: 1rem;
-}
+tr:first-child {
+    border-top-left-radius: 8px;
 
-/* Estilo adicional para a célula para garantir que o conteúdo não está muito colado às bordas da caixa */
-td {
-    padding: 1rem;
-}
 
-.info-banner {
-    background-color: #e0e0e0;
-    padding: 1rem;
-    border-radius: 5px;
-    margin-bottom: 1.5rem;
-}
+    .info-banner {
+        background-color: #e0e0e0;
+        padding: 1rem;
+        border-radius: 5px;
+        margin-bottom: 1.5rem;
+    }
 
-.buttonEditar {
-    background-color: var(--header-background-color);
-    color: #6638f0;
-    text-decoration: none;
-    padding: 0.25rem 0.5rem;
-    border-radius: 3px;
-}
+    .buttonEditar {
+        background-color: var(--header-background-color);
+        color: #6638f0;
+        text-decoration: none;
+        padding: 0.25rem 0.5rem;
+        border-radius: 3px;
+    }
 
-/* .buttonCodigo {
+    /* .buttonCodigo {
     font-size: 1rem;
     padding: 0.75rem;
     
@@ -192,41 +190,41 @@ td {
     color: var(--card-background-color);
     cursor: pointer;
 } */
-.codigo-gerado {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-top: 0.5rem;
-}
+    .codigo-gerado {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-top: 0.5rem;
+    }
 
-.alert {
-    padding: 1rem;
-    border-radius: 5px;
-    margin-bottom: 1.5rem;
-}
+    .alert {
+        padding: 1rem;
+        border-radius: 5px;
+        margin-bottom: 1.5rem;
+    }
 
-.success {
-    background-color: var(--success-color);
-    color: white;
-}
+    .success {
+        background-color: var(--success-color);
+        color: white;
+    }
 
-.error {
-    background-color: var(--error-color);
-    color: white;
-}
+    .error {
+        background-color: var(--error-color);
+        color: white;
+    }
 
-button {
-    font-size: 1rem;
-    padding: 0.75rem;
-    /* aumentado para adicionar mais altura */
-    margin-top: 1rem;
-    border-radius: 0.25rem;
-    border: none;
-    background: #6638f0;
-    /* background: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%); */
-    color: var(--card-background-color);
-    cursor: pointer;
-}
+    button {
+        font-size: 1rem;
+        padding: 0.75rem;
+        /* aumentado para adicionar mais altura */
+        margin-top: 1rem;
+        border-radius: 0.25rem;
+        border: none;
+        background: #6638f0;
+        /* background: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%); */
+        color: var(--card-background-color);
+        cursor: pointer;
+    }
 
-/* .exportar {
+    /* .exportar {
     align-self: left;
 } */
