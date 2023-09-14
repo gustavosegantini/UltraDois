@@ -116,7 +116,7 @@ label {
     width: 180px;
     text-align: left;
 }
-table {
+/* table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 1.5rem;
@@ -129,7 +129,7 @@ td {
 }
 th {
     background-color: #f2f2f2;
-}
+} */
 .info-banner {
     background-color: #e0e0e0;
     padding: 1rem;
