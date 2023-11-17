@@ -360,56 +360,23 @@ if (isset($_GET['exportar'])) {
             <header>
                 <h1>Produtos</h1>
             </header>
-            <form action="perfil_cafeteria.php" method="get">
-                <input type="text" id="buscaProduto" name="buscaProduto" placeholder="Buscar...">
-                <button class="exportar" id="exportarCsvProdutos">Exportar para CSV</button><br>
-            </form>
-            <table id="tabelaProdutos">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Tamanho</th>
-                        <th>Preço</th>
-                        <th>Quantidade Vendida</th>
-                        <th>Valor Total Vendido</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $buscaProduto = isset($_GET['buscaProduto']) ? $_GET['buscaProduto'] : '';
-                    $query = "SELECT p.nome, p.tamanho, p.preco, COUNT(c.ID_Codigo) as quantidade_vendida, COUNT(c.ID_Codigo)*p.preco as valor_total FROM produtos p LEFT JOIN Codigos c ON p.ID = c.ID_Produto WHERE p.nome LIKE '%$buscaProduto%' GROUP BY p.ID";
+            <div id="lista-produtos">
+                <?php
+                // Conexão com o banco de dados
+                // $conn = ...
+                
+                $sql = "SELECT DISTINCT nome FROM produtos";
+                $result = mysqli_query($conn, $sql);
 
-                    $result = mysqli_query($conn, $query);
-                    if (!$result) {
-                        die('Erro na consulta: ' . mysqli_error($conn));
-                    }
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $tamanho = '';
-                        switch ($row['tamanho']) {
-                            case 0:
-                                $tamanho = 'Pequeno';
-                                break;
-                            case 1:
-                                $tamanho = 'Médio';
-                                break;
-                            case 2:
-                                $tamanho = 'Grande';
-                                break;
-                            case 3:
-                                $tamanho = 'Longo';
-                                break;
-                        }
-                        echo '<tr>';
-                        echo '<td>' . $row['nome'] . '</td>';
-                        echo '<td>' . $tamanho . '</td>';
-                        echo '<td>' . $row['preco'] . '</td>';
-                        echo '<td>' . $row['quantidade_vendida'] . '</td>';
-                        echo '<td>' . $row['valor_total'] . '</td>';
-                        echo '</tr>';
-                    }
-                    ?>
-                </tbody>
-            </table>
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<div class="produto" data-nome="' . $row['nome'] . '">';
+                    echo '<h2>' . $row['nome'] . '</h2>';
+                    echo '</div>';
+                }
+                ?>
+            </div>
+            <div id="detalhes-produto" class="detalhes-produto"></div>
+            <div id="codigo-gerado" class="codigo-gerado"></div>
         </div>
 
 
@@ -633,15 +600,36 @@ if (isset($_GET['exportar'])) {
                 link.click();
             }
         });
-         //Produtos:
-         function gerarCodigo(id_produto) {
-            // A solicitação POST é feita para gerar_codigo.php com o ID do produto
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.produto').forEach(function (produto) {
+                produto.addEventListener('click', function () {
+                    let nomeProduto = this.getAttribute('data-nome');
+                    fetch(`get_detalhes_produto.php?nome=${nomeProduto}`)
+                        .then(response => response.json())
+                        .then(detalhes => {
+                            let detalhesElemento = document.getElementById('detalhes-produto');
+                            detalhesElemento.innerHTML = ''; // Limpar detalhes anteriores
+
+                            detalhes.forEach(function (detalhe) {
+                                let detalheDiv = document.createElement('div');
+                                detalheDiv.innerHTML = `Tamanho: ${detalhe.tamanho}, Preço: ${detalhe.preco}`;
+                                detalheDiv.addEventListener('click', function () {
+                                    gerarCodigo(detalhe.ID);
+                                });
+                                detalhesElemento.appendChild(detalheDiv);
+                            });
+                        });
+                });
+            });
+        });
+
+        function gerarCodigo(idProduto) {
             fetch('gerar_codigo.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: `id_produto=${id_produto}`
+                body: `id_produto=${idProduto}`
             })
                 .then(response => response.text())
                 .then(codigo => {
@@ -649,34 +637,6 @@ if (isset($_GET['exportar'])) {
                 })
                 .catch(error => console.error('Erro:', error));
         }
-
-        fetch('get_produtos.php')
-            .then(response => response.json())
-            .then(produtos => {
-                let listaProdutos = document.getElementById('lista-produtos');
-
-                for (let produto of produtos) {
-                    let produtoElemento = document.createElement('div');
-                    produtoElemento.classList.add('produto');
-                    produtoElemento.innerHTML = `
-                <h2>${produto.nome}</h2>
-                <p>Tamanho: ${produto.tamanho}</p>
-                <p>Preço: ${produto.preco}</p>
-            `;
-                    produtoElemento.setAttribute('data-id-produto', produto.ID);
-                    produtoElemento.addEventListener('click', function () {
-                        gerarCodigo(this.getAttribute('data-id-produto'));
-                    });
-                    listaProdutos.appendChild(produtoElemento);
-                }
-            });
-
-        document.querySelectorAll('.produto').forEach(function (produto) {
-            produto.addEventListener('click', function () {
-                var idProduto = this.getAttribute('data-id');
-                gerarCodigo(idProduto);
-            });
-        });
 
 
 
