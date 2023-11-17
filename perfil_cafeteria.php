@@ -216,23 +216,43 @@ if (isset($_GET['exportar'])) {
                 <h1>Produtos</h1>
             </header>
             <div id="lista-produtos">
+                <?php
+                if (isset($_POST['nome_produto'])) {
+                    $nomeProduto = $_POST['nome_produto'];
+                    $sql = "SELECT ID, tamanho, preco FROM produtos WHERE nome = '$nomeProduto'";
+                    // Executar consulta e retornar dados como JSON
+                }
+                ?>
+
                 <!-- Os produtos serão inseridos aqui pelo PHP -->
                 <?php
-                $sql = "SELECT * FROM produtos";
+                $sql = "SELECT nome FROM produtos GROUP BY nome";
                 $result = mysqli_query($conn, $sql);
 
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<div class="produto" data-id="' . $row['ID'] . '">';
+                    echo '<div class="produto" data-nome="' . $row['nome'] . '">';
                     echo '<h2>' . $row['nome'] . '</h2>';
                     echo '</div>';
                 }
                 ?>
-            </div>
-            <div id="popup-tamanho" style="display:none;">
-                <!-- O pop-up para seleção de tamanho será inserido aqui pelo JavaScript -->
+
             </div>
             <div id="codigo-gerado" class="codigo-gerado"></div>
+
+            <div id="popup-selecao" class="popup-selecao" style="display: none;">
+                <div class="popup-conteudo">
+                    <span class="close-popup">&times;</span>
+                    <h3>Selecione o Tamanho e Preço</h3>
+                    <div id="opcoes-tamanho-preco">
+                        <!-- Opções de tamanho e preço serão inseridas aqui -->
+                    </div>
+                    <button id="confirmar-selecao">Confirmar</button>
+                </div>
+            </div>
+
         </div>
+
+
 
 
 
@@ -684,6 +704,38 @@ if (isset($_GET['exportar'])) {
             });
         });
 
+        // Variável para armazenar o produto selecionado
+        let produtoSelecionado = null;
+
+        document.querySelectorAll('.produto').forEach(produto => {
+            produto.addEventListener('click', function () {
+                let nomeProduto = this.getAttribute('data-nome');
+                produtoSelecionado = nomeProduto;
+                fetch('get_tamanhos_precos.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `nome_produto=${nomeProduto}`
+                })
+                    .then(response => response.json())
+                    .then(dados => {
+                        let opcoes = document.getElementById('opcoes-tamanho-preco');
+                        opcoes.innerHTML = ''; // Limpar opções anteriores
+                        dados.forEach(item => {
+                            opcoes.innerHTML += `<div class="opcao-tamanho-preco" data-id="${item.ID}">${item.tamanho} - ${item.preco}</div>`;
+                        });
+                        document.getElementById('popup-selecao').style.display = 'block';
+                    });
+            });
+        });
+
+        document.getElementById('confirmar-selecao').addEventListener('click', function () {
+            let opcaoSelecionada = document.querySelector('.opcao-tamanho-preco.selecionado');
+            if (opcaoSelecionada) {
+                gerarCodigo(opcaoSelecionada.getAttribute('data-id'));
+            }
+        });
 
 
 
