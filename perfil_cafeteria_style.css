@@ -52,7 +52,7 @@ input[type="submit"]:hover {
 
 #lista-produtos {
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     /* Isso permite que os itens passem para a linha seguinte se não houver espaço suficiente na linha atual */
     justify-content: space-between;
     /* Isso adiciona espaço igual entre os produtos */
