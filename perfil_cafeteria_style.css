@@ -236,6 +236,17 @@ button {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
+.detalhes-lista div {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.detalhes-lista div:hover {
+    background-color: #f0f0f0;
+}
+
 .popup-content {
     background-color: #fefefe;
     margin: auto;
