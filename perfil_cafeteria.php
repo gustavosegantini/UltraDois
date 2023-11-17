@@ -217,32 +217,36 @@ if (isset($_GET['exportar'])) {
                 <h1>Produtos</h1>
             </header>
             <div id="lista-produtos">
+                <!-- Os produtos serão inseridos aqui pelo PHP -->
                 <?php
-                $sql = "SELECT DISTINCT nome FROM produtos";
+                $sql = "SELECT * FROM produtos";
                 $result = mysqli_query($conn, $sql);
 
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<div class="produto" data-nome="' . $row['nome'] . '">';
-                    echo '<h2>' . $row['nome'] . '</h2>';
+                    $tamanho = '';
+                    switch ($row['tamanho']) {
+                        case 0:
+                            $tamanho = 'P';
+                            break;
+                        case 1:
+                            $tamanho = 'M';
+                            break;
+                        case 2:
+                            $tamanho = 'G';
+                            break;
+                        case 3:
+                            $tamanho = 'L';
+                            break;
+                    }
+                    echo '<div class="produto" data-id="' . $row['ID'] . '">';
+                    echo '<h2>' . $row['nome'] . ' - ' . $tamanho . '</h2>';
+                    echo '<p>' . $row['preco'] . '</p>';
                     echo '</div>';
                 }
                 ?>
-
-                <!-- Os produtos serão inseridos aqui pelo JavaScript -->
             </div>
             <div id="codigo-gerado" class="codigo-gerado"></div>
         </div>
-
-        <!-- Modal para seleção de tamanho e preço -->
-        <div id="modal-produto" class="modal-produto" style="display: none;">
-            <div class="modal-content">
-                <span id="close-modal" class="close">&times;</span>
-                <h2 id="produto-nome"></h2>
-                <!-- Opções de tamanho e preço serão inseridas aqui -->
-                <div id="opcoes-tamanho-preco"></div>
-            </div>
-        </div>
-
 
 
 
@@ -629,60 +633,8 @@ if (isset($_GET['exportar'])) {
                 link.click();
             }
         });
-        fetch('get_produtos.php')
-            .then(response => response.json())
-            .then(produtos => {
-                let listaProdutos = document.getElementById('lista-produtos');
-                let produtosAgrupados = agruparProdutosPorNome(produtos);
-
-                for (let nomeProduto in produtosAgrupados) {
-                    let produtoElemento = document.createElement('div');
-                    produtoElemento.classList.add('produto');
-                    produtoElemento.innerHTML = `<h2>${nomeProduto}</h2>`;
-                    produtoElemento.setAttribute('data-nome', nomeProduto);
-                    produtoElemento.addEventListener('click', function () {
-                        var nomeProduto = this.getAttribute('data-nome');
-                        mostrarModalProduto(nomeProduto, produtosAgrupados[nomeProduto]);
-                    });
-                    listaProdutos.appendChild(produtoElemento);
-                }
-            });
-
-        function agruparProdutosPorNome(produtos) {
-            let agrupados = {};
-            produtos.forEach(produto => {
-                if (!agrupados[produto.nome]) {
-                    agrupados[produto.nome] = [];
-                }
-                agrupados[produto.nome].push(produto);
-            });
-            return agrupados;
-        }
-
-        function mostrarModalProduto(nome, opcoes) {
-            let modal = document.getElementById('modal-produto');
-            document.getElementById('produto-nome').innerText = nome;
-            let containerOpcoes = document.getElementById('opcoes-tamanho-preco');
-            containerOpcoes.innerHTML = '';
-
-            opcoes.forEach(opcao => {
-                let opcaoElemento = document.createElement('div');
-                opcaoElemento.innerHTML = `Tamanho: ${opcao.tamanho}, Preço: ${opcao.preco}`;
-                opcaoElemento.addEventListener('click', function () {
-                    gerarCodigo(opcao.ID);
-                    modal.style.display = 'none';
-                });
-                containerOpcoes.appendChild(opcaoElemento);
-            });
-
-            modal.style.display = 'block';
-            document.getElementById('close-modal').onclick = function () {
-                modal.style.display = 'none';
-            };
-        }
-
-        // Função gerarCodigo() aqui...
-        function gerarCodigo(id_produto) {
+         //Produtos:
+         function gerarCodigo(id_produto) {
             // A solicitação POST é feita para gerar_codigo.php com o ID do produto
             fetch('gerar_codigo.php', {
                 method: 'POST',
@@ -697,6 +649,34 @@ if (isset($_GET['exportar'])) {
                 })
                 .catch(error => console.error('Erro:', error));
         }
+
+        fetch('get_produtos.php')
+            .then(response => response.json())
+            .then(produtos => {
+                let listaProdutos = document.getElementById('lista-produtos');
+
+                for (let produto of produtos) {
+                    let produtoElemento = document.createElement('div');
+                    produtoElemento.classList.add('produto');
+                    produtoElemento.innerHTML = `
+                <h2>${produto.nome}</h2>
+                <p>Tamanho: ${produto.tamanho}</p>
+                <p>Preço: ${produto.preco}</p>
+            `;
+                    produtoElemento.setAttribute('data-id-produto', produto.ID);
+                    produtoElemento.addEventListener('click', function () {
+                        gerarCodigo(this.getAttribute('data-id-produto'));
+                    });
+                    listaProdutos.appendChild(produtoElemento);
+                }
+            });
+
+        document.querySelectorAll('.produto').forEach(function (produto) {
+            produto.addEventListener('click', function () {
+                var idProduto = this.getAttribute('data-id');
+                gerarCodigo(idProduto);
+            });
+        });
 
 
 
