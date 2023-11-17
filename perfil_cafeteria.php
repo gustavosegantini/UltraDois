@@ -217,34 +217,20 @@ if (isset($_GET['exportar'])) {
                 <h1>Produtos</h1>
             </header>
             <div id="lista-produtos">
-                <!-- Os produtos serão inseridos aqui pelo PHP -->
                 <?php
-                $sql = "SELECT * FROM produtos";
+                include '..\conexao.php';
+
+                $sql = "SELECT DISTINCT nome FROM produtos";
                 $result = mysqli_query($conn, $sql);
 
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $tamanho = '';
-                    switch ($row['tamanho']) {
-                        case 0:
-                            $tamanho = 'P';
-                            break;
-                        case 1:
-                            $tamanho = 'M';
-                            break;
-                        case 2:
-                            $tamanho = 'G';
-                            break;
-                        case 3:
-                            $tamanho = 'L';
-                            break;
-                    }
-                    echo '<div class="produto" data-id="' . $row['ID'] . '">';
-                    echo '<h2>' . $row['nome'] . ' - ' . $tamanho . '</h2>';
-                    echo '<p>' . $row['preco'] . '</p>';
+                    echo '<div class="produto" data-nome="' . $row['nome'] . '">';
+                    echo '<h2>' . $row['nome'] . '</h2>';
                     echo '</div>';
                 }
                 ?>
             </div>
+            <div id="detalhes-produto" class="detalhes-produto"></div>
             <div id="codigo-gerado" class="codigo-gerado"></div>
         </div>
 
@@ -360,23 +346,56 @@ if (isset($_GET['exportar'])) {
             <header>
                 <h1>Produtos</h1>
             </header>
-            <div id="lista-produtos">
-                <?php
-                // Conexão com o banco de dados
-                // $conn = ...
-                
-                $sql = "SELECT DISTINCT nome FROM produtos";
-                $result = mysqli_query($conn, $sql);
+            <form action="perfil_cafeteria.php" method="get">
+                <input type="text" id="buscaProduto" name="buscaProduto" placeholder="Buscar...">
+                <button class="exportar" id="exportarCsvProdutos">Exportar para CSV</button><br>
+            </form>
+            <table id="tabelaProdutos">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tamanho</th>
+                        <th>Preço</th>
+                        <th>Quantidade Vendida</th>
+                        <th>Valor Total Vendido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $buscaProduto = isset($_GET['buscaProduto']) ? $_GET['buscaProduto'] : '';
+                    $query = "SELECT p.nome, p.tamanho, p.preco, COUNT(c.ID_Codigo) as quantidade_vendida, COUNT(c.ID_Codigo)*p.preco as valor_total FROM produtos p LEFT JOIN Codigos c ON p.ID = c.ID_Produto WHERE p.nome LIKE '%$buscaProduto%' GROUP BY p.ID";
 
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<div class="produto" data-nome="' . $row['nome'] . '">';
-                    echo '<h2>' . $row['nome'] . '</h2>';
-                    echo '</div>';
-                }
-                ?>
-            </div>
-            <div id="detalhes-produto" class="detalhes-produto"></div>
-            <div id="codigo-gerado" class="codigo-gerado"></div>
+                    $result = mysqli_query($conn, $query);
+                    if (!$result) {
+                        die('Erro na consulta: ' . mysqli_error($conn));
+                    }
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $tamanho = '';
+                        switch ($row['tamanho']) {
+                            case 0:
+                                $tamanho = 'Pequeno';
+                                break;
+                            case 1:
+                                $tamanho = 'Médio';
+                                break;
+                            case 2:
+                                $tamanho = 'Grande';
+                                break;
+                            case 3:
+                                $tamanho = 'Longo';
+                                break;
+                        }
+                        echo '<tr>';
+                        echo '<td>' . $row['nome'] . '</td>';
+                        echo '<td>' . $tamanho . '</td>';
+                        echo '<td>' . $row['preco'] . '</td>';
+                        echo '<td>' . $row['quantidade_vendida'] . '</td>';
+                        echo '<td>' . $row['valor_total'] . '</td>';
+                        echo '</tr>';
+                    }
+                    ?>
+                </tbody>
+            </table>
         </div>
 
 
@@ -600,6 +619,8 @@ if (isset($_GET['exportar'])) {
                 link.click();
             }
         });
+
+
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.produto').forEach(function (produto) {
                 produto.addEventListener('click', function () {
@@ -637,10 +658,6 @@ if (isset($_GET['exportar'])) {
                 })
                 .catch(error => console.error('Erro:', error));
         }
-
-
-
-
     </script>
 
 
