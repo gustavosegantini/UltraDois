@@ -1,16 +1,5 @@
 <?php
-// Conectar ao banco de dados
-$host = 'localhost'; // ou seu host de banco de dados
-$username = 'seu_usuario'; // seu usuário do banco de dados
-$password = 'sua_senha'; // sua senha do banco de dados
-$database = 'nome_do_banco_de_dados'; // nome do seu banco de dados
-
-$conn = new mysqli($host, $username, $password, $database);
-
-// Checar conexão
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
-}
+include '..\conexao.php'
 
 // Buscar produtos
 $sql = "SELECT * FROM produtos";
