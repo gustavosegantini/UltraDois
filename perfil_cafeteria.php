@@ -218,7 +218,7 @@ if (isset($_GET['exportar'])) {
             </header>
             <div id="lista-produtos">
                 <?php
-                include '..\conexao.php';
+                include '../conexao.php';
 
                 $sql = "SELECT DISTINCT nome FROM produtos";
                 $result = mysqli_query($conn, $sql);

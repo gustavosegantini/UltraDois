@@ -2,7 +2,7 @@
 // Conexão com o banco de dados
 // $conn = ...
 
-include '..\conexao.php';
+include '../conexao.php';
 
 $nomeProduto = $_GET['nome'] ?? '';
 
