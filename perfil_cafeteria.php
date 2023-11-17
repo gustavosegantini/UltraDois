@@ -216,35 +216,20 @@ if (isset($_GET['exportar'])) {
                 <h1>Produtos</h1>
             </header>
             <div id="lista-produtos">
-                <!-- Os produtos serão inseridos aqui pelo PHP -->
-                <?php
-                $sql = "SELECT * FROM produtos";
-                $result = mysqli_query($conn, $sql);
-
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $tamanho = '';
-                    switch ($row['tamanho']) {
-                        case 0:
-                            $tamanho = 'P';
-                            break;
-                        case 1:
-                            $tamanho = 'M';
-                            break;
-                        case 2:
-                            $tamanho = 'G';
-                            break;
-                        case 3:
-                            $tamanho = 'L';
-                            break;
-                    }
-                    echo '<div class="produto" data-id="' . $row['ID'] . '">';
-                    echo '<h2>' . $row['nome'] . ' - ' . $tamanho . '</h2>';
-                    echo '<p>' . $row['preco'] . '</p>';
-                    echo '</div>';
-                }
-                ?>
+                <!-- Os produtos serão inseridos aqui pelo JavaScript -->
             </div>
             <div id="codigo-gerado" class="codigo-gerado"></div>
+        </div>
+
+        <!-- Popup para seleção de tamanho -->
+        <div id="popup-selecao" class="popup-selecao" style="display: none;">
+            <div class="popup-conteudo">
+                <h2>Selecione o Tamanho</h2>
+                <select id="selecao-tamanho">
+                    <!-- Opções de tamanho serão inseridas aqui -->
+                </select>
+                <button id="btn-confirmar-tamanho">Confirmar</button>
+            </div>
         </div>
 
 
@@ -631,9 +616,49 @@ if (isset($_GET['exportar'])) {
             }
         });
 
-        //Produtos:
-        function gerarCodigo(id_produto) {
-            // A solicitação POST é feita para gerar_codigo.php com o ID do produto
+        fetch('get_produtos.php')
+            .then(response => response.json())
+            .then(produtos => {
+                let listaProdutos = document.getElementById('lista-produtos');
+
+                for (let produto of produtos) {
+                    let produtoElemento = document.createElement('div');
+                    produtoElemento.classList.add('produto');
+                    produtoElemento.innerHTML = `<h2>${produto.nome}</h2>`;
+                    produtoElemento.setAttribute('data-id-produto', produto.ID);
+                    produtoElemento.addEventListener('click', function () {
+                        mostrarPopupSelecao(produto);
+                    });
+                    listaProdutos.appendChild(produtoElemento);
+                }
+            });
+
+        function mostrarPopupSelecao(produto) {
+            let popup = document.getElementById('popup-selecao');
+            let selecaoTamanho = document.getElementById('selecao-tamanho');
+            selecaoTamanho.innerHTML = ''; // Limpa opções anteriores
+
+            // Adiciona opções de tamanho
+            for (let tamanho of produto.tamanhos) {
+                let opcao = document.createElement('option');
+                opcao.value = tamanho.ID;
+                opcao.text = `${tamanho.descricao} - Preço: ${tamanho.preco}`;
+                selecaoTamanho.appendChild(opcao);
+            }
+
+            document.getElementById('btn-confirmar-tamanho').onclick = function () {
+                gerarCodigo(produto.ID, selecaoTamanho.value);
+            };
+
+            popup.style.display = 'block';
+        }
+
+        function gerarCodigo(id_produto, id_tamanho) {
+            // Aqui você faz a solicitação POST para gerar o código
+            // e fecha o popup após o processamento
+            let popup = document.getElementById('popup-selecao');
+            popup.style.display = 'none';
+            // ... Implementação da geração de código ...
             fetch('gerar_codigo.php', {
                 method: 'POST',
                 headers: {
@@ -648,36 +673,8 @@ if (isset($_GET['exportar'])) {
                 .catch(error => console.error('Erro:', error));
         }
 
-        fetch('get_produtos.php')
-            .then(response => response.json())
-            .then(produtos => {
-                let listaProdutos = document.getElementById('lista-produtos');
 
-                for (let produto of produtos) {
-                    let produtoElemento = document.createElement('div');
-                    produtoElemento.classList.add('produto');
-                    produtoElemento.innerHTML = `
-                <h2>${produto.nome}</h2>
-                <p>Tamanho: ${produto.tamanho}</p>
-                <p>Preço: ${produto.preco}</p>
-            `;
-                    produtoElemento.setAttribute('data-id-produto', produto.ID);
-                    produtoElemento.addEventListener('click', function () {
-                        gerarCodigo(this.getAttribute('data-id-produto'));
-                    });
-                    listaProdutos.appendChild(produtoElemento);
-                }
-            });
-
-        document.querySelectorAll('.produto').forEach(function (produto) {
-            produto.addEventListener('click', function () {
-                var idProduto = this.getAttribute('data-id');
-                gerarCodigo(idProduto);
-            });
-        });
-
-
-
+        
 
     </script>
 
