@@ -216,31 +216,18 @@ if (isset($_GET['exportar'])) {
             <header>
                 <h1>Produtos</h1>
             </header>
-
-            <? // Buscar produtos
-            include '..\conexao.php'
-            
-                $sql = "SELECT * FROM produtos";
-            $result = $conn->query($sql);
-
-            $produtos = [];
-
-            if ($result->num_rows > 0) {
-                // Colocar cada linha do resultado em um array associativo
-                while ($row = $result->fetch_assoc()) {
-                    $produtos[] = $row;
-                }
-            } else {
-                echo "0 resultados";
-            }
-
-            $conn->close();
-
-            // Retornar os dados em formato JSON
-            header('Content-Type: application/json');
-            echo json_encode($produtos);
-            ?>
             <div id="lista-produtos">
+                <?php
+                $sql = "SELECT DISTINCT nome FROM produtos";
+                $result = mysqli_query($conn, $sql);
+
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<div class="produto" data-nome="' . $row['nome'] . '">';
+                    echo '<h2>' . $row['nome'] . '</h2>';
+                    echo '</div>';
+                }
+                ?>
+
                 <!-- Os produtos serão inseridos aqui pelo JavaScript -->
             </div>
             <div id="codigo-gerado" class="codigo-gerado"></div>
@@ -711,6 +698,16 @@ if (isset($_GET['exportar'])) {
         }
 
 
+        document.querySelectorAll('.produto').forEach(function (produto) {
+            produto.addEventListener('click', function () {
+                var nomeProduto = this.getAttribute('data-nome');
+                fetch(`get_detalhes_produto.php?nome=${nomeProduto}`)
+                    .then(response => response.json())
+                    .then(detalhes => {
+                        // Código para mostrar o pop-up com detalhes
+                    });
+            });
+        });
 
 
 
