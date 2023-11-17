@@ -20,26 +20,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Buscar produtos
-$sql = "SELECT * FROM produtos";
-$result = $conn->query($sql);
 
-$produtos = [];
-
-if ($result->num_rows > 0) {
-    // Colocar cada linha do resultado em um array associativo
-    while($row = $result->fetch_assoc()) {
-        $produtos[] = $row;
-    }
-} else {
-    echo "0 resultados";
-}
-
-$conn->close();
-
-// Retornar os dados em formato JSON
-header('Content-Type: application/json');
-echo json_encode($produtos);
 
 
 function exportData($data)
@@ -235,6 +216,30 @@ if (isset($_GET['exportar'])) {
             <header>
                 <h1>Produtos</h1>
             </header>
+
+            <? // Buscar produtos
+            include '..\conexao.php'
+            
+                $sql = "SELECT * FROM produtos";
+            $result = $conn->query($sql);
+
+            $produtos = [];
+
+            if ($result->num_rows > 0) {
+                // Colocar cada linha do resultado em um array associativo
+                while ($row = $result->fetch_assoc()) {
+                    $produtos[] = $row;
+                }
+            } else {
+                echo "0 resultados";
+            }
+
+            $conn->close();
+
+            // Retornar os dados em formato JSON
+            header('Content-Type: application/json');
+            echo json_encode($produtos);
+            ?>
             <div id="lista-produtos">
                 <!-- Os produtos serão inseridos aqui pelo JavaScript -->
             </div>
