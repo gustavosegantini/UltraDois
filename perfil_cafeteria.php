@@ -28,7 +28,7 @@ $produtos = [];
 
 if ($result->num_rows > 0) {
     // Colocar cada linha do resultado em um array associativo
-    while ($row = $result->fetch_assoc()) {
+    while($row = $result->fetch_assoc()) {
         $produtos[] = $row;
     }
 } else {
