@@ -632,40 +632,38 @@ if (isset($_GET['exportar'])) {
         });
 
         // Adicione seu código JavaScript aqui
-        document.querySelectorAll('.produto').forEach(produto => {
-            produto.addEventListener('click', function () {
-                let nomeProduto = this.getAttribute('data-nome');
-                fetch('get_tamanhos_precos.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: `nome_produto=${nomeProduto}`
-                })
-                    .then(response => response.json())
-                    .then(dados => {
-                        let opcoes = document.getElementById('opcoes-tamanho-preco');
-                        opcoes.innerHTML = ''; // Limpar opções anteriores
-                        dados.forEach(item => {
-                            opcoes.innerHTML += `<div class="opcao-tamanho-preco" data-id="${item.ID}">${item.tamanho} - ${item.preco}</div>`;
-                        });
-                        document.getElementById('popup-selecao').style.display = 'block';
-                    });
-            });
-        });
+        document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('.produto').forEach(produto => {
+        produto.addEventListener('click', function() {
+            let nomeProduto = this.getAttribute('data-nome');
+            console.log('Produto clicado:', nomeProduto); // Para depuração
 
-        // Código para fechar o pop-up
-        document.querySelector('.close-popup').addEventListener('click', function () {
-            document.getElementById('popup-selecao').style.display = 'none';
+            fetch('get_tamanhos_precos.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `nome_produto=${nomeProduto}`
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Resposta do servidor não foi OK');
+                }
+                return response.json();
+            })
+            .then(dados => {
+                let opcoes = document.getElementById('opcoes-tamanho-preco');
+                opcoes.innerHTML = ''; // Limpar opções anteriores
+                dados.forEach(item => {
+                    opcoes.innerHTML += `<div class="opcao-tamanho-preco" data-id="${item.ID}">${item.tamanho} - ${item.preco}</div>`;
+                });
+                document.getElementById('popup-selecao').style.display = 'block';
+            })
+            .catch(error => console.error('Erro ao buscar dados:', error));
         });
+    });
+});
 
-        // Código para confirmar seleção
-        document.getElementById('confirmar-selecao').addEventListener('click', function () {
-            let opcaoSelecionada = document.querySelector('.opcao-tamanho-preco.selecionado');
-            if (opcaoSelecionada) {
-                gerarCodigo(opcaoSelecionada.getAttribute('data-id'));
-            }
-        });
 
 
 
