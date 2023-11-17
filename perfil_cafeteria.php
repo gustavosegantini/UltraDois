@@ -639,7 +639,9 @@ if (isset($_GET['exportar'])) {
                     let produtoElemento = document.createElement('div');
                     produtoElemento.classList.add('produto');
                     produtoElemento.innerHTML = `<h2>${nomeProduto}</h2>`;
+                    produtoElemento.setAttribute('data-nome', nomeProduto);
                     produtoElemento.addEventListener('click', function () {
+                        var nomeProduto = this.getAttribute('data-nome');
                         mostrarModalProduto(nomeProduto, produtosAgrupados[nomeProduto]);
                     });
                     listaProdutos.appendChild(produtoElemento);
@@ -680,7 +682,6 @@ if (isset($_GET['exportar'])) {
         }
 
         // Função gerarCodigo() aqui...
-        //Produtos:
         function gerarCodigo(id_produto) {
             // A solicitação POST é feita para gerar_codigo.php com o ID do produto
             fetch('gerar_codigo.php', {
@@ -696,18 +697,6 @@ if (isset($_GET['exportar'])) {
                 })
                 .catch(error => console.error('Erro:', error));
         }
-
-
-        document.querySelectorAll('.produto').forEach(function (produto) {
-            produto.addEventListener('click', function () {
-                var nomeProduto = this.getAttribute('data-nome');
-                fetch(`get_detalhes_produto.php?nome=${nomeProduto}`)
-                    .then(response => response.json())
-                    .then(detalhes => {
-                        // Código para mostrar o pop-up com detalhes
-                    });
-            });
-        });
 
 
 
