@@ -630,11 +630,14 @@ if (isset($_GET['exportar'])) {
 
         document.addEventListener('DOMContentLoaded', function () {
             var popup = document.getElementById("popup-detalhes");
+            var popupTitulo = document.getElementById("popup-titulo");
             var closeButton = document.getElementsByClassName("close-button")[0];
 
             document.querySelectorAll('.produto').forEach(function (produto) {
                 produto.addEventListener('click', function () {
                     let nomeProduto = this.getAttribute('data-nome');
+                    popupTitulo.textContent = `Selecione o Tamanho de ${nomeProduto}`;
+
                     fetch(`get_detalhes_produto.php?nome=${nomeProduto}`)
                         .then(response => response.json())
                         .then(detalhes => {
@@ -642,8 +645,21 @@ if (isset($_GET['exportar'])) {
                             detalhesElemento.innerHTML = ''; // Limpar detalhes anteriores
 
                             detalhes.forEach(function (detalhe) {
+                                let tamanhoTexto = '';
+                                switch (detalhe.tamanho) {
+                                    case '0':
+                                        tamanhoTexto = 'Pequeno';
+                                        break;
+                                    case '1':
+                                        tamanhoTexto = 'Médio';
+                                        break;
+                                    case '2':
+                                        tamanhoTexto = 'Grande';
+                                        break;
+                                }
+
                                 let detalheDiv = document.createElement('div');
-                                detalheDiv.innerHTML = `Tamanho: ${detalhe.tamanho}, Preço: ${detalhe.preco}`;
+                                detalheDiv.innerHTML = `<strong>${tamanhoTexto}</strong> - Preço: ${detalhe.preco}`;
                                 detalheDiv.addEventListener('click', function () {
                                     gerarCodigo(detalhe.ID);
                                     popup.style.display = "none"; // Fechar o popup após a seleção
