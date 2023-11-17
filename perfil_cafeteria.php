@@ -646,20 +646,25 @@ if (isset($_GET['exportar'])) {
 
                             detalhes.forEach(function (detalhe) {
                                 let tamanhoTexto = '';
-                                switch (detalhe.tamanho) {
-                                    case '0':
+                                // Assegure-se de que os números são comparados como números e não como strings.
+                                switch (parseInt(detalhe.tamanho)) {
+                                    case 0:
                                         tamanhoTexto = 'Pequeno';
                                         break;
-                                    case '1':
+                                    case 1:
                                         tamanhoTexto = 'Médio';
                                         break;
-                                    case '2':
+                                    case 2:
                                         tamanhoTexto = 'Grande';
+                                        break;
+                                    // Certifique-se de que exista um caso padrão para tratamento de erros ou entradas inesperadas.
+                                    default:
+                                        tamanhoTexto = 'Tamanho Desconhecido';
                                         break;
                                 }
 
                                 let detalheDiv = document.createElement('div');
-                                detalheDiv.innerHTML = `<strong>${tamanhoTexto}</strong> - Preço: ${detalhe.preco}`;
+                                detalheDiv.innerHTML = `<strong>${tamanhoTexto}</strong><br>Preço: ${detalhe.preco}`;
                                 detalheDiv.addEventListener('click', function () {
                                     gerarCodigo(detalhe.ID);
                                     popup.style.display = "none"; // Fechar o popup após a seleção
