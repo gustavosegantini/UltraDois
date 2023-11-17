@@ -216,21 +216,24 @@ if (isset($_GET['exportar'])) {
                 <h1>Produtos</h1>
             </header>
             <div id="lista-produtos">
-                <!-- Os produtos serão inseridos aqui pelo JavaScript -->
+                <!-- Os produtos serão inseridos aqui pelo PHP -->
+                <?php
+                $sql = "SELECT * FROM produtos";
+                $result = mysqli_query($conn, $sql);
+
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<div class="produto" data-id="' . $row['ID'] . '">';
+                    echo '<h2>' . $row['nome'] . '</h2>';
+                    echo '</div>';
+                }
+                ?>
+            </div>
+            <div id="popup-tamanho" style="display:none;">
+                <!-- O pop-up para seleção de tamanho será inserido aqui pelo JavaScript -->
             </div>
             <div id="codigo-gerado" class="codigo-gerado"></div>
         </div>
 
-        <!-- Popup para seleção de tamanho -->
-        <div id="popup-selecao" class="popup-selecao" style="display: none;">
-            <div class="popup-conteudo">
-                <h2>Selecione o Tamanho</h2>
-                <select id="selecao-tamanho">
-                    <!-- Opções de tamanho serão inseridas aqui -->
-                </select>
-                <button id="btn-confirmar-tamanho">Confirmar</button>
-            </div>
-        </div>
 
 
 
@@ -633,38 +636,37 @@ if (isset($_GET['exportar'])) {
                 }
             });
 
-        function mostrarPopupSelecao(produto) {
-            let popup = document.getElementById('popup-selecao');
-            let selecaoTamanho = document.getElementById('selecao-tamanho');
-            selecaoTamanho.innerHTML = ''; // Limpa opções anteriores
-
-            // Adiciona opções de tamanho
-            for (let tamanho of produto.tamanhos) {
-                let opcao = document.createElement('option');
-                opcao.value = tamanho.ID;
-                opcao.text = `${tamanho.descricao} - Preço: ${tamanho.preco}`;
-                selecaoTamanho.appendChild(opcao);
-            }
-
-            document.getElementById('btn-confirmar-tamanho').onclick = function () {
-                gerarCodigo(produto.ID, selecaoTamanho.value);
-            };
-
+        // Função para gerar o pop-up de seleção de tamanho
+        function exibirPopupTamanho(idProduto) {
+            let popup = document.getElementById('popup-tamanho');
+            popup.innerHTML = `
+        <div>
+            <h3>Selecione o Tamanho:</h3>
+            <button onclick="selecionarTamanho(${idProduto}, 'P')">P</button>
+            <button onclick="selecionarTamanho(${idProduto}, 'M')">M</button>
+            <button onclick="selecionarTamanho(${idProduto}, 'G')">G</button>
+            <button onclick="selecionarTamanho(${idProduto}, 'L')">L</button>
+        </div>
+    `;
             popup.style.display = 'block';
         }
 
-        function gerarCodigo(id_produto, id_tamanho) {
-            // Aqui você faz a solicitação POST para gerar o código
-            // e fecha o popup após o processamento
-            let popup = document.getElementById('popup-selecao');
-            popup.style.display = 'none';
-            // ... Implementação da geração de código ...
+        // Função para selecionar o tamanho e gerar o código
+        function selecionarTamanho(idProduto, tamanho) {
+            document.getElementById('popup-tamanho').style.display = 'none';
+            // Aqui você pode incluir o código para buscar o preço com base no tamanho, se necessário
+            gerarCodigo(idProduto, tamanho);
+        }
+
+        // Função para gerar o código
+        function gerarCodigo(idProduto, tamanho) {
+            // Aqui pode ser adicionada a lógica para incluir o tamanho na solicitação, se necessário
             fetch('gerar_codigo.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: `id_produto=${id_produto}`
+                body: `id_produto=${idProduto}&tamanho=${tamanho}`
             })
                 .then(response => response.text())
                 .then(codigo => {
@@ -673,8 +675,18 @@ if (isset($_GET['exportar'])) {
                 .catch(error => console.error('Erro:', error));
         }
 
+        // Adiciona o evento de clique nos produtos
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.produto').forEach(produto => {
+                produto.addEventListener('click', () => {
+                    exibirPopupTamanho(produto.getAttribute('data-id'));
+                });
+            });
+        });
 
-        
+
+
+
 
     </script>
 
