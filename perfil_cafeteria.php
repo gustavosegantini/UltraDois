@@ -219,7 +219,7 @@ if (isset($_GET['exportar'])) {
                 <!-- Os produtos serão inseridos aqui pelo PHP -->
                 <?php
                 // Conexão com o banco de dados
-                include 'conexao.php';
+                include '../conexao.php';
 
                 $sql = "SELECT nome FROM produtos GROUP BY nome";
                 $result = mysqli_query($conn, $sql);
