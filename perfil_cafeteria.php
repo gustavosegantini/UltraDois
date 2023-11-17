@@ -211,6 +211,13 @@ if (isset($_GET['exportar'])) {
                 </span></p>
         </div>
 
+        <div id="popup-detalhes" class="popup">
+            <div class="popup-content">
+                <span class="close-button">&times;</span>
+                <h2>Detalhes do Produto</h2>
+                <div id="detalhes-produto"></div>
+            </div>
+        </div>
 
         <div class="modal">
             <header>
@@ -622,6 +629,9 @@ if (isset($_GET['exportar'])) {
 
 
         document.addEventListener('DOMContentLoaded', function () {
+            var popup = document.getElementById("popup-detalhes");
+            var closeButton = document.getElementsByClassName("close-button")[0];
+
             document.querySelectorAll('.produto').forEach(function (produto) {
                 produto.addEventListener('click', function () {
                     let nomeProduto = this.getAttribute('data-nome');
@@ -636,12 +646,25 @@ if (isset($_GET['exportar'])) {
                                 detalheDiv.innerHTML = `Tamanho: ${detalhe.tamanho}, Preço: ${detalhe.preco}`;
                                 detalheDiv.addEventListener('click', function () {
                                     gerarCodigo(detalhe.ID);
+                                    popup.style.display = "none"; // Fechar o popup após a seleção
                                 });
                                 detalhesElemento.appendChild(detalheDiv);
                             });
+
+                            popup.style.display = "block"; // Mostrar o popup
                         });
                 });
             });
+
+            closeButton.onclick = function () {
+                popup.style.display = "none";
+            };
+
+            window.onclick = function (event) {
+                if (event.target == popup) {
+                    popup.style.display = "none";
+                }
+            };
         });
 
         function gerarCodigo(idProduto) {
