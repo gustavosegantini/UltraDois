@@ -212,12 +212,12 @@ if (isset($_GET['exportar'])) {
         </div>
 
         <div id="popup-detalhes" class="popup">
-            <div class="popup-content">
-                <span class="close-button">&times;</span>
-                <h2>Detalhes do Produto</h2>
-                <div id="detalhes-produto"></div>
-            </div>
-        </div>
+    <div class="popup-content">
+        <span class="close-button">&times;</span>
+        <h2 id="popup-titulo">Selecione o Tamanho</h2>
+        <div id="detalhes-produto" class="detalhes-lista"></div>
+    </div>
+</div>
 
         <div class="modal">
             <header>
