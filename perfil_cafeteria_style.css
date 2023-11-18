@@ -230,49 +230,65 @@ button {
 .popup {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 100; /* Aumentar se necessário para garantir que o popup esteja no topo */
     padding-top: 100px;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6); /* Escurecer o fundo para mais foco no popup */
+    animation: fadeIn 0.3s; /* Adicionando animação */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .detalhes-lista div {
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ddd;
+    margin: 15px 0; /* Aumentar o espaço entre itens */
+    padding: 15px;
+    border: none; /* Remover a borda para um design mais limpo */
+    background-color: #f9f9f9; /* Cor de fundo mais suave */
     cursor: pointer;
+    transition: background-color 0.3s; /* Suavizar a transição de cor */
 }
 
 .detalhes-lista div:hover {
-    background-color: #f0f0f0;
+    background-color: #e0e0e0; /* Cor mais escura ao passar o mouse */
 }
 
 .popup-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+    background-color: #fff;
+    margin: 5% auto; /* Centralizar melhor no viewport */
+    padding: 40px; /* Aumentar o padding para mais espaço */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    width: 60%; /* Ajustar a largura conforme necessário */
+    animation: scaleUp 0.3s; /* Adicionando animação */
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.8); }
+    to { transform: scale(1); }
 }
 
 .close-button {
-    color: #aaa;
+    color: #888; /* Cor mais suave */
     float: right;
     font-size: 28px;
     font-weight: bold;
+    transition: color 0.2s; /* Suavizar a transição de cor */
 }
 
 .close-button:hover,
 .close-button:focus {
-    color: black;
-    text-decoration: none;
+    color: #333; /* Cor mais escura ao passar o mouse ou focar */
     cursor: pointer;
+    text-decoration: none;
 }
+
 
 /* Adicione seus estilos CSS aqui */
 
