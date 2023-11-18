@@ -59,21 +59,26 @@ input[type="submit"]:hover {
 }
 
 .produto {
-    flex-basis: calc(33.33% - 2rem);
-    /* Isso faz com que cada produto ocupe aproximadamente um terço do espaço disponível, subtraindo o espaço para a margem. */
     margin: 1rem;
-    /* Isso adiciona algum espaço ao redor de cada produto */
     padding: 1rem;
-    margin: 1rem 0;
     background-color: var(--card-background-color);
     border-radius: 18px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     cursor: pointer;
-    transition: box-shadow 0.2s;
+    transition: box-shadow 0.3s, transform 0.3s;
+    width: 170px;
+    height: 170px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6638f0;
+    border: 2px solid #6638f0; /* Aumente a espessura da borda e defina o estilo em uma declaração */
 }
 
 .produto:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px); /* Efeito de elevação sutil */
 }
 
 .produto h2 {
