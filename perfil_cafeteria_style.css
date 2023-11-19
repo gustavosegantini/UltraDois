@@ -214,6 +214,10 @@ tr {
     /* Espaço abaixo do elemento para separar do conteúdo seguinte */
 }
 
+.codigo-gerado:empty {
+    display: none;
+}
+
 
 
 
