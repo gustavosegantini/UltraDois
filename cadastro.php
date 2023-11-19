@@ -13,7 +13,7 @@
     <div class="container">
         <div class="modal">
             <header>
-                <h1>Loyal Link</h1></br>
+                <h1>UltraFidelidade</h1></br>
             </header>
             <form action="cadastrar_cliente.php" method="post">
                 <label for="nome">Nome:</label>
