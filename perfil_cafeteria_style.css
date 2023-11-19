@@ -194,25 +194,27 @@ tr {
     cursor: pointer;
 } */
 .codigo-gerado {
-    font-size: 2rem;
-    /* Mantendo o tamanho da fonte conforme solicitado */
-    font-weight: bold;
-    /* Mantendo a fonte em negrito */
-    color: #ffffff;
-    /* Texto branco */
-    background-color: #6638f0;
-    /* Fundo roxo */
-    padding: 10px 16px;
-    /* Espaçamento interno para que o texto não fique muito junto às bordas */
-    border-radius: 8px;
-    /* Bordas arredondadas */
     display: inline-block;
-    /* Faz com que o fundo ocupe apenas o espaço do texto */
+    /* Para permitir o padding e a borda ao redor do texto */
+    font-size: 2rem;
+    font-weight: bold;
     margin-top: 0.5rem;
-    /* Espaço acima do elemento */
+    padding: 10px 20px;
+    /* Espaçamento interno */
+    background-color: #6638f0;
+    /* Cor de fundo que contrasta com o texto */
+    color: #ffffff;
+    /* Cor do texto */
+    border-radius: 20px;
+    /* Borda arredondada */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
     margin-bottom: 1rem;
-    /* Espaço abaixo do elemento para separar do conteúdo seguinte */
+    /* Espaço abaixo do elemento */
+    font-family: 'Courier New', Courier, monospace;
+    /* Estilo de fonte para código */
 }
+
 
 
 .alert {
