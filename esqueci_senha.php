@@ -11,27 +11,31 @@
 
 <body>
     <div class="container">
-        <h1>Esqueci a senha</h1>
+        <div class="modal">
 
-        <?php
-        if (isset($_SESSION['emailErro'])) {
-            echo '<div class="alert alert-danger">' . $_SESSION['emailErro'] . '</div>';
-            unset($_SESSION['emailErro']);
-        }
+            <h1>Esqueci a senha</h1>
 
-        if (isset($_SESSION['emailSucesso'])) {
-            echo '<div class="alert alert-success">' . $_SESSION['emailSucesso'] . '</div>';
-            unset($_SESSION['emailSucesso']);
-        }
-        ?>
+            <?php
+            if (isset($_SESSION['emailErro'])) {
+                echo '<div class="alert alert-danger">' . $_SESSION['emailErro'] . '</div>';
+                unset($_SESSION['emailErro']);
+            }
 
-        <form method="POST" action="enviar_email.php">
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" required>
+            if (isset($_SESSION['emailSucesso'])) {
+                echo '<div class="alert alert-success">' . $_SESSION['emailSucesso'] . '</div>';
+                unset($_SESSION['emailSucesso']);
+            }
+            ?>
 
-            <input type="submit" value="Enviar">
-        </form><br>
-        <p><a href="login.php">Voltar ao Login</a></p>
+            <form method="POST" action="enviar_email.php">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <input type="submit" value="Enviar">
+            </form><br>
+            <p><a href="login.php">Voltar ao Login</a></p>
+
+        </div>
     </div>
 </body>
 <footer>
