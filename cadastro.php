@@ -48,7 +48,7 @@
 
                 <!-- Adicionando campo Data de Nascimento -->
                 <label for="data_nascimento">Data de Nascimento:</label>
-                <input type="date" id="data_nascimento" name="data_nascimento" placeholder="DD/MM/AAAA" required>
+                <input type="date" id="data_nascimento" name="data_nascimento" placeholder="DD/MM/AAAA" required><br>
 
                 <!-- Adicionando campo Curso -->
                 <label for="curso">Curso:</label>
