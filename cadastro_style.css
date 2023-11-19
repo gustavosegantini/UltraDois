@@ -171,6 +171,11 @@ input[type="submit"]:hover {
         /* -webkit-backdrop-filter: blur(8.9px); */
         /* z-index: 1; */
     }
+
+    .data_nascimento {
+        width: 300px;
+        height: 40px;
+    }
 }
 
 .input-wrapper {
