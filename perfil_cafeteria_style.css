@@ -95,21 +95,90 @@ input[type="submit"]:hover {
 }
 
 
+/* Importando uma folha de estilo para cores, se necessário */
+@import 'colors.css';
+
+/* Estilos existentes ... */
+
+/* Estilos específicos do modal de resumo */
 .modal {
-    display: flex;
-    flex-direction: column;
-    /* Para posicionar os conteúdos um abaixo do outro */
-    align-items: flex-start;
-    /* Para alinhar os conteúdos à esquerda */
-    padding: 1rem;
     background-color: var(--card-background-color);
+    /* ou qualquer cor de fundo desejada */
     border-radius: 18px;
-    backdrop-filter: blur(4px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    margin: 1rem;
-    max-width: 90%;
-    width: 100%;
+    padding: 20px;
+    max-width: 500px;
+    /* ou a largura desejada */
+    margin: 20px auto;
 }
+
+.modal header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.modal header h1 {
+    color: #6638f0;
+    /* ou qualquer cor desejada */
+    font-size: 24px;
+    /* ou o tamanho desejado */
+}
+
+.modal p {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    /* ou o tamanho desejado */
+    margin-bottom: 10px;
+}
+
+.modal p i {
+    font-size: 20px;
+    /* ou o tamanho desejado */
+    width: 30px;
+    /* ou a largura desejada */
+    margin-right: 10px;
+    color: #6638f0;
+    /* ou qualquer cor desejada */
+}
+
+/* Estilização dos ícones - use uma biblioteca como FontAwesome ou ícones SVG personalizados */
+.modal p .icon-user {
+    background-image: url('user-icon.svg');
+    /* Substitua pelo caminho do seu ícone */
+}
+
+.modal p .icon-coupon {
+    background-image: url('coupon-icon.svg');
+    /* Substitua pelo caminho do seu ícone */
+}
+
+.modal p .icon-used-coupon {
+    background-image: url('used-coupon-icon.svg');
+    /* Substitua pelo caminho do seu ícone */
+}
+
+/* Barra de progresso para ilustrar cupons utilizados */
+.progress-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.progress-bar {
+    height: 10px;
+    border-radius: 5px;
+    background-color: #6638f0;
+    /* ou qualquer cor desejada */
+    width: 0%;
+    /* Atualize isso dinamicamente com JS */
+}
+
+/* Estilos para responsividade e outros componentes ... */
+
+
 
 header {
     padding: 1.5rem 0;
