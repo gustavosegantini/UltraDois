@@ -96,88 +96,20 @@ input[type="submit"]:hover {
 
 
 .modal {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: 'Open Sans', sans-serif;
-    max-width: 300px;
-    margin: auto;
-    overflow: hidden;
-}
-
-.modal header {
-    background: linear-gradient(to right, #f9f9f9, #e7e9f1);
-    padding: 10px 20px;
-    text-align: center;
-}
-
-.modal header h1 {
-    margin: 0;
-    font-size: 1.5em;
-    color: #333;
-}
-
-.modal p {
-    padding: 10px 20px;
-    margin: 0;
-    border-bottom: 1px solid #eee;
     display: flex;
-    align-items: center;
-}
-
-.modal p:last-child {
-    border-bottom: none;
-}
-
-.modal p span {
-    font-weight: bold;
-    margin-left: auto;
-}
-
-.modal p i {
-    margin-right: 10px;
-    color: #7a7a7a;
-}
-
-.progress-bar {
-    background: #f2f2f2;
-    border-radius: 5px;
-    overflow: hidden;
-    position: relative;
-    height: 10px;
+    flex-direction: column;
+    /* Para posicionar os conteúdos um abaixo do outro */
+    align-items: flex-start;
+    /* Para alinhar os conteúdos à esquerda */
+    padding: 1rem;
+    background-color: var(--card-background-color);
+    border-radius: 18px;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    margin: 1rem;
+    max-width: 90%;
     width: 100%;
-    margin: 10px 0;
 }
-
-.progress-bar::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    background: #007bff;
-    width: 0;
-    /* Dynamically set this in JavaScript based on percentage */
-    border-radius: 5px;
-    transition: width 0.3s ease;
-}
-
-/* Icons example with FontAwesome */
-.user-icon:before {
-    content: '\f007';
-    /* FontAwesome user icon unicode */
-}
-
-.coupon-icon:before {
-    content: '\f0ac';
-    /* FontAwesome ticket icon unicode */
-}
-
-.used-coupon-icon:before {
-    content: '\f14a';
-    /* FontAwesome check-circle icon unicode */
-}
-
 
 header {
     padding: 1.5rem 0;
