@@ -236,8 +236,6 @@ if (isset($_GET['exportar'])) {
                     echo '</div>';
                 }
                 ?>
-                
-
             </div>
             <div id="detalhes-produto" class="detalhes-produto"></div>
             <div id="codigo-gerado" class="codigo-gerado"></div>
