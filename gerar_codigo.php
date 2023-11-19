@@ -10,7 +10,7 @@ function generate_unique_code($conn)
 {
     $unique = false;
     while (!$unique) {
-        $codigo_gerado = substr(str_shuffle("12ABC"), 0, 5);
+        $codigo_gerado = substr(str_shuffle("123456789ABCDEFGHJKMNPQRSTUVWXYZ"), 0, 5);
         $sql_check = "SELECT * FROM Codigos WHERE Codigo = '$codigo_gerado'";
         $result_check = mysqli_query($conn, $sql_check);
         if (mysqli_num_rows($result_check) == 0) {
