@@ -193,27 +193,7 @@ tr {
     color: var(--card-background-color);
     cursor: pointer;
 } */
-.codigo-gerado {
-    display: inline-block;
-    /* Para permitir o padding e a borda ao redor do texto */
-    font-size: 2rem;
-    font-weight: bold;
-    margin-top: 0.5rem;
-    padding: 10px 20px;
-    /* Espaçamento interno */
-    background-color: #6638f0;
-    /* Cor de fundo que contrasta com o texto */
-    color: #ffffff;
-    /* Cor do texto */
-    border-radius: 20px;
-    /* Borda arredondada */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* Sombra suave */
-    margin-bottom: 1rem;
-    /* Espaço abaixo do elemento */
-    font-family: 'Courier New', Courier, monospace;
-    /* Estilo de fonte para código */
-}
+
 
 
 
