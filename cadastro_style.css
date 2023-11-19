@@ -173,13 +173,18 @@ input[type="submit"]:hover {
     }
 
     .data_nascimento {
-        width: 300px;
+        width: 800px;
         height: 40px;
     }
 }
 
 .input-wrapper {
     position: relative;
+}
+
+.data_nascimento {
+    width: 800px;
+    height: 40px;
 }
 
 .password-icon {
