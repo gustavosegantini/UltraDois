@@ -1,0 +1,44 @@
+/* colors.css */
+
+:root {
+    --background-color: #f5f5f5;
+    --card-background-color: #fff;
+   --header-background-color: linear-gradient(45deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+
+    --text-color: #444444;
+    --input-border-color: #ccc;
+    --submit-button-color: #3a83f1;
+    --submit-button-hover-color: #1f5bbf;
+    --success-color: #5cb85c;
+    --error-color: #d9534f;
+    --credit-banner-color: #f1f1f1;
+    --credit-banner-border-color: #ccc;
+    --credit-banner-text-color: #333;
+    --cupom-item-background-color: #5cb85c;
+    --button-color: #689eef;
+    --editar-email-btn-color: var(--button-color);
+    --nova-senha-btn-color: var(--button-color);
+    --sair-btn-color: #f44336;
+    --sair-btn-hover-color: #d32f2f;
+    --cupom-utilizado-item-color: #b3b3b3;
+    --alert-danger-color: #d9534f;
+    --alert-success-color: #5cb85c;
+    --switch-unchecked-color: #ccc;
+    --switch-checked-color: #2196F3;
+    --link-color: #3a83f1;
+    --link-hover-color: #1f5bbf;
+    --alert-text-color: #ffffff;
+
+    --header-text-color: #ffffff;
+
+    --button-background-color: var(--button-color);
+    --button-text-color: #ffffff;
+    --benefit-block-background-color: #f1f1f1;
+    --button-hover-background-color: #5680d8;
+
+    
+
+    --background: rgba(255, 255, 255, 0.1);
+    --glass: rgba(255, 255, 255, 0.7);
+    --border-color: rgba(255, 255, 255, 0.3);
+}
