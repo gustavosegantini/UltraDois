@@ -172,7 +172,17 @@ input[type="submit"]:hover {
         /* z-index: 1; */
     }
 
-  
+    input[type="date"] {
+        height: 38px;
+        /* Altura específica para combinar com outros campos */
+        -webkit-appearance: none;
+        /* Remove estilos padrão do navegador para Safari e Chrome */
+        -moz-appearance: none;
+        /* Remove estilos padrão do navegador para Firefox */
+        appearance: none;
+        /* Remove estilos padrão para navegadores modernos */
+        /* Adicione outras propriedades de estilo conforme necessário */
+    }
 
 
 }
