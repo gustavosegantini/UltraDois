@@ -11,30 +11,41 @@ verify_session('email_cafeteria', 'login_cafeteria.php');
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Cadastro de Funcionário</title>
-    <link rel="stylesheet" href="cadastro_style.css">
+    <link rel="stylesheet" href="login_style.css">
 </head>
+
 <body>
-    <h1>Cadastro de Funcionário</h1>
-    <form action="cadastrar_cafeteria.php" method="post">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
+    <div class="container">
+        <div class="modal">
 
-        <label for="sobrenome">Sobrenome:</label>
-        <input type="text" id="sobrenome" name="sobrenome" required>
+            <h1>Cadastro de Funcionário</h1>
+            <form action="cadastrar_cafeteria.php" method="post">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+                <label for="sobrenome">Sobrenome:</label>
+                <input type="text" id="sobrenome" name="sobrenome" required>
 
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
 
-        <label for="confirmar_senha">Confirmar Senha:</label>
-        <input type="password" id="confirmar_senha" name="confirmar_senha" required>
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
 
-        <input type="submit" value="Cadastrar">
-    </form>
+                <label for="confirmar_senha">Confirmar Senha:</label>
+                <input type="password" id="confirmar_senha" name="confirmar_senha" required>
+
+                <input type="submit" value="Cadastrar">
+            </form>
+
+
+        </div>
+
+    </div>
 </body>
+
 </html>
